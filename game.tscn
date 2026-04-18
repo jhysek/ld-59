@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://lqo0vjx7ag67" path="res://components/receiver/receiver.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dugpsqiui3j38" path="res://components/splitter/splitter.tscn" id="3_7jktm"]
+[ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
 
 [node name="Game" type="Node2D" unique_id=493524955]
 script = ExtResource("1_fc0e3")
@@ -13,9 +15,22 @@ rings = 6
 [node name="Components" type="Node2D" parent="." unique_id=1389326713]
 
 [node name="Receiver" parent="Components" unique_id=2098003525 instance=ExtResource("2_feb5d")]
-ring = 2
+segment = 3
+ring = 6
+color = Color(1, 0, 1, 1)
+
+[node name="Receiver2" parent="Components" unique_id=570187664 instance=ExtResource("2_feb5d")]
+delay_offset = 2
+segment = 7
+ring = 5
+direction = -1
+color = Color(0, 1, 1, 1)
+
+[node name="Splitter" parent="Components" unique_id=225869489 instance=ExtResource("3_7jktm")]
 
 [node name="Rings" type="Node2D" parent="." unique_id=1700894208]
+
+[node name="Signals" type="Node2D" parent="." unique_id=1692297398]
 
 [node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
 
@@ -25,3 +40,23 @@ offset_top = -255.0
 offset_right = 537.0
 offset_bottom = -232.0
 text = "ring: 0. segment: 0"
+
+[node name="Sfx" type="Node" parent="." unique_id=1735032796]
+
+[node name="Tick" type="AudioStreamPlayer2D" parent="Sfx" unique_id=553439494]
+stream = ExtResource("4_fc0e3")
+
+[node name="Paused" type="Label" parent="." unique_id=1434672108]
+visible = false
+offset_left = -28.0
+offset_top = -309.0
+offset_right = 34.0
+offset_bottom = -286.0
+text = "PAUSED"
+
+[node name="Ticks" type="Label" parent="." unique_id=1016928859]
+offset_left = 398.0
+offset_top = -296.0
+offset_right = 460.0
+offset_bottom = -273.0
+text = "TICKS: 0"

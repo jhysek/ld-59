@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dugpsqiui3j38"]
+
+[ext_resource type="Texture2D" uid="uid://c6fux3h8axtfm" path="res://components/splitter/placeholder.png" id="1_huji4"]
+[ext_resource type="Script" uid="uid://cnlxpr3v00rei" path="res://components/splitter/splitter.gd" id="1_i6ymf"]
+[ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="3_2st3l"]
+
+[node name="Splitter" type="Node2D" unique_id=942806992 groups=["splitter"]]
+script = ExtResource("1_i6ymf")
+
+[node name="Draggable" parent="." unique_id=2650241 node_paths=PackedStringArray("parent_object") instance=ExtResource("3_2st3l")]
+parent_object = NodePath("..")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=555672472]
+texture = ExtResource("1_huji4")

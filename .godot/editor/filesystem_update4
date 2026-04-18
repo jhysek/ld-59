@@ -9,3 +9,9 @@ res://components/center/center.tscn
 res://components/receiver/receiver.tscn
 res://components/receiver/receiver.gd
 res://coords.gd
+res://global_time.gd
+res://components/splitter/splitter.tscn
+res://components/splitter/splitter.gd
+res://global.gd
+res://components/draggable/draggable.tscn
+res://components/draggable/draggable.gd

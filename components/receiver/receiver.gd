@@ -1,12 +1,36 @@
 extends Node2D
 
+signal fire_signal(config)
+
 @export var delay_ticks = 4
+@export var delay_offset = 0
 @export var segment = 0
 @export var ring = 0
+@export var direction = 1
+@export var color = Color.WHITE
+var polar_pos = Vector2.ZERO 
 
-
-func place(target_ring, target_segment, world_config):
-	ring = target_ring
-	segment = target_segment
-	position = Coords.polar_to_world(Vector2(segment, ring), world_config)
+func place(polar_coords: Vector2i):
+	ring = polar_coords.y
+	segment = polar_coords.x
+	position = Coords.polar_to_world(polar_coords)
 	rotation = position.angle() + PI / 2
+	polar_pos = polar_coords
+
+func tick(time):
+	if (time - delay_offset) % delay_ticks == 0:
+		fire()
+
+func fire():
+	$Sfx/Fire.play()
+	emit_signal("fire_signal", signal_config())
+
+func signal_config():
+	return {
+		direction = direction,
+		start_pos = Vector2(segment, ring),
+		color = color
+	}
+
+func process_signals(signals):
+	pass

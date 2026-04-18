@@ -1,7 +1,11 @@
 extends Node
 
+var current_level_config = {}
+
 # Polar coordinates: x = segment number, y = ring number
-func world_to_polar(world_pos, world_config):
+func world_to_polar(world_pos):
+	var world_config = Coords.current_level_config
+	
 	# get ring number
 	var distance = Vector2.ZERO.distance_to(world_pos)
 	var ring = floor((distance + world_config.ring_distance / 2) / world_config.ring_distance)
@@ -22,7 +26,9 @@ func world_to_polar(world_pos, world_config):
 	return Vector2i(int(segment), int(ring))
 	
 	
-func polar_to_world(polar_pos, world_config):
+func polar_to_world(polar_pos):
+	var world_config = Coords.current_level_config
+		
 	var segment = polar_pos.x
 	var ring = polar_pos.y
 	

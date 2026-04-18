@@ -1,0 +1,38 @@
+extends Node
+
+var TIME = 0.0
+
+const COLOR_WHITE = Color.WHITE
+const COLOR_CYAN = Color.CYAN
+const COLOR_MAGENTA = Color.MAGENTA
+const COLOR_YELLOW = Color.YELLOW
+const COLOR_BLUE = Color.BLUE
+const COLOR_RED = Color.RED
+const COLOR_GREEN = Color.GREEN
+
+const SPLIT_RULES = {
+	COLOR_WHITE = [ 
+		COLOR_CYAN,
+		COLOR_MAGENTA,
+		COLOR_YELLOW
+	],
+	
+	COLOR_CYAN = [
+		COLOR_BLUE,
+		COLOR_GREEN
+	],
+	
+	COLOR_MAGENTA = [
+		COLOR_RED,
+		COLOR_BLUE
+	],
+	
+	COLOR_YELLOW = [
+		COLOR_RED,
+		COLOR_GREEN
+	],
+	
+	COLOR_RED = [],
+	COLOR_GREEN = [],
+	COLOR_BLUE = []
+}

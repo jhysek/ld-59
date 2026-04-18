@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://kbscdnwiqnpa" path="res://components/signal/signal.gd" id="1_ik0xp"]
 [ext_resource type="Texture2D" uid="uid://by4o3ld7dtdu4" path="res://components/signal/sprite.png" id="2_ik0xp"]
 
-[node name="Signal" type="Node2D" unique_id=2010018270]
+[node name="Signal" type="Node2D" unique_id=2010018270 groups=["signal"]]
 script = ExtResource("1_ik0xp")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=99720300]

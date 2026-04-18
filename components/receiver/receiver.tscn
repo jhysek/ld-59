@@ -2,9 +2,15 @@
 
 [ext_resource type="Script" uid="uid://d1ekxo58ctis7" path="res://components/receiver/receiver.gd" id="1_y5fus"]
 [ext_resource type="Texture2D" uid="uid://b5i65rdcsg3cl" path="res://components/receiver/placeholder.png" id="2_43b8r"]
+[ext_resource type="AudioStream" uid="uid://b1qjhot2kheul" path="res://components/receiver/fire.wav" id="3_7h78m"]
 
 [node name="Receiver" type="Node2D" unique_id=2098003525 groups=["receiver"]]
 script = ExtResource("1_y5fus")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2074550737]
 texture = ExtResource("2_43b8r")
+
+[node name="Sfx" type="Node" parent="." unique_id=350573364]
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="Sfx" unique_id=1554349311]
+stream = ExtResource("3_7h78m")

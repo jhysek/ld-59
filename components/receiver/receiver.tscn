@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://lqo0vjx7ag67"]
+
+[ext_resource type="Script" uid="uid://d1ekxo58ctis7" path="res://components/receiver/receiver.gd" id="1_y5fus"]
+
+[node name="Receiver" type="Node2D" unique_id=2098003525 groups=["receiver"]]
+script = ExtResource("1_y5fus")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2074550737]

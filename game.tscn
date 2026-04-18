@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bqnde7eixm4vy"]
+
+[ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://lqo0vjx7ag67" path="res://components/receiver/receiver.tscn" id="2_feb5d"]
+
+[node name="Game" type="Node2D" unique_id=493524955]
+script = ExtResource("1_fc0e3")
+rings = 6
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=944193220]
+
+[node name="Rings" type="Node2D" parent="." unique_id=1700894208]
+
+[node name="Components" type="Node2D" parent="." unique_id=1389326713]
+
+[node name="Receiver" parent="Components" unique_id=2098003525 instance=ExtResource("2_feb5d")]
+
+[node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
+
+[node name="Label" type="Label" parent="." unique_id=1790227513]
+offset_left = 395.0
+offset_top = -255.0
+offset_right = 537.0
+offset_bottom = -232.0
+text = "ring: 0. segment: 0"

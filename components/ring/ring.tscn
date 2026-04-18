@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://m6q364dwymbv"]
+
+[ext_resource type="Script" uid="uid://dofc0qhu7dgoh" path="res://components/ring/ring.gd" id="1_ea651"]
+
+[node name="Ring" type="Node2D" unique_id=1682834633]
+script = ExtResource("1_ea651")

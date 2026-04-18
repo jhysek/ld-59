@@ -1,0 +1,10 @@
+res://components/signal/signal.tscn
+res://signal.gd
+res://components/signal/signal.gd
+res://components/ring/ring.tscn
+res://components/ring/ring.gd
+res://game.tscn
+res://game.gd
+res://components/center/center.tscn
+res://components/receiver/receiver.tscn
+res://components/receiver/receiver.gd

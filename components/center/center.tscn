@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c6b3m2043fsfq"]
+
+[ext_resource type="Texture2D" uid="uid://by4o3ld7dtdu4" path="res://components/signal/sprite.png" id="1_p1elh"]
+
+[node name="Center" type="Node2D" unique_id=1098449740]
+
+[node name="Center" type="Sprite2D" parent="." unique_id=8217968]
+modulate = Color(1, 0.52156866, 1, 1)
+texture = ExtResource("1_p1elh")

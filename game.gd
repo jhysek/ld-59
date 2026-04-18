@@ -11,13 +11,16 @@ var Ring = preload("res://components/ring/ring.tscn")
 
 var current_ring_index = 0
 var current_ring_segment = 0
+var current_polar_coords = Vector2(0,0)
+var current_ring_center = Vector2(0,0)
 
 var ring_data = []
 
 func _ready():
-	initialize()
+	initialize_rings()
+	initialize_receivers()
 	
-func initialize():
+func initialize_rings():
 	for i in range(rings):
 		var ring = Ring.instantiate()
 		ring.radius = (i + 1) * ring_distance
@@ -31,23 +34,25 @@ func initialize():
 		})
 		Rings.add_child(ring)
 
+func initialize_receivers():
+	for receiver in $Components.get_children():
+		receiver.place(receiver.segment, receiver.ring, self)
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		var mouse_pos = get_global_mouse_position()
 		$Label.text = str(mouse_pos)
 		
-		current_ring_index = get_current_ring_index(mouse_pos)
-		current_ring_segment = get_current_ring_segment(mouse_pos)
+		current_polar_coords = Coords.world_to_polar(mouse_pos, self)
+		current_ring_center = Coords.polar_to_world(current_polar_coords, self)
+		$Components/Receiver.position = current_ring_center
+		$Components/Receiver.rotation = current_ring_center.angle() + PI / 2
+			
+		highlight_active_segment(current_polar_coords.y, current_polar_coords.x)
 		
-		if current_ring_index > rings || current_ring_index == 0:
-			current_ring_index = 0
-			current_ring_segment = 0
+		$Label.text = $Label.text + "\n RING: " + str(current_polar_coords.y) + "  SEG: " + str(current_polar_coords.x)
+
 		
-		highlight_active_segment(current_ring_index, current_ring_segment)
-		
-		$Label.text = $Label.text + " RING: " + str(current_ring_index) + "  SEG: " + str(current_ring_segment)
-	
-	
 func highlight_active_segment(ring_index, ring_segment):
 	for ring in ring_data: 
 		ring.node.set_active_segments([])
@@ -55,15 +60,3 @@ func highlight_active_segment(ring_index, ring_segment):
 	if (ring_index - 1) < rings && ring_index >= 1:
 		ring_data[ring_index - 1].node.set_active_segments([ring_segment])
 	
-func get_current_ring_index(mouse_pos):
-	var distance = Vector2(0,0).distance_to(mouse_pos)
-	return floor((distance + ring_distance / 2) / ring_distance)
-
-func get_current_ring_segment(mouse_pos):
-	var angle = mouse_pos.angle()
-
-	if angle < 0:
-		angle += 2 * PI
-
-	var segment_size = 2 * PI / segments
-	return int(angle / segment_size) % segments

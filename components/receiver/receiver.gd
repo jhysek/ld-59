@@ -2,13 +2,11 @@ extends Node2D
 
 @export var delay_ticks = 4
 @export var segment = 0
-@export var ring: Node2D = null
+@export var ring = 0
 
 
-func place(target_ring, target_segment):
+func place(target_ring, target_segment, world_config):
 	ring = target_ring
 	segment = target_segment
-	
-	# TODO: 
-	# - get position and angle of given segment in given ring
-	
+	position = Coords.polar_to_world(Vector2(segment, ring), world_config)
+	rotation = position.angle() + PI / 2

@@ -10,11 +10,12 @@ rings = 6
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=944193220]
 
-[node name="Rings" type="Node2D" parent="." unique_id=1700894208]
-
 [node name="Components" type="Node2D" parent="." unique_id=1389326713]
 
 [node name="Receiver" parent="Components" unique_id=2098003525 instance=ExtResource("2_feb5d")]
+ring = 2
+
+[node name="Rings" type="Node2D" parent="." unique_id=1700894208]
 
 [node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
 

@@ -8,3 +8,4 @@ res://game.gd
 res://components/center/center.tscn
 res://components/receiver/receiver.tscn
 res://components/receiver/receiver.gd
+res://coords.gd

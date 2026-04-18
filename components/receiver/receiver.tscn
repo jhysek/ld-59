@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://lqo0vjx7ag67"]
 
 [ext_resource type="Script" uid="uid://d1ekxo58ctis7" path="res://components/receiver/receiver.gd" id="1_y5fus"]
+[ext_resource type="Texture2D" uid="uid://b5i65rdcsg3cl" path="res://components/receiver/placeholder.png" id="2_43b8r"]
 
 [node name="Receiver" type="Node2D" unique_id=2098003525 groups=["receiver"]]
 script = ExtResource("1_y5fus")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2074550737]
+texture = ExtResource("2_43b8r")

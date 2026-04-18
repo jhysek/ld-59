@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://duxpr4gb6baop"]
+
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="1_8xmkw"]
+[ext_resource type="Script" uid="uid://dnlbw4ifv6xhx" path="res://components/metrics/metrics.gd" id="2_f0ako"]
+
+[node name="Metrics" type="Panel" unique_id=1107093088]
+offset_left = -368.0
+offset_top = 27.0
+offset_right = -138.0
+offset_bottom = 59.0
+theme = ExtResource("1_8xmkw")
+script = ExtResource("2_f0ako")
+
+[node name="Time" type="Label" parent="." unique_id=1652292003]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 69.0
+offset_bottom = 29.0
+theme = ExtResource("1_8xmkw")
+theme_override_font_sizes/font_size = 16
+text = "TIME: 0"
+
+[node name="Size" type="Label" parent="." unique_id=1906648799]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 6.0
+offset_right = 200.0
+offset_bottom = 29.0
+theme = ExtResource("1_8xmkw")
+theme_override_font_sizes/font_size = 16
+text = "SIZE: 0"

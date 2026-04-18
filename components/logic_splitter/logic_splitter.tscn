@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dvv15r8fcivkk"]
+
+[ext_resource type="Script" uid="uid://p0o3uichqtjf" path="res://components/logic_splitter/logic_splitter.gd" id="1_3omna"]
+[ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_efe41"]
+[ext_resource type="Texture2D" uid="uid://c77i4o34yat12" path="res://components/logic_splitter/placeholder.png" id="2_fmpn4"]
+
+[node name="LogicSplitter" type="Node2D" unique_id=1702744917 groups=["coppier"]]
+script = ExtResource("1_3omna")
+
+[node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_efe41")]
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1984002862]
+texture = ExtResource("2_fmpn4")

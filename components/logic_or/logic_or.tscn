@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://qoxaosc5kb0d"]
+
+[ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_0ppr6"]
+[ext_resource type="Script" uid="uid://bqifpgrn2axng" path="res://components/logic_or/logic_or.gd" id="1_5b87q"]
+
+[node name="LogicOr" type="Node2D" unique_id=1306487229 groups=["logic_or"]]
+script = ExtResource("1_5b87q")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=281475452]
+
+[node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_0ppr6")]

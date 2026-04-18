@@ -1,7 +1,7 @@
 extends Node2D
 
 signal fire_signal(config)
-signal anihilate_signal(config)
+signal annihilate_signal(config)
 signal signal_in_center(config)
 
 signal on_component_placed(node)
@@ -59,8 +59,8 @@ func split_signal(signal_node):
 func create_signal(color_code, ring_idx, direction, signal_node = null):
 	print("MAX: " + str(Coords.current_level_config.rings ) + "    current: " + str(ring_idx))
 	if Coords.current_level_config.rings < ring_idx:
-		print("ANIHILATED " + color_code)
-		emit_signal("anihilate_signal", { 
+		print("ANNIHILATED " + color_code)
+		emit_signal("annihilate_signal", { 
 			"color_code": color_code,
 			"ring_idx": ring_idx,
 			"segment": polar_pos.x

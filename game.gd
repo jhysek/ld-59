@@ -5,11 +5,17 @@ var SignalNode = preload("res://components/signal/signal.tscn")
 var Splitter = preload("res://components/splitter/splitter.tscn")
 var Merger = preload("res://components/merger/merger.tscn")
 var Mover = preload("res://components/mover/mover.tscn")
+var LogicCopy = preload("res://components/logic_splitter/logic_splitter.tscn")
+var LogicNot = preload("res://components/logic_not/logic_not.tscn")
+var LogicAnd = preload("res://components/logic_and/logic_and.tscn")
+var LogicOr = preload("res://components/logic_or/logic_or.tscn")
 
 @onready var Rings = get_node("Rings")
 @onready var Components = get_node("Components")
 @onready var Signals = get_node("Signals")
 @onready var GoalIndicator = get_node("CanvasLayer/Control/GoalIndicator")
+@onready var Metrics = get_node("CanvasLayer/Control/Metrics")
+@onready var Center = get_node("Center")
 
 @export var rings = 4
 @export var ring_distance = 50
@@ -35,6 +41,10 @@ enum States {
 var state = States.PAUSED
 
 func _ready():
+	if Engine.is_editor_hint():
+		initialize_rings()
+		return
+		
 	print("BPM: " + str(BPM))
 	print("length of a beat: " + str(beat_cooldown))
 		
@@ -49,8 +59,11 @@ func _ready():
 	$CanvasLayer/Control/GoalIndicator.init(GOAL)
 	initialize_rings()
 	initialize_receivers()
+	initialize_center()
 	
 func _process(delta):
+	# $Lights.rotation -= delta * 0.1
+		
 	if state == States.PAUSED:
 		return
 
@@ -64,6 +77,8 @@ func _process(delta):
 	beat_cooldown -= delta
 	
 	highlight_active_segments()
+	
+
 	
 	
 func highlight_active_segments():
@@ -88,9 +103,10 @@ func tick():
 	time += 1
 	$Sfx/Tick.play()
 	
-	propagate_time(time)
 	evaluate_components()
-	
+	propagate_time(time)
+
+
 	refresh_ui()
 	
 func propagate_time(time):
@@ -106,6 +122,8 @@ func evaluate_components():
 		if signals.size() > 0:
 			component.process_signals(signals)
 
+func initialize_center():
+	Center.set_color(GOAL[0])
 	
 func initialize_rings():
 	for i in range(rings):
@@ -137,7 +155,7 @@ func same_signal_in_segment(polar_pos, color_code):
 	return false
 
 func spawn_signal(config):
-	if same_signal_in_segment(config.start_pos, config.color_code):
+	if !config.has("force") and same_signal_in_segment(config.start_pos, config.color_code):
 		print("Already existing signal...")
 		return
 		
@@ -148,6 +166,7 @@ func spawn_signal(config):
 func consume_signal(config):
 	GoalIndicator.consume_signal(config.color_code)
 	config.signal_node.queue_free()
+	Center.set_color(GoalIndicator.next_expected())
 	consumed.append(config.color_code)
 
 func _input(event):
@@ -175,6 +194,7 @@ func _input(event):
 	
 func reset_simulation():
 	time = 0
+	Metrics.set_time_metric(time)
 	consumed = []
 	state = States.PAUSED
 	$CanvasLayer/Control/GoalIndicator.reset()
@@ -183,6 +203,8 @@ func reset_simulation():
 		
 func refresh_ui():
 	$Ticks.text = "TICKS: " + str(time)
+	Metrics.set_time_metric(time)
+	$Center.pulse()
 	
 	if time == 0:
 		$Paused.text = "Press space to start simulation"
@@ -200,6 +222,21 @@ func highlight_active_segment(ring_index, ring_segment):
 		ring_data[ring_index - 1].node.set_active_segments([ring_segment])
 	
 
+func component_placed():
+	$Sfx/Placed.play()
+	refresh_component_metric()
+	
+func component_lifted():
+	$Sfx/Lifted.play()
+	refresh_component_metric()
+
+func refresh_component_metric():
+	var mergers = get_tree().get_node_count_in_group("merger")
+	var movers = get_tree().get_node_count_in_group("mover")
+	var splitters = get_tree().get_node_count_in_group("splitter")
+	
+	Metrics.set_size_metric(mergers + movers + splitters)
+	
 ## Component palette start dragging ############################################
 
 func _on_splitter_gui_input(event: InputEvent) -> void:
@@ -231,26 +268,96 @@ func _on_mover_gui_input(event: InputEvent) -> void:
 			mover.position = get_global_mouse_position()
 			mover.start_dragging()
 			connect_mover_signals(mover)
-			
+	
+func _on_logic_copy_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var component = LogicCopy.instantiate()
+			$Components.add_child(component)
+		
+			component.position = get_global_mouse_position()
+			component.start_dragging()
+			connect_coppier_signals(component)
+
+func _on_logic_not_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var component = LogicNot.instantiate()
+			$Components.add_child(component)
+		
+			component.position = get_global_mouse_position()
+			component.start_dragging()
+			connect_not_signals(component)
+
+func _on_logic_and_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var component = LogicAnd.instantiate()
+			$Components.add_child(component)
+		
+			component.position = get_global_mouse_position()
+			component.start_dragging()
+			connect_and_signals(component)
+
+func _on_logic_or_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var component = LogicOr.instantiate()
+			$Components.add_child(component)
+		
+			component.position = get_global_mouse_position()
+			component.start_dragging()
+			connect_or_signals(component)
+		
 ## Component signals ###############################################
 func connect_splitter_signals(splitter):
 	if splitter.is_in_group("splitter"):
 		splitter.fire_signal.connect(spawn_signal)
 		splitter.signal_in_center.connect(consume_signal)
-		# splitter.anihilate_signal.connect(anihilate_signal)
+		splitter.on_component_placed.connect(component_placed)
+		splitter.on_component_lifted.connect(component_lifted)
+		# splitter.annihilate_signal.connect(annihilate_signal)
 
 func connect_merger_signals(merger):
 	if merger.is_in_group("merger"):
 		merger.fire_signal.connect(spawn_signal)
+		merger.on_component_placed.connect(component_placed)
+		merger.on_component_lifted.connect(component_lifted)
 
-func connect_mover_signals(mover):
-	if mover.is_in_group("mover"):
-		mover.fire_signal.connect(spawn_signal)
-		mover.signal_in_center.connect(consume_signal)
+func connect_mover_signals(component):
+	if component.is_in_group("mover"):
+		component.fire_signal.connect(spawn_signal)
+		component.signal_in_center.connect(consume_signal)
+		component.on_component_placed.connect(component_placed)
+		component.on_component_lifted.connect(component_lifted)
 		
+func connect_coppier_signals(component):
+	if component.is_in_group("coppier"):
+		component.fire_signal.connect(spawn_signal)
+		component.signal_in_center.connect(consume_signal)
+		component.on_component_placed.connect(component_placed)
+		component.on_component_lifted.connect(component_lifted)
+
+func connect_not_signals(component):
+	if component.is_in_group("mover"):
+		component.fire_signal.connect(spawn_signal)
+		component.on_component_placed.connect(component_placed)
+		component.on_component_lifted.connect(component_lifted)
+
+func connect_and_signals(component):
+	if component.is_in_group("mover"):
+		component.fire_signal.connect(spawn_signal)
+		component.signal_in_center.connect(consume_signal)
+		component.on_component_placed.connect(component_placed)
+		component.on_component_lifted.connect(component_lifted)
+			
+func connect_or_signals(component):
+	if component.is_in_group("mover"):
+		component.fire_signal.connect(spawn_signal)
+		component.signal_in_center.connect(consume_signal)
+		component.on_component_placed.connect(component_placed)
+		component.on_component_lifted.connect(component_lifted)
 		
-
-
 ## Goal indicator handlers #####################################################
 func _on_goal_indicator_on_goal_achieved() -> void:
 	state = States.PAUSED

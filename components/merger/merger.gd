@@ -1,7 +1,7 @@
 extends Node2D
 
 signal fire_signal(config)
-signal anihilate_signal(config)
+signal annihilate_signal(config)
 
 signal on_component_placed(node)
 signal on_component_lifted(node)

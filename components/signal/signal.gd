@@ -8,6 +8,7 @@ extends Node2D
 var previous_time = Global.TIME
 var color_code = Global.COLOR_WHITE
 var polar_pos = Vector2.ZERO
+var lifetime = 0
 
 enum States { 
 	INITIALIZING,
@@ -31,6 +32,11 @@ func initialize(_direction, _polar_position, _ring, _color_code, _bpm):
 	$Sprite.modulate = Global.COLORS[color_code]
 	$Sprite/Trail.modulate = Global.COLORS[color_code]
 
+func change_color(new_color_code):
+	color_code = new_color_code
+	$Sprite.modulate = Global.COLORS[color_code]
+	$Sprite/Trail.modulate = Global.COLORS[color_code]
+	
 func _process(delta):
 	if state != States.RUNNING:
 		return
@@ -39,26 +45,16 @@ func _process(delta):
 	previous_time = Global.TIME
 	
 	angle += SPEED * global_delta * direction
+	lifetime += global_delta
 	
 	if !ring_node:
-		anihilate()
+		annihilate()
 		return
 	
 	# Move along circle
 	position = Vector2.ZERO + Vector2(cos(angle), sin(angle)) * ring_node.radius
 	polar_pos = Coords.world_to_polar(position)
 	
-	# Determine current segment
-	#var segment = get_segment_from_angle(angle)
-	
-	# Tell ring to light it
-	
-	#if ring_node:
-		#ring_node.set_active_segments([
-		#	segment,
-		#	#(segment - 1 + SEGMENTS) % SEGMENTS,
-		#	#(segment - 2 + SEGMENTS) % SEGMENTS
-		#])
 	
 func get_segment_from_angle(angle: float) -> int:
 	var normalized = fmod(angle, PI * 2)
@@ -68,5 +64,5 @@ func get_segment_from_angle(angle: float) -> int:
 	return int(normalized / (PI * 2 / ring_node.segments))
 	
 	
-func anihilate():
+func annihilate():
 	queue_free()

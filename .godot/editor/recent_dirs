@@ -1,3 +1,9 @@
+res://components/logic_or/
+res://components/logic_and/
+res://components/logic_not/
+res://components/logic_splitter/
+res://components/logic_generator/
+res://components/metrics/
 res://assets/
 res://components/goal_indicator/
 res://components/mover/

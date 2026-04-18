@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://v318s4fjehwt"]
+
+[ext_resource type="Script" uid="uid://td67nfel5rew" path="res://components/logic_generator/logic_generator.gd" id="1_65qug"]
+[ext_resource type="Texture2D" uid="uid://b5i65rdcsg3cl" path="res://components/receiver/placeholder.png" id="2_2ulo4"]
+
+[node name="LogicGenerator" type="Node2D" unique_id=1155449095 groups=["receiver"]]
+script = ExtResource("1_65qug")
+ring = 2
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1452330385]
+texture = ExtResource("2_2ulo4")
+
+[node name="Sfx" type="Node" parent="." unique_id=456162424]
+
+[node name="Black" type="AudioStreamPlayer" parent="Sfx" unique_id=1927910241]
+
+[node name="White" type="AudioStreamPlayer" parent="Sfx" unique_id=1153633126]

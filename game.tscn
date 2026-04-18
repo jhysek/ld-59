@@ -2,15 +2,41 @@
 
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://lqo0vjx7ag67" path="res://components/receiver/receiver.tscn" id="2_feb5d"]
 [ext_resource type="Texture2D" uid="uid://c6fux3h8axtfm" path="res://components/splitter/placeholder.png" id="2_ryrav"]
 [ext_resource type="Texture2D" uid="uid://6f3vmidoiej7" path="res://components/merger/placeholder.png" id="3_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://u0tq7qpbsbrd" path="res://components/mover/placeholder.png" id="4_eow3j"]
 [ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://c77i4o34yat12" path="res://components/logic_splitter/placeholder.png" id="5_boyg6"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="6_80cx4"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="6_215e1"]
+[ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="6_iotsf"]
+[ext_resource type="Texture2D" uid="uid://djutndluqnpws" path="res://components/logic_not/placeholder.png" id="6_x5p1p"]
+[ext_resource type="PackedScene" uid="uid://duxpr4gb6baop" path="res://components/metrics/metrics.tscn" id="7_e8heu"]
+[ext_resource type="Texture2D" uid="uid://cjk821y381kg6" path="res://components/logic_and/placeholder.png" id="7_qhcbd"]
+[ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="7_vef74"]
+[ext_resource type="Texture2D" uid="uid://bc4pyrfw4r5hu" path="res://components/logic_or/placeholder.png" id="8_f1jbl"]
+[ext_resource type="Script" uid="uid://mm1qjlxeapxp" path="res://outer.gd" id="8_lc2xo"]
+[ext_resource type="Texture2D" uid="uid://bodnfmktuun1l" path="res://assets/inner.png" id="8_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://dp7bi7emff4hw" path="res://components/goal_indicator/goal_indicator.tscn" id="9_hve3p"]
+[ext_resource type="Texture2D" uid="uid://budjmyywgw3an" path="res://assets/light.png" id="12_iotsf"]
+[ext_resource type="PackedScene" uid="uid://v318s4fjehwt" path="res://components/logic_generator/logic_generator.tscn" id="14_rvswv"]
+[ext_resource type="PackedScene" uid="uid://dk24n5bv16wo8" path="res://components/logic_not/logic_not.tscn" id="15_hb5m1"]
+[ext_resource type="PackedScene" uid="uid://7o03vuwl1xhk" path="res://components/logic_and/logic_and.tscn" id="16_x5p1p"]
+[ext_resource type="PackedScene" uid="uid://qoxaosc5kb0d" path="res://components/logic_or/logic_or.tscn" id="17_qhcbd"]
+[ext_resource type="AudioStream" uid="uid://benj5rvo7pwrm" path="res://assets/component_placed.wav" id="17_rvswv"]
+
+[sub_resource type="Environment" id="Environment_80cx4"]
+background_mode = 3
+tonemap_mode = 2
+tonemap_exposure = 0.33
+glow_enabled = true
+adjustment_brightness = 0.88
+adjustment_contrast = 1.25
 
 [node name="Game" type="Node2D" unique_id=493524955]
 script = ExtResource("1_fc0e3")
+rings = 3
+ring_distance = 80
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249804444]
 
@@ -49,6 +75,42 @@ offset_bottom = 162.0
 mouse_filter = 0
 texture = ExtResource("4_eow3j")
 
+[node name="LogicCopy" type="TextureRect" parent="CanvasLayer/Palette" unique_id=512293268]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 135.0
+offset_right = 106.0
+offset_bottom = 162.0
+mouse_filter = 0
+texture = ExtResource("5_boyg6")
+
+[node name="LogicNot" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1729214499]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 242.0
+offset_right = 98.0
+offset_bottom = 269.0
+mouse_filter = 0
+texture = ExtResource("6_x5p1p")
+
+[node name="LogicAnd" type="TextureRect" parent="CanvasLayer/Palette" unique_id=390927940]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 319.0
+offset_right = 99.0
+offset_bottom = 346.0
+mouse_filter = 0
+texture = ExtResource("7_qhcbd")
+
+[node name="LogicOr" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1648289040]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 376.0
+offset_right = 106.0
+offset_bottom = 403.0
+mouse_filter = 0
+texture = ExtResource("8_f1jbl")
+
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=564903987]
 layout_mode = 3
 anchors_preset = 5
@@ -66,31 +128,88 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
 offset_left = -112.0
-offset_top = 9.0
-offset_right = 111.56
-offset_bottom = 41.0
+offset_top = 27.0
+offset_right = 118.0
+offset_bottom = 59.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1796083809]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 27.0
+offset_right = 374.0
+offset_bottom = 59.0
+theme = ExtResource("6_80cx4")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel" unique_id=2113725402]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 69.0
+offset_bottom = 29.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "CTRL:"
+
+[node name="Metrics" parent="CanvasLayer/Control" unique_id=1107093088 instance=ExtResource("7_e8heu")]
+layout_mode = 1
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Vignette" parent="CanvasLayer" unique_id=2053270938 instance=ExtResource("6_215e1")]
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=944193220]
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=266532316]
+offset_left = -1155.0
+offset_top = -1102.0
+offset_right = 1338.0
+offset_bottom = 592.0
+texture = ExtResource("6_iotsf")
+
+[node name="Environment" type="Node2D" parent="." unique_id=1251804752]
+metadata/_edit_lock_ = true
+
+[node name="Outer" type="Sprite2D" parent="Environment" unique_id=1579183329]
+modulate = Color(0.7437754, 0.7350739, 0.7339112, 1)
+clip_children = 2
+light_mask = 4
+visibility_layer = 7
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_vef74")
+script = ExtResource("8_lc2xo")
+metadata/_edit_lock_ = true
+
+[node name="Inner" type="Sprite2D" parent="Environment" unique_id=997535156]
+clip_children = 2
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("8_mfdv2")
+
 [node name="Components" type="Node2D" parent="." unique_id=1389326713]
+metadata/_edit_lock_ = true
 
-[node name="Receiver" parent="Components" unique_id=2098003525 instance=ExtResource("2_feb5d")]
-ring = 4
-color_code = "RED"
-
-[node name="Receiver2" parent="Components" unique_id=1134156495 instance=ExtResource("2_feb5d")]
+[node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
 ring = 3
-direction = -1
-color_code = "BLUE"
+clock = true
+
+[node name="LogicNot" parent="Components" unique_id=1551525737 instance=ExtResource("15_hb5m1")]
+
+[node name="LogicAnd" parent="Components" unique_id=158245418 instance=ExtResource("16_x5p1p")]
+
+[node name="LogicOr" parent="Components" unique_id=1306487229 instance=ExtResource("17_qhcbd")]
 
 [node name="Rings" type="Node2D" parent="." unique_id=1700894208]
+metadata/_edit_lock_ = true
 
 [node name="Signals" type="Node2D" parent="." unique_id=1692297398]
+metadata/_edit_lock_ = true
 
 [node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="." unique_id=1790227513]
 offset_left = 395.0
@@ -103,6 +222,12 @@ text = "ring: 0. segment: 0"
 
 [node name="Tick" type="AudioStreamPlayer" parent="Sfx" unique_id=918341786]
 stream = ExtResource("4_fc0e3")
+
+[node name="Placed" type="AudioStreamPlayer" parent="Sfx" unique_id=808137682]
+stream = ExtResource("17_rvswv")
+
+[node name="Lifted" type="AudioStreamPlayer" parent="Sfx" unique_id=620552170]
+stream = ExtResource("17_rvswv")
 
 [node name="Paused" type="Label" parent="." unique_id=1434672108]
 visible = false
@@ -119,8 +244,36 @@ offset_right = 460.0
 offset_bottom = -273.0
 text = "TICKS: 0"
 
+[node name="Lights" type="Node2D" parent="." unique_id=39670324]
+rotation = -44.27279
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=72298969]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-801.5786, -865.86816)
+color = Color(0, 1, 1, 1)
+energy = 0.4
+texture = ExtResource("12_iotsf")
+texture_scale = 2.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights" unique_id=1771075660]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(760.25305, 920.31256)
+color = Color(1, 0, 1, 1)
+energy = 0.4
+texture = ExtResource("12_iotsf")
+texture_scale = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=493908119]
+environment = SubResource("Environment_80cx4")
+
 [connection signal="gui_input" from="CanvasLayer/Palette/Splitter" to="." method="_on_splitter_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/Merger" to="." method="_on_merger_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/Mover" to="." method="_on_mover_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicCopy" to="." method="_on_logic_copy_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicNot" to="." method="_on_logic_not_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicAnd" to="." method="_on_logic_and_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicOr" to="." method="_on_logic_or_gui_input"]
 [connection signal="on_goal_achieved" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_goal_achieved"]
 [connection signal="on_signal_rejected" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_rejected"]

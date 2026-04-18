@@ -16,7 +16,7 @@ func _draw():
 		var color = Color(0.835, 0.825, 0.81, 0.4)
 
 		if i in active_segments:
-			color = Color(1.0, 0.941, 0.796, 0.725)
+			color = Color(1.0, 1.0, 1.0, 0.725)
 
 		draw_arc(Vector2.ZERO, radius, start_angle, end_angle, 32, color, thickness, true)
 

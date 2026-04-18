@@ -2,7 +2,7 @@ extends Node2D
 
 
 signal fire_signal(config)
-signal anihilate_signal(config)
+signal nihilate_signal(config)
 signal signal_in_center(config)
 
 signal on_component_placed(node)
@@ -50,12 +50,12 @@ func process_signals(signals):
 func move_signal(signal_node):
 	var target_ring = polar_pos.y + direction
 	if target_ring > Coords.current_level_config.rings:
-		emit_signal("anihilate_signal", { 
+		emit_signal("annihilate_signal", { 
 			"color_code": signal_node.color_code,
 			"ring_idx": target_ring,
 			"segment": polar_pos.x
 		})
-		signal_node.anihilate()
+		signal_node.annihilate()
 		return 
 	
 	if target_ring == 0:

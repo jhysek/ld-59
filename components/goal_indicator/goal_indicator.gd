@@ -39,7 +39,10 @@ func reset():
 	cursor.position = Vector2(cursor_idx * DISTANCE, 0)
 	
 func next_expected():
-	return goal[cursor_idx]
+	if goal.size() > cursor_idx:
+		return goal[cursor_idx]
+	else:
+		return null
 	
 func consume_signal(color_code):
 	if cursor_idx >= goal.size():

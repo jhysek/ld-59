@@ -9,6 +9,7 @@ const COLOR_YELLOW = "YELLOW"
 const COLOR_BLUE = "BLUE"
 const COLOR_RED = "RED"
 const COLOR_GREEN = "GREEN"
+const COLOR_BLACK = "BLACK"
 
 const COLORS = {
 	COLOR_WHITE: Color.WHITE,
@@ -17,7 +18,8 @@ const COLORS = {
 	COLOR_YELLOW: Color.YELLOW,
 	COLOR_BLUE: Color.BLUE,
 	COLOR_RED: Color.RED,
-	COLOR_GREEN: Color.GREEN
+	COLOR_GREEN: Color.GREEN,
+	COLOR_BLACK: Color.BLACK
 }
 
 const SPLIT_RULES = {

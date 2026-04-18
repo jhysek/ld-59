@@ -1,9 +1,110 @@
 [gd_scene format=3 uid="uid://c6b3m2043fsfq"]
 
-[ext_resource type="Texture2D" uid="uid://by4o3ld7dtdu4" path="res://components/signal/sprite.png" id="1_p1elh"]
+[ext_resource type="Texture2D" uid="uid://bj8i77h5lf2hx" path="res://components/goal_indicator/circle.png" id="1_p1elh"]
+[ext_resource type="Script" uid="uid://w3k4t1jq1jhu" path="res://components/center/center.gd" id="1_wv1xt"]
+[ext_resource type="Texture2D" uid="uid://ckg75t1hk0mh6" path="res://components/goal_indicator/circle_borrder.png" id="2_4l1pc"]
+[ext_resource type="Texture2D" uid="uid://budjmyywgw3an" path="res://assets/light.png" id="4_qm4yw"]
+
+[sub_resource type="Animation" id="Animation_4l1pc"]
+resource_name = "Pulse"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10114433, 0.4, 0.5),
+"transitions": PackedFloat32Array(0.28717458, 0.4061261, 1, 0.28717458),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.16, 0.16), Vector2(0.08, 0.08), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.46666667),
+"transitions": PackedFloat32Array(1, 3.9999998, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.2, 0.2), Vector2(0.15, 0.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.102226086, 0.46948278),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.2, 0.5, 0.2]
+}
+
+[sub_resource type="Animation" id="Animation_wv1xt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wv1xt"]
+_data = {
+&"Pulse": SubResource("Animation_4l1pc"),
+&"RESET": SubResource("Animation_wv1xt")
+}
 
 [node name="Center" type="Node2D" unique_id=1098449740]
+script = ExtResource("1_wv1xt")
 
-[node name="Center" type="Sprite2D" parent="." unique_id=8217968]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=8217968]
 modulate = Color(1, 0.52156866, 1, 1)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_p1elh")
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=1014594716]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_4l1pc")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1297368279]
+energy = 0.2
+texture = ExtResource("4_qm4yw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=973081880]
+libraries/ = SubResource("AnimationLibrary_wv1xt")

@@ -2,9 +2,23 @@
 
 [ext_resource type="Script" uid="uid://kbscdnwiqnpa" path="res://components/signal/signal.gd" id="1_ik0xp"]
 [ext_resource type="Texture2D" uid="uid://by4o3ld7dtdu4" path="res://components/signal/sprite.png" id="2_ik0xp"]
+[ext_resource type="Script" uid="uid://d2dlh7dq2pi6" path="res://components/signal/trail.gd" id="3_g5i3x"]
+
+[sub_resource type="Curve" id="Curve_g5i3x"]
+_data = [Vector2(0, 0.066328645), 0.0, 0.0, 0, 0, Vector2(1, 0.98626953), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_g5i3x"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.7019608)
 
 [node name="Signal" type="Node2D" unique_id=2010018270 groups=["signal"]]
 script = ExtResource("1_ik0xp")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=99720300]
 texture = ExtResource("2_ik0xp")
+
+[node name="Trail" type="Line2D" parent="Sprite" unique_id=503812150]
+top_level = true
+width_curve = SubResource("Curve_g5i3x")
+gradient = SubResource("Gradient_g5i3x")
+script = ExtResource("3_g5i3x")

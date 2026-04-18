@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c6fux3h8axtfm" path="res://components/splitter/placeholder.png" id="1_huji4"]
 [ext_resource type="Script" uid="uid://cnlxpr3v00rei" path="res://components/splitter/splitter.gd" id="1_i6ymf"]
 [ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="3_2st3l"]
+[ext_resource type="AudioStream" uid="uid://gcaquh151hee" path="res://components/splitter/split.wav" id="4_2tkl6"]
 
 [node name="Splitter" type="Node2D" unique_id=942806992 groups=["splitter"]]
 script = ExtResource("1_i6ymf")
@@ -12,3 +13,8 @@ parent_object = NodePath("..")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=555672472]
 texture = ExtResource("1_huji4")
+
+[node name="Sfx" type="Node" parent="." unique_id=1804339335]
+
+[node name="Split" type="AudioStreamPlayer" parent="Sfx" unique_id=1965230213]
+stream = ExtResource("4_2tkl6")

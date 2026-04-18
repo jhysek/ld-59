@@ -6,7 +6,7 @@ extends Node2D
 @export var direction = 1
 
 var previous_time = Global.TIME
-var color = Color.WHITE
+var color_code = Global.COLOR_WHITE
 var polar_pos = Vector2.ZERO
 
 enum States { 
@@ -18,17 +18,18 @@ enum States {
 var angle = 0.0
 var state = States.INITIALIZING
 
-func initialize(_direction, _polar_position, _ring, _color, _bpm):
+func initialize(_direction, _polar_position, _ring, _color_code, _bpm):
 	polar_pos = _polar_position
 	position = Coords.polar_to_world(polar_pos)
 	
 	direction = _direction 
 	ring_node = _ring 
-	color = _color 
+	color_code = _color_code
 	state = States.RUNNING
 	SPEED = 2 * PI / 8 * _bpm / 60.0 * 2
 	angle = position.angle()
-	$Sprite.self_modulate = color
+	$Sprite.modulate = Global.COLORS[color_code]
+	$Sprite/Trail.modulate = Global.COLORS[color_code]
 
 func _process(delta):
 	if state != States.RUNNING:

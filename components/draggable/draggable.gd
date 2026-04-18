@@ -15,14 +15,23 @@ func _process(delta):
 		parent_object.position = get_global_mouse_position() + mouse_offset 
 		parent_object.rotation = parent_object.position.angle() + PI / 2
 		
+		if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			selected = false
+			dropped()
+		
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			mouse_offset = parent_object.position - get_global_mouse_position()
 			selected = true
-		else:
-			selected = false
-			dropped()
+			if parent_object.placed:
+				parent_object.lift()
+				
+			parent_object.placed = false
+	
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MASK_RIGHT and event.pressed:
+		if parent_object.is_in_group("mover"):
+			parent_object.switch_variant()
 
 func dropped():
 	placed_at = Coords.world_to_polar(parent_object.position)
@@ -32,5 +41,5 @@ func dropped():
 		#parent_object.rotation = parent_object.position.angle() + PI / 2
 		print("DROPPED TO " + str(placed_at))
 	else:
-		print("DELETED...")
+		parent_object.queue_free()
 	pass

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dp7bi7emff4hw"]
+
+[ext_resource type="Script" uid="uid://ijh4a4uwxu17" path="res://components/goal_indicator/goal_indicator.gd" id="1_lut88"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="2_pa30f"]
+[ext_resource type="Texture2D" uid="uid://ckg75t1hk0mh6" path="res://components/goal_indicator/circle_borrder.png" id="3_cvawb"]
+[ext_resource type="AudioStream" uid="uid://bv7a5bwjcpjea" path="res://components/goal_indicator/rejected.wav" id="4_5vojo"]
+[ext_resource type="AudioStream" uid="uid://dl66yenwu4r7y" path="res://components/goal_indicator/accepted.wav" id="5_1pti1"]
+
+[node name="GoalIndicator" type="Panel" unique_id=1311293732]
+anchors_preset = -1
+anchor_right = 0.096
+anchor_bottom = 0.035
+offset_right = 223.12
+offset_bottom = 3.0
+theme = ExtResource("2_pa30f")
+script = ExtResource("1_lut88")
+
+[node name="Colors" type="Node2D" parent="." unique_id=434275598]
+position = Vector2(96, 16)
+
+[node name="Cursor" type="Sprite2D" parent="Colors" unique_id=201507930]
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("3_cvawb")
+
+[node name="Label" type="Label" parent="." unique_id=315174383]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 69.0
+offset_bottom = 29.0
+theme = ExtResource("2_pa30f")
+theme_override_font_sizes/font_size = 16
+text = "GOAL"
+
+[node name="Sfx" type="Node" parent="." unique_id=1125978237]
+
+[node name="Rejected" type="AudioStreamPlayer" parent="Sfx" unique_id=508994316]
+stream = ExtResource("4_5vojo")
+
+[node name="Consumed" type="AudioStreamPlayer" parent="Sfx" unique_id=2013968579]
+stream = ExtResource("5_1pti1")

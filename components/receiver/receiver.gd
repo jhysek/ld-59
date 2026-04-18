@@ -7,7 +7,8 @@ signal fire_signal(config)
 @export var segment = 0
 @export var ring = 0
 @export var direction = 1
-@export var color = Color.WHITE
+@export var color_code = "WHITE"
+
 var polar_pos = Vector2.ZERO 
 
 func place(polar_coords: Vector2i):
@@ -22,14 +23,17 @@ func tick(time):
 		fire()
 
 func fire():
-	$Sfx/Fire.play()
+	if color_code == Global.COLOR_CYAN:
+		$Sfx/Fire2.play()
+	else:
+		$Sfx/Fire.play()
 	emit_signal("fire_signal", signal_config())
 
 func signal_config():
 	return {
 		direction = direction,
 		start_pos = Vector2(segment, ring),
-		color = color
+		color_code = color_code
 	}
 
 func process_signals(signals):

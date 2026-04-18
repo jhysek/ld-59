@@ -24,8 +24,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="3.3452708"
-     inkscape:cx="189.22235"
-     inkscape:cy="119.42232"
+     inkscape:cx="180.70286"
+     inkscape:cy="215.07975"
      inkscape:window-width="1672"
      inkscape:window-height="1040"
      inkscape:window-x="1321"
@@ -43,8 +43,54 @@
        id="rect1"
        width="163.48849"
        height="114.8782"
-       x="-43.313938"
-       y="-33.008137" />
+       x="-61.425945"
+       y="-30.160833" />
+    <circle
+       style="opacity:0.841463;fill:none;fill-opacity:1;stroke:#f6f6f6;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.95238096"
+       id="path1-3-8"
+       cx="22.115526"
+       cy="37.990524"
+       r="1.6426103"
+       inkscape:export-filename="../components/goal_indicator/circle_borrder.png"
+       inkscape:export-xdpi="932.85358"
+       inkscape:export-ydpi="932.85358" />
+    <rect
+       style="opacity:0.841463;fill:#666666;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="rect2-5-1-4"
+       width="11.863763"
+       height="7.039166"
+       x="69.949997"
+       y="42.433331"
+       inkscape:export-filename="../components/receiver/placeholder.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.28389px;line-height:2.18145px;font-family:'Sukhumvit Set';-inkscape-font-specification:'Sukhumvit Set';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.0775724;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       x="89.173431"
+       y="38.068382"
+       id="text11-5-0"
+       transform="scale(0.80649864,1.2399277)"
+       inkscape:export-filename="../components/mover/placeholder.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan11-2-0"
+         style="stroke-width:0.0775724"
+         x="89.173431"
+         y="38.068382">MOVE</tspan></text>
+    <path
+       style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 50.889469,70.210731 -7.6719,-6.248249"
+       id="path3-3" />
+    <path
+       style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="M 51.522205,69.894364 51.680388,62.38065"
+       id="path4-0" />
+    <path
+       style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 52.392213,70.368915 8.858276,-6.643706"
+       id="path5-8" />
     <path
        style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        d="m 51.330547,47.455052 -9.253733,7.909176"
@@ -71,8 +117,9 @@
        id="path6" />
     <path
        style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 42.709546,46.110493 60.821559,55.52241"
-       id="path7" />
+       d="m 42.709546,46.110493 -1.740017,9.491009"
+       id="path7"
+       sodipodi:nodetypes="cc" />
     <path
        style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        d="m 61.217018,46.031401 -9.174644,9.886468"
@@ -82,6 +129,15 @@
        id="path1-3"
        cx="50.955109"
        cy="38.255112"
+       r="1.6426103"
+       inkscape:export-filename="../components/signal/sprite.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="opacity:0.841463;fill:#1a1a1a;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="path1-3-0"
+       cx="51.639629"
+       cy="70.205345"
        r="1.6426103"
        inkscape:export-filename="../components/signal/sprite.png"
        inkscape:export-xdpi="96"
@@ -163,21 +219,40 @@
     <circle
        style="opacity:0.841463;fill:#0000ff;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        id="circle2"
-       cx="60.810421"
-       cy="55.594002"
+       cx="41.353851"
+       cy="55.040359"
+       r="1.6426103"
+       inkscape:export-filename="../components/signal/sprite.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="opacity:0.841463;fill:#0000ff;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="circle2-5"
+       cx="37.51416"
+       cy="62.359505"
+       r="1.6426103"
+       inkscape:export-filename="../components/signal/sprite.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="opacity:0.841463;fill:#0000ff;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="circle2-5-1"
+       cx="44.920464"
+       cy="62.359501"
        r="1.6426103"
        inkscape:export-filename="../components/signal/sprite.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <path
        style="opacity:0.841463;fill:#00ff00;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       d="M 59.872459,46.505952 41.91863,55.917869"
-       id="path11" />
+       d="m 59.872459,46.505952 3.400944,8.541908"
+       id="path11"
+       sodipodi:nodetypes="cc" />
     <circle
        style="opacity:0.841463;fill:#ff0000;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        id="circle3"
-       cx="41.986584"
-       cy="55.673092"
+       cx="61.838612"
+       cy="55.277634"
        r="1.6426103"
        inkscape:export-filename="../components/signal/sprite.png"
        inkscape:export-xdpi="96"
@@ -222,5 +297,9 @@
          style="stroke-width:0.0775724"
          x="82.007431"
          y="24.51869">MERGE</tspan></text>
+    <path
+       style="opacity:0.841463;fill:#1a1a1a;fill-opacity:1;stroke:#e3e3e3;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 70.866211,43.500465 4.903689,-2.530938 4.824598,2.61003 z"
+       id="path12" />
   </g>
 </svg>

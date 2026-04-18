@@ -3,30 +3,88 @@
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://lqo0vjx7ag67" path="res://components/receiver/receiver.tscn" id="2_feb5d"]
-[ext_resource type="PackedScene" uid="uid://dugpsqiui3j38" path="res://components/splitter/splitter.tscn" id="3_7jktm"]
+[ext_resource type="Texture2D" uid="uid://c6fux3h8axtfm" path="res://components/splitter/placeholder.png" id="2_ryrav"]
+[ext_resource type="Texture2D" uid="uid://6f3vmidoiej7" path="res://components/merger/placeholder.png" id="3_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://u0tq7qpbsbrd" path="res://components/mover/placeholder.png" id="4_eow3j"]
 [ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://dp7bi7emff4hw" path="res://components/goal_indicator/goal_indicator.tscn" id="9_hve3p"]
 
 [node name="Game" type="Node2D" unique_id=493524955]
 script = ExtResource("1_fc0e3")
-rings = 6
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249804444]
+
+[node name="Palette" type="Panel" parent="CanvasLayer" unique_id=1545649822]
+offset_left = 2.0
+offset_top = 144.0
+offset_right = 173.0
+offset_bottom = 679.0
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="Splitter" type="TextureRect" parent="CanvasLayer/Palette" unique_id=719371009]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 32.0
+offset_right = 109.0
+offset_bottom = 59.0
+mouse_filter = 0
+texture = ExtResource("2_ryrav")
+
+[node name="Merger" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1342032496]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 86.0
+offset_right = 107.0
+offset_bottom = 113.0
+mouse_filter = 0
+texture = ExtResource("3_j5wjh")
+
+[node name="Mover" type="TextureRect" parent="CanvasLayer/Palette" unique_id=2118907533]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 135.0
+offset_right = 106.0
+offset_bottom = 162.0
+mouse_filter = 0
+texture = ExtResource("4_eow3j")
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=564903987]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GoalIndicator" parent="CanvasLayer/Control" unique_id=1369370731 instance=ExtResource("9_hve3p")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -112.0
+offset_top = 9.0
+offset_right = 111.56
+offset_bottom = 41.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=944193220]
 
 [node name="Components" type="Node2D" parent="." unique_id=1389326713]
 
 [node name="Receiver" parent="Components" unique_id=2098003525 instance=ExtResource("2_feb5d")]
-segment = 3
-ring = 6
-color = Color(1, 0, 1, 1)
+ring = 4
+color_code = "RED"
 
-[node name="Receiver2" parent="Components" unique_id=570187664 instance=ExtResource("2_feb5d")]
-delay_offset = 2
-segment = 7
-ring = 5
+[node name="Receiver2" parent="Components" unique_id=1134156495 instance=ExtResource("2_feb5d")]
+ring = 3
 direction = -1
-color = Color(0, 1, 1, 1)
-
-[node name="Splitter" parent="Components" unique_id=225869489 instance=ExtResource("3_7jktm")]
+color_code = "BLUE"
 
 [node name="Rings" type="Node2D" parent="." unique_id=1700894208]
 
@@ -43,7 +101,7 @@ text = "ring: 0. segment: 0"
 
 [node name="Sfx" type="Node" parent="." unique_id=1735032796]
 
-[node name="Tick" type="AudioStreamPlayer2D" parent="Sfx" unique_id=553439494]
+[node name="Tick" type="AudioStreamPlayer" parent="Sfx" unique_id=918341786]
 stream = ExtResource("4_fc0e3")
 
 [node name="Paused" type="Label" parent="." unique_id=1434672108]
@@ -60,3 +118,9 @@ offset_top = -296.0
 offset_right = 460.0
 offset_bottom = -273.0
 text = "TICKS: 0"
+
+[connection signal="gui_input" from="CanvasLayer/Palette/Splitter" to="." method="_on_splitter_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/Merger" to="." method="_on_merger_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/Mover" to="." method="_on_mover_gui_input"]
+[connection signal="on_goal_achieved" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_goal_achieved"]
+[connection signal="on_signal_rejected" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_rejected"]

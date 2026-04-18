@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d1ekxo58ctis7" path="res://components/receiver/receiver.gd" id="1_y5fus"]
 [ext_resource type="Texture2D" uid="uid://b5i65rdcsg3cl" path="res://components/receiver/placeholder.png" id="2_43b8r"]
 [ext_resource type="AudioStream" uid="uid://b1qjhot2kheul" path="res://components/receiver/fire.wav" id="3_7h78m"]
+[ext_resource type="AudioStream" uid="uid://dgmn0ymjfewe6" path="res://components/receiver/fire2.wav" id="4_qhwa6"]
 
 [node name="Receiver" type="Node2D" unique_id=2098003525 groups=["receiver"]]
 script = ExtResource("1_y5fus")
@@ -14,3 +15,6 @@ texture = ExtResource("2_43b8r")
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="Sfx" unique_id=1554349311]
 stream = ExtResource("3_7h78m")
+
+[node name="Fire2" type="AudioStreamPlayer2D" parent="Sfx" unique_id=220209358]
+stream = ExtResource("4_qhwa6")

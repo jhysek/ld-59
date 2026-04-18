@@ -1,0 +1,16 @@
+[gd_resource type="Theme" format=3 uid="uid://bt0nuby2dsqi2"]
+
+[ext_resource type="FontFile" uid="uid://bmqqw6ma5h3eg" path="res://assets/Neuropol.otf" id="1_5x3i2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x3i2"]
+bg_color = Color(0, 0, 0, 0.76862746)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+default_font = ExtResource("1_5x3i2")
+default_font_size = 20
+Label/fonts/font = ExtResource("1_5x3i2")
+Panel/styles/panel = SubResource("StyleBoxFlat_5x3i2")

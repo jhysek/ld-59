@@ -15,3 +15,11 @@ res://components/splitter/splitter.gd
 res://global.gd
 res://components/draggable/draggable.tscn
 res://components/draggable/draggable.gd
+res://components/merger/merger.tscn
+res://components/merger/merger.gd
+res://components/signal/trail.gd
+res://components/mover/mover.tscn
+res://components/mover/mover.gd
+res://components/goal_indicator/goal_indicator.tscn
+res://components/goal_indicator/goal_indicator.gd
+res://assets/theme.tres

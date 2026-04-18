@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bj10natuvk0sk"]
+
+[ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_42fgj"]
+[ext_resource type="Script" uid="uid://j7ycnha126pr" path="res://components/merger/merger.gd" id="1_omsde"]
+[ext_resource type="Texture2D" uid="uid://6f3vmidoiej7" path="res://components/merger/placeholder.png" id="2_8hnay"]
+
+[node name="Merger" type="Node2D" unique_id=1086898484 groups=["merger"]]
+script = ExtResource("1_omsde")
+
+[node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_42fgj")]
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1671154570]
+texture = ExtResource("2_8hnay")

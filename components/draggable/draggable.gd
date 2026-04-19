@@ -32,6 +32,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 			mouse_offset = parent_object.position - get_global_mouse_position()
 			selected = true
 			map.set_dragging(true)
+			$Sfx/Picked.play()
 			if parent_object.placed:
 				parent_object.lift()
 				
@@ -52,8 +53,8 @@ func dropped():
 
 	if placed_at != Vector2i.ZERO:
 		parent_object.place(placed_at)
-		#parent_object.position = Coords.polar_to_world(placed_at)
-		#parent_object.rotation = parent_object.position.angle() + PI / 2
+		$Sfx/Dropped.play()
+		explode()
 		print("DROPPED TO " + str(placed_at))
 	else:
 		explode()

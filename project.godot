@@ -17,12 +17,18 @@ boot_splash/bg_color=Color(0.06675503, 0.06675499, 0.06675497, 1)
 boot_splash/image="uid://d38lr8v2vo2qp"
 config/icon="uid://bcq156orlxx1d"
 
+[audio]
+
+buses/default_bus_layout="uid://7p1tgnaneqlb"
+
 [autoload]
 
 Coords="*uid://cnxrftiah2bor"
 Global="*uid://4yscyujpni87"
 Transition="*uid://byy2cqtwibtxt"
 LevelSwitcher="*uid://bvmuh8xne5xp6"
+Loops="*uid://dcya0u2f2m4ot"
+Sfx="*uid://1u17e55ga0ab"
 
 [display]
 

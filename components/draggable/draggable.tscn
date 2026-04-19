@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://tcjux342gpil"]
 
 [ext_resource type="Script" uid="uid://s4el16sc0lsn" path="res://components/draggable/draggable.gd" id="1_vyf7q"]
+[ext_resource type="AudioStream" uid="uid://bddduxx4o28ww" path="res://assets/pick2.wav" id="3_gr3j2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vyf7q"]
 size = Vector2(78, 40)
@@ -11,5 +12,13 @@ script = ExtResource("1_vyf7q")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1650290663]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_vyf7q")
+
+[node name="Sfx" type="Node" parent="." unique_id=480187200]
+
+[node name="Dropped" type="AudioStreamPlayer" parent="Sfx" unique_id=701164309]
+stream = ExtResource("3_gr3j2")
+
+[node name="Picked" type="AudioStreamPlayer" parent="Sfx" unique_id=1287812078]
+stream = ExtResource("3_gr3j2")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

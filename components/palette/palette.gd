@@ -14,4 +14,3 @@ func initialize(allowed_commands):
 				idx += 1
 				
 			
-			

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dcya0u2f2m4ot"]
+
+[ext_resource type="AudioStream" uid="uid://b7xeiyja7ja6b" path="res://assets/loop04.wav" id="1_abo8h"]
+[ext_resource type="Script" uid="uid://bq0gf1o2ystr" path="res://assets/loops.gd" id="1_o3yp3"]
+
+[node name="Loops" type="Node2D" unique_id=571542355]
+script = ExtResource("1_o3yp3")
+
+[node name="Tune" type="AudioStreamPlayer" parent="." unique_id=196911238]
+stream = ExtResource("1_abo8h")
+bus = &"Loops"

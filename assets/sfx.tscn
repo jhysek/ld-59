@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://1u17e55ga0ab"]
+
+[ext_resource type="Script" uid="uid://dxjp4r37yvro8" path="res://assets/sfx.gd" id="1_48cat"]
+[ext_resource type="AudioStream" uid="uid://bddduxx4o28ww" path="res://assets/pick2.wav" id="1_jxv0c"]
+
+[node name="Sfx" type="Node" unique_id=979010096]
+script = ExtResource("1_48cat")
+
+[node name="Picked" type="AudioStreamPlayer" parent="." unique_id=1549751434]
+stream = ExtResource("1_jxv0c")

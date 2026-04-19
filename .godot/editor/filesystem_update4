@@ -6,3 +6,13 @@ res://game.gd
 res://LevelSwitcher.gd
 res://menu.tscn
 res://components/palette/palette.tscn
+res://components/Vignette/vignette.tscn
+res://default_bus_layout.tres
+res://assets/loops.tscn
+res://assets/loops.gd
+res://components/draggable/draggable.gd
+res://components/draggable/draggable.tscn
+res://levels/level07.tscn
+res://components/palette/palette.gd
+res://assets/sfx.tscn
+res://assets/sfx.gd

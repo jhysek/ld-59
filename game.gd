@@ -53,6 +53,7 @@ var state = States.PAUSED
 
 func _ready():
 	randomize()
+	Loops.fade_out()
 	Transition.openScene()
 	
 	if Engine.is_editor_hint():
@@ -183,6 +184,7 @@ func set_dragging(_dragging):
 		return
 		
 	state = States.PAUSED
+	Loops.fade_out()
 	reset_simulation()
 		
 	dragging = _dragging
@@ -213,6 +215,10 @@ func highlight_active_segments():
 func tick():
 	time += 1
 	$Sfx/Tick.play()
+	
+	if time == 8:
+
+		Loops.play()
 	
 	evaluate_components()
 	propagate_time(time)
@@ -295,6 +301,7 @@ func reset_simulation():
 	Metrics.set_time_metric(time)
 	consumed = []
 	state = States.PAUSED
+	Loops.fade_out()
 	$CanvasLayer/Control/GoalIndicator.reset()
 	for node in Signals.get_children():
 		node.annihilate()
@@ -377,17 +384,19 @@ func _on_splitter_gui_input(event: InputEvent) -> void:
 			splitter.start_dragging()
 			dragging = true
 			connect_splitter_signals(splitter)
+			Sfx.play("Picked")
 
 func _on_merger_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			var merger = Merger.instantiate()
 			$Components.add_child(merger)
-		
+			
 			merger.position = get_global_mouse_position()
 			merger.start_dragging()
 			dragging = true
 			connect_merger_signals(merger)
+			Sfx.play("Picked")
 
 func _on_mover_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -399,6 +408,7 @@ func _on_mover_gui_input(event: InputEvent) -> void:
 			mover.start_dragging()
 			dragging = true
 			connect_mover_signals(mover)
+			Sfx.play("Picked")
 	
 func _on_logic_copy_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -410,6 +420,7 @@ func _on_logic_copy_gui_input(event: InputEvent) -> void:
 			component.start_dragging()
 			dragging = true
 			connect_coppier_signals(component)
+			Sfx.play("Picked")
 
 func _on_logic_not_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -421,6 +432,7 @@ func _on_logic_not_gui_input(event: InputEvent) -> void:
 			component.start_dragging()
 			dragging = true
 			connect_not_signals(component)
+			Sfx.play("Picked")
 
 func _on_logic_and_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -433,6 +445,7 @@ func _on_logic_and_gui_input(event: InputEvent) -> void:
 			component.start_dragging()
 			dragging = true
 			connect_and_signals(component)
+			Sfx.play("Picked")
 
 func _on_logic_or_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -444,6 +457,7 @@ func _on_logic_or_gui_input(event: InputEvent) -> void:
 			component.start_dragging()
 			dragging = true
 			connect_or_signals(component)
+			Sfx.play("Picked")
 		
 func _on_alternator_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -455,6 +469,7 @@ func _on_alternator_gui_input(event: InputEvent) -> void:
 			component.start_dragging()
 			dragging = true
 			connect_alternator_signals(component)
+			Sfx.play("Picked")
 		
 func _on_logic_branch_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -466,6 +481,7 @@ func _on_logic_branch_gui_input(event: InputEvent) -> void:
 			component.start_dragging()
 			dragging = true
 			connect_logic_branch_signals(component)
+			Sfx.play("Picked")
 	
 ## Component signals ###############################################
 func connect_splitter_signals(splitter):
@@ -537,6 +553,7 @@ func _on_goal_indicator_on_goal_achieved() -> void:
 
 func _on_goal_indicator_on_signal_rejected(color_code) -> void:
 	reset_simulation()
+	Loops.fade_out()
 	state = States.REJECTED
 	$CanvasLayer/InfoBox/Title.text = "Incorrect signal transmitted!\n\npress any key..."
 	$CanvasLayer/InfoBox.show()
@@ -568,4 +585,5 @@ func _on_button_pressed() -> void:
 		$CanvasLayer/InfoBox.hide()
 	else:
 		state = States.PAUSED
+		Loops.fade_out()
 		$CanvasLayer/Control/Panel/Button.text = "▶"

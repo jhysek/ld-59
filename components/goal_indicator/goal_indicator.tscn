@@ -30,7 +30,7 @@ offset_right = 69.0
 offset_bottom = 29.0
 theme = ExtResource("2_pa30f")
 theme_override_font_sizes/font_size = 16
-text = "GOAL"
+text = "Goal"
 
 [node name="Sfx" type="Node" parent="." unique_id=1125978237]
 

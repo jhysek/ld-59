@@ -1,3 +1,5 @@
+res://components/palette/
+res://
 res://components/alternator/
 res://components/metrics/
 res://components/explosion/
@@ -12,7 +14,6 @@ res://components/goal_indicator/
 res://components/mover/
 res://components/merger/
 res://components/draggable/
-res://
 /Users/jh/code/games/ld-59/
 res://components/splitter/
 res://components/receiver/

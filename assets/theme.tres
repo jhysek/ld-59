@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://bmqqw6ma5h3eg" path="res://assets/Neuropol.otf" id="1_5x3i2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x3i2"]
-bg_color = Color(0, 0, 0, 0.76862746)
+bg_color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10

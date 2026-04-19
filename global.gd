@@ -2,6 +2,8 @@ extends Node
 
 var TIME = 0.0
 
+var opened_levels = 0
+
 const COLOR_WHITE = "WHITE"
 const COLOR_CYAN = "CYAN"
 const COLOR_MAGENTA = "MAGENTA"

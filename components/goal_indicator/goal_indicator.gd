@@ -1,8 +1,8 @@
 extends Panel
 
 signal on_goal_achieved
-signal on_signal_rejected
-signal on_signal_consumed
+signal on_signal_rejected(color_code)
+signal on_signal_consumed(color_code)
 
 @export var DISTANCE = 30
 @onready var cursor = $Colors/Cursor
@@ -50,6 +50,7 @@ func consume_signal(color_code):
 		return
 			
 	if goal[cursor_idx] != color_code:
+		print("SIGNAL REJECT~ED, emitting signall....")
 		emit_signal("on_signal_rejected", color_code)
 		$Sfx/Rejected.play()
 		return

@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="circles"
-run/main_scene="uid://bqnde7eixm4vy"
+config/name="Logic Emittor"
+run/main_scene="uid://d4emj7t3ygvcv"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.06675503, 0.06675499, 0.06675497, 1)
 config/icon="res://icon.svg"
@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 Coords="*uid://cnxrftiah2bor"
 Global="*uid://4yscyujpni87"
 Transition="*uid://byy2cqtwibtxt"
+LevelSwitcher="*uid://bvmuh8xne5xp6"
 
 [display]
 

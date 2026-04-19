@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d4emj7t3ygvcv"]
+
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://cbnwsbn3ifq5p" path="res://menu.gd" id="1_mae5d"]
+[ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="1_ouk20"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="4_4hy44"]
+
+[node name="Menu" type="Node2D" unique_id=1199427413]
+script = ExtResource("1_mae5d")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=945069610]
+offset_left = -1908.0
+offset_top = -914.0
+offset_right = 2145.0
+offset_bottom = 1105.0
+texture = ExtResource("1_ouk20")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1241424091]
+
+[node name="Vignette" parent="CanvasLayer" unique_id=543236073 instance=ExtResource("1_lti8b")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1925562066]
+
+[node name="Title" type="Label" parent="." unique_id=681052869]
+offset_left = -399.0
+offset_top = -382.0
+offset_right = 396.0
+offset_bottom = -262.0
+theme = ExtResource("4_4hy44")
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "logic emittor"
+
+[node name="Title2" type="Label" parent="." unique_id=2023779398]
+offset_left = -391.0
+offset_top = -375.0
+offset_right = 404.0
+offset_bottom = -255.0
+theme = ExtResource("4_4hy44")
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "logic emittor"
+
+[node name="Title3" type="Label" parent="." unique_id=1701402129]
+offset_left = -394.0
+offset_top = -378.0
+offset_right = 401.0
+offset_bottom = -258.0
+theme = ExtResource("4_4hy44")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "logic emittor"
+
+[node name="Button" type="Button" parent="." unique_id=821724128]
+offset_left = -177.0
+offset_top = -36.0
+offset_right = 168.0
+offset_bottom = 34.0
+theme = ExtResource("4_4hy44")
+text = "START GAME"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

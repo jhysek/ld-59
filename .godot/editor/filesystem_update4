@@ -30,3 +30,10 @@ res://components/mover/mover.tscn
 res://components/alternator/alternator.tscn
 res://components/alternator/alternator.gd
 res://components/logic_splitter/logic_splitter.tscn
+res://LevelSwitcher.gd
+res://menu.tscn
+res://menu.gd
+res://levels/level01.tscn
+res://components/palette/palette.tscn
+res://components/goal_indicator/goal_indicator.tscn
+res://components/palette/palette.gd

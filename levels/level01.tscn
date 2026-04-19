@@ -1,0 +1,338 @@
+[gd_scene format=3 uid="uid://cb8ifdjo14e73"]
+
+[ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://b1b4ykgm3k7jn" path="res://components/palette/palette.tscn" id="2_6q0d3"]
+[ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
+[ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="6_80cx4"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="6_215e1"]
+[ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="6_iotsf"]
+[ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="7_vef74"]
+[ext_resource type="Script" uid="uid://mm1qjlxeapxp" path="res://outer.gd" id="8_lc2xo"]
+[ext_resource type="Texture2D" uid="uid://bodnfmktuun1l" path="res://assets/inner.png" id="8_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://dp7bi7emff4hw" path="res://components/goal_indicator/goal_indicator.tscn" id="9_hve3p"]
+[ext_resource type="Script" uid="uid://dnlbw4ifv6xhx" path="res://components/metrics/metrics.gd" id="11_hb5m1"]
+[ext_resource type="PackedScene" uid="uid://v318s4fjehwt" path="res://components/logic_generator/logic_generator.tscn" id="14_rvswv"]
+[ext_resource type="AudioStream" uid="uid://benj5rvo7pwrm" path="res://assets/component_placed.wav" id="17_rvswv"]
+
+[sub_resource type="Environment" id="Environment_80cx4"]
+background_mode = 3
+tonemap_mode = 2
+tonemap_exposure = 0.33
+glow_enabled = true
+adjustment_brightness = 0.88
+adjustment_contrast = 1.25
+
+[node name="Game" type="Node2D" unique_id=493524955]
+script = ExtResource("1_fc0e3")
+title = "Level 01 / basics"
+rings = 3
+ring_distance = 80
+GOAL = ["WHITE", "WHITE", "WHITE"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249804444]
+
+[node name="Palette" parent="CanvasLayer" unique_id=1887817896 instance=ExtResource("2_6q0d3")]
+offset_left = 62.0
+offset_top = 149.0
+offset_right = 233.0
+offset_bottom = 684.0
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=564903987]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GoalIndicator" parent="CanvasLayer/Control" unique_id=1369370731 instance=ExtResource("9_hve3p")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -186.0
+offset_top = 32.0
+offset_right = 190.0
+offset_bottom = 64.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1796083809]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 32.0
+offset_right = 444.0
+offset_bottom = 64.0
+theme = ExtResource("6_80cx4")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel" unique_id=2113725402]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 71.0
+offset_bottom = 27.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "Simulation"
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1947526452]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 4.0
+offset_right = 179.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 12
+text = " ▶"
+
+[node name="Reset" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1876512363]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 4.0
+offset_right = 221.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 12
+text = "↺"
+
+[node name="Metrics" type="Panel" parent="CanvasLayer/Control" unique_id=2058442517]
+layout_mode = 0
+offset_left = -440.0
+offset_top = 32.0
+offset_right = -210.0
+offset_bottom = 64.0
+theme = ExtResource("6_80cx4")
+script = ExtResource("11_hb5m1")
+
+[node name="Time" type="Label" parent="CanvasLayer/Control/Metrics" unique_id=900009249]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 69.0
+offset_bottom = 29.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "TIME: 0"
+
+[node name="Size" type="Label" parent="CanvasLayer/Control/Metrics" unique_id=1499542166]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 6.0
+offset_right = 200.0
+offset_bottom = 29.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "SIZE: 0"
+
+[node name="Vignette" parent="CanvasLayer" unique_id=2053270938 instance=ExtResource("6_215e1")]
+
+[node name="LevelTitle" type="Label" parent="CanvasLayer" unique_id=1874057529]
+offset_left = 62.0
+offset_top = 37.0
+offset_right = 182.0
+offset_bottom = 62.0
+theme = ExtResource("6_80cx4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "LEVEL 01"
+
+[node name="LevelTitleCyan" type="Label" parent="CanvasLayer/LevelTitle" unique_id=723466446]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_right = 119.0
+offset_bottom = 25.0
+theme = ExtResource("6_80cx4")
+theme_override_colors/font_color = Color(0, 1, 1, 0.5568628)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5058824)
+text = "LEVEL 01"
+
+[node name="LevelTitleMagenta" type="Label" parent="CanvasLayer/LevelTitle" unique_id=1599895516]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 121.0
+offset_bottom = 26.0
+theme = ExtResource("6_80cx4")
+theme_override_colors/font_color = Color(1, 0, 1, 0.59607846)
+text = "LEVEL 01"
+
+[node name="InfoBox" type="Panel" parent="CanvasLayer" unique_id=1984478383]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -407.5
+offset_top = -71.5
+offset_right = 407.5
+offset_bottom = 71.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_80cx4")
+
+[node name="Title" type="Label" parent="CanvasLayer/InfoBox" unique_id=1789508666]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 23.0
+offset_right = 778.0
+offset_bottom = 131.0
+theme = ExtResource("6_80cx4")
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+text = "Signal successfully transmitted ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=266532316]
+offset_left = -1112.0
+offset_top = -1088.0
+offset_right = 1381.0
+offset_bottom = 606.0
+texture = ExtResource("6_iotsf")
+
+[node name="Environment" type="Node2D" parent="." unique_id=1251804752]
+metadata/_edit_lock_ = true
+
+[node name="Outer" type="Sprite2D" parent="Environment" unique_id=1579183329]
+modulate = Color(0.7437754, 0.7350739, 0.7339112, 1)
+clip_children = 2
+light_mask = 4
+visibility_layer = 7
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_vef74")
+script = ExtResource("8_lc2xo")
+metadata/_edit_lock_ = true
+
+[node name="Inner" type="Sprite2D" parent="Environment" unique_id=997535156]
+clip_children = 2
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("8_mfdv2")
+
+[node name="Rings" type="Node2D" parent="." unique_id=1700894208]
+metadata/_edit_lock_ = true
+
+[node name="Signals" type="Node2D" parent="." unique_id=1692297398]
+metadata/_edit_lock_ = true
+
+[node name="Components" type="Node2D" parent="." unique_id=1389326713]
+metadata/_edit_lock_ = true
+
+[node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
+delay_offset = 1
+segment = 3
+
+[node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="." unique_id=1790227513]
+visible = false
+offset_left = -79.0
+offset_top = -268.0
+offset_right = 63.0
+offset_bottom = -245.0
+text = "ring: 0. segment: 0"
+
+[node name="Sfx" type="Node" parent="." unique_id=1735032796]
+
+[node name="Tick" type="AudioStreamPlayer" parent="Sfx" unique_id=918341786]
+stream = ExtResource("4_fc0e3")
+
+[node name="Placed" type="AudioStreamPlayer" parent="Sfx" unique_id=808137682]
+stream = ExtResource("17_rvswv")
+
+[node name="Lifted" type="AudioStreamPlayer" parent="Sfx" unique_id=620552170]
+stream = ExtResource("17_rvswv")
+
+[node name="Paused" type="Label" parent="." unique_id=1434672108]
+offset_left = -423.0
+offset_top = 380.0
+offset_right = 432.0
+offset_bottom = 405.0
+theme = ExtResource("6_80cx4")
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Paused" unique_id=1573607471]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -2.0
+offset_top = -10.0
+offset_right = 885.0
+offset_bottom = 39.0
+theme = ExtResource("6_80cx4")
+
+[node name="Ticks" type="Label" parent="." unique_id=1016928859]
+offset_left = 398.0
+offset_top = -296.0
+offset_right = 460.0
+offset_bottom = -273.0
+text = "TICKS: 0"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=493908119]
+environment = SubResource("Environment_80cx4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=944193220]
+
+[node name="Timer" type="Timer" parent="." unique_id=676343284]
+wait_time = 3.0
+
+[node name="Tutorial" type="Panel" parent="." unique_id=1836625615]
+offset_left = 451.0
+offset_top = -343.0
+offset_right = 741.0
+offset_bottom = 55.0
+theme = ExtResource("6_80cx4")
+
+[node name="TutorialText" type="Label" parent="Tutorial" unique_id=1485507824]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 262.0
+offset_bottom = 355.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 15
+text = "
+
+Route required signal sequence to the center.
+
+- drag & drop to place component
+
+- right click to rotate placed component
+
+- [space] to play / pause"
+autowrap_mode = 2
+
+[node name="Title" type="Label" parent="Tutorial" unique_id=1984093114]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 262.0
+offset_bottom = 355.0
+theme = ExtResource("6_80cx4")
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "Objective:"
+autowrap_mode = 2
+
+[connection signal="gui_input" from="CanvasLayer/Palette/Mover" to="." method="_on_mover_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicCopy" to="." method="_on_logic_copy_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicNot" to="." method="_on_logic_not_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicAnd" to="." method="_on_logic_and_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicOr" to="." method="_on_logic_or_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/Alternator" to="." method="_on_alternator_gui_input"]
+[connection signal="on_goal_achieved" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_goal_achieved"]
+[connection signal="on_signal_consumed" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_consumed"]
+[connection signal="on_signal_rejected" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_rejected"]
+[connection signal="pressed" from="CanvasLayer/Control/Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Panel/Reset" to="." method="_on_reset_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="CanvasLayer/Palette"]

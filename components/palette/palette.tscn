@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://b1b4ykgm3k7jn"]
+
+[ext_resource type="Texture2D" uid="uid://b6s2nvc5thnaf" path="res://components/palette/mover.png" id="1_lisst"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="1_lrhr7"]
+[ext_resource type="Texture2D" uid="uid://746mx7830ges" path="res://components/palette/copy.png" id="2_lrhr7"]
+[ext_resource type="Script" uid="uid://ba2jmfwysaewt" path="res://components/palette/palette.gd" id="2_rlmkc"]
+[ext_resource type="Texture2D" uid="uid://b4ynqleg2cwb8" path="res://components/logic_not/sprite.png" id="3_rlmkc"]
+[ext_resource type="Texture2D" uid="uid://bila2ad2rdi0p" path="res://components/palette/and.png" id="4_5rsha"]
+[ext_resource type="Texture2D" uid="uid://617abveeo0ng" path="res://components/palette/or.png" id="5_e454g"]
+[ext_resource type="Texture2D" uid="uid://1w0f14bnip14" path="res://components/palette/alternator.png" id="6_2fcey"]
+
+[node name="Palette" type="Panel" unique_id=1887817896]
+offset_left = -8.0
+offset_top = 144.0
+offset_right = 163.0
+offset_bottom = 679.0
+size_flags_horizontal = 0
+mouse_filter = 2
+theme = ExtResource("1_lrhr7")
+script = ExtResource("2_rlmkc")
+
+[node name="Mover" type="TextureRect" parent="." unique_id=659009743]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 458.0
+offset_right = 103.0
+offset_bottom = 498.0
+mouse_filter = 0
+texture = ExtResource("1_lisst")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Mover" unique_id=199898493]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -18.0
+offset_right = 98.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
+text = "signal router"
+horizontal_alignment = 1
+
+[node name="LogicCopy" type="TextureRect" parent="." unique_id=237789447]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 94.0
+offset_right = 103.0
+offset_bottom = 134.0
+mouse_filter = 0
+texture = ExtResource("2_lrhr7")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="LogicCopy" unique_id=599069068]
+layout_mode = 0
+offset_left = -31.0
+offset_top = -19.0
+offset_right = 78.0
+offset_bottom = 6.0
+theme_override_font_sizes/font_size = 10
+text = "signal duplicator"
+
+[node name="LogicNot" type="TextureRect" parent="." unique_id=1325152691]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 162.0
+offset_right = 121.0
+offset_bottom = 209.0
+mouse_filter = 0
+texture = ExtResource("3_rlmkc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LogicNot" unique_id=1988356626]
+layout_mode = 0
+offset_left = -34.0
+offset_top = -11.0
+offset_right = 120.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 10
+text = "signal inverter"
+horizontal_alignment = 1
+
+[node name="LogicAnd" type="TextureRect" parent="." unique_id=325948828]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 242.0
+offset_right = 114.0
+offset_bottom = 274.0
+mouse_filter = 0
+texture = ExtResource("4_5rsha")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="LogicAnd" unique_id=1392129999]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -18.0
+offset_right = 111.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
+text = "logic AND gate"
+horizontal_alignment = 1
+
+[node name="LogicOr" type="TextureRect" parent="." unique_id=1832912958]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 318.0
+offset_right = 114.0
+offset_bottom = 351.0
+mouse_filter = 0
+texture = ExtResource("5_e454g")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LogicOr" unique_id=417937618]
+layout_mode = 0
+offset_left = -42.0
+offset_top = -18.0
+offset_right = 110.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
+text = "logic OR gate"
+horizontal_alignment = 1
+
+[node name="Alternator" type="TextureRect" parent="." unique_id=297855670]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 388.0
+offset_right = 104.0
+offset_bottom = 420.0
+mouse_filter = 0
+texture = ExtResource("6_2fcey")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Alternator" unique_id=631468853]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -18.0
+offset_right = 79.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
+text = "alternating router"
+
+[node name="Label" type="Label" parent="." unique_id=335494577]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 165.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 16
+text = "drag & drop components"
+horizontal_alignment = 1
+autowrap_mode = 2

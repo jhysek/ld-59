@@ -87,6 +87,7 @@ func move_signal(signal_node):
 			"signal_node": signal_node,
 			"color_code": signal_node.color_code 
 		})
+		signal_node.queue_free()
 		return
 	
 	var result_direction = current_output.x

@@ -19,12 +19,15 @@ var Alternator = preload("res://components/alternator/alternator.tscn")
 @onready var Metrics = get_node("CanvasLayer/Control/Metrics")
 @onready var Center = get_node("Center")
 
+@export var title = "Level 01"
 @export var rings = 4
 @export var ring_distance = 50
 @export var segments = 8
 @export var BPM = 60
 @export var GOAL = ["BLACK", "WHITE", "BLACK", "WHITE"]
 @export var ring_color = Color(0.303, 0.303, 0.303, 0.4)
+
+@export var ENABLED_TOOLS = ["Mover"]
 
 var time = 0
 var consumed = []
@@ -40,7 +43,8 @@ var ring_data = []
 enum States { 
 	PAUSED,
 	RUNNING,
-	DRAGGING
+	DRAGGING,
+	REJECTED
 }
 
 var state = States.PAUSED
@@ -63,12 +67,22 @@ func _ready():
 	}
 	
 	refresh_ui()
+	initialize_title()
+	initialize_tools()
 	$CanvasLayer/Control/GoalIndicator.init(GOAL)
 	initialize_rings()
 	initialize_receivers()
 	initialize_center()
 	
 ## Initialization ##############################################################
+func initialize_title():
+	$CanvasLayer/LevelTitle.text = title
+	$CanvasLayer/LevelTitle/LevelTitleCyan.text = title
+	$CanvasLayer/LevelTitle/LevelTitleMagenta.text = title
+	
+func initialize_tools():
+	$CanvasLayer/Palette.initialize(ENABLED_TOOLS)
+		
 func initialize_center():
 	Center.set_color(GOAL[0])
 	
@@ -98,8 +112,7 @@ func initialize_receivers():
 ## Godot standard handlers #####################################################
 func _process(delta):
 	# $Lights.rotation -= delta * 0.1
-		
-	if state == States.PAUSED:
+	if state == States.PAUSED or state == States.REJECTED:
 		return
 
 	Global.TIME = Global.TIME + delta
@@ -113,7 +126,12 @@ func _process(delta):
 	
 	highlight_active_segments()
 	
-func _input(event):
+func _input(event):		
+	if event is InputEventKey and state == States.REJECTED:
+		$CanvasLayer/InfoBox.hide()
+		state = States.PAUSED
+		return
+		
 	if event is InputEventMouseMotion:
 		var mouse_pos = get_global_mouse_position()
 		$Label.text = str(mouse_pos)
@@ -132,8 +150,10 @@ func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		if state == States.PAUSED:
 			state = States.RUNNING	
+			$CanvasLayer/Control/Panel/Button.text = "⏸"
 		else:
 			state = States.PAUSED
+			$CanvasLayer/Control/Panel/Button.text = "▶"
 		refresh_ui()
 		
 	if Input.is_action_just_pressed("ui_restart"):
@@ -147,15 +167,22 @@ func is_occupied(polar_pos: Vector2i):
 	for component in Components.get_children():
 		if component.placed:
 			for coord in component.SHAPE:
-				if polar_pos == Vector2i(component.polar_pos + Vector2i(coord)):
+				if polar_pos == Vector2i(component.polar_pos) + Vector2i(coord):
 					return true
 	return false
 	
 func set_dragging(_dragging):
+	if dragging == _dragging:
+		return
+		
+	state = States.PAUSED
+	reset_simulation()
+		
 	dragging = _dragging
 	if !dragging:
 		print("NO DRAGGING")
 		highlight_segments([], ring_color)
+	refresh_component_metric()
 
 func highlight_active_segments():
 	var positions = {}
@@ -251,7 +278,6 @@ func spawn_signal(config):
 
 func consume_signal(config):
 	GoalIndicator.consume_signal(config.color_code)
-	# config.signal_node.queue_free()
 	Center.set_color(GoalIndicator.next_expected())
 	consumed.append(config.color_code)
 
@@ -263,7 +289,7 @@ func reset_simulation():
 	state = States.PAUSED
 	$CanvasLayer/Control/GoalIndicator.reset()
 	for node in Signals.get_children():
-		node.queue_free()
+		node.annihilate()
 		
 func refresh_ui():
 	$Ticks.text = "TICKS: " + str(time)
@@ -271,7 +297,7 @@ func refresh_ui():
 	$Center.pulse()
 	
 	if time == 0:
-		$Paused.text = "Press space to start simulation"
+		$Paused.text = "Press [space] to start simulation"
 	else:
 		$Paused.text = "Simulation paused"
 		
@@ -289,10 +315,14 @@ func highlight_active_segment(ring_index, ring_segment):
 func component_placed():
 	$Sfx/Placed.play()
 	refresh_component_metric()
+	state = States.PAUSED
+	reset_simulation()
 	
 func component_lifted():
 	$Sfx/Lifted.play()
 	refresh_component_metric()
+	state = States.PAUSED
+	reset_simulation()
 	
 func component_dragging(polar_pos, component_node):
 	pass
@@ -471,14 +501,38 @@ func connect_placement_signals(component):
 ## Goal indicator handlers #####################################################
 func _on_goal_indicator_on_goal_achieved() -> void:
 	state = States.PAUSED
-	print("WIN!!!")
+	$CanvasLayer/InfoBox/Title.text = "Signal successfully transmitted!"
+	$CanvasLayer/InfoBox.show()
+	$Timer.start()
 
-func _on_goal_indicator_on_signal_rejected() -> void:
-	state = States.PAUSED
-	print("LOSE!!!")
-	
+func _on_goal_indicator_on_signal_rejected(color_code) -> void:
+	print("SIGNAL REJECTED: " + color_code)
+	reset_simulation()
+	state = States.REJECTED
+	$CanvasLayer/InfoBox/Title.text = "Incorrect signal transmitted!\n\npress any key..."
+	$CanvasLayer/InfoBox.show()
+
+
 func explode(pos):
 	var explosion = Explosion.instantiate()
 	add_child(explosion)
 	explosion.position = pos
 	explosion.explode()
+
+func _on_timer_timeout() -> void:
+	LevelSwitcher.next_level()
+
+
+func _on_goal_indicator_on_signal_consumed(color_code) -> void:
+	pass
+
+func _on_reset_pressed() -> void:
+	reset_simulation()
+
+func _on_button_pressed() -> void:
+	if state == States.PAUSED:
+		state = States.RUNNING	
+		$CanvasLayer/Control/Panel/Button.text = "⏸"
+	else:
+		state = States.PAUSED
+		$CanvasLayer/Control/Panel/Button.text = "▶"

@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
-[ext_resource type="Texture2D" uid="uid://c6fux3h8axtfm" path="res://components/splitter/placeholder.png" id="2_ryrav"]
-[ext_resource type="Texture2D" uid="uid://6f3vmidoiej7" path="res://components/merger/placeholder.png" id="3_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://u0tq7qpbsbrd" path="res://components/mover/placeholder.png" id="4_eow3j"]
 [ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://c77i4o34yat12" path="res://components/logic_splitter/placeholder.png" id="5_boyg6"]
@@ -44,24 +42,6 @@ offset_right = 173.0
 offset_bottom = 679.0
 size_flags_horizontal = 0
 mouse_filter = 2
-
-[node name="Splitter" type="TextureRect" parent="CanvasLayer/Palette" unique_id=719371009]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 32.0
-offset_right = 109.0
-offset_bottom = 59.0
-mouse_filter = 0
-texture = ExtResource("2_ryrav")
-
-[node name="Merger" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1342032496]
-layout_mode = 0
-offset_left = 51.0
-offset_top = 86.0
-offset_right = 107.0
-offset_bottom = 113.0
-mouse_filter = 0
-texture = ExtResource("3_j5wjh")
 
 [node name="Mover" type="TextureRect" parent="CanvasLayer/Palette" unique_id=2118907533]
 layout_mode = 0
@@ -284,8 +264,6 @@ texture_scale = 2.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=493908119]
 environment = SubResource("Environment_80cx4")
 
-[connection signal="gui_input" from="CanvasLayer/Palette/Splitter" to="." method="_on_splitter_gui_input"]
-[connection signal="gui_input" from="CanvasLayer/Palette/Merger" to="." method="_on_merger_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/Mover" to="." method="_on_mover_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicCopy" to="." method="_on_logic_copy_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicNot" to="." method="_on_logic_not_gui_input"]

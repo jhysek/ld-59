@@ -9,8 +9,17 @@ signal on_dragging_over(coords, object)
 var polar_pos = Vector2i(0,0)
 var placed = false
 var direction = -1
+var variant = 0
+var current_output = Vector2.RIGHT
 
 const SHAPE = [ Vector2.ZERO, Vector2(0, -1) ]
+
+# output: Vector2(direction, ring_offset)
+const VARIANTS = [ 
+		{ "scale": Vector2(0.8, 0.8), "output": Vector2(1, 0) }, 
+		{ "scale": Vector2(0.8,-0.8), "output": Vector2(1, -1) }, 
+		{ "scale": Vector2(-0.8, -0.8), "output": Vector2(-1, -1)  }, 
+		{ "scale": Vector2(-0.8, 0.8), "output": Vector2(-1, 0)  } ]
 
 func can_be_placed(to_coords):
 	if to_coords.y == 1 or to_coords.y > Coords.current_level_config.rings:
@@ -20,6 +29,13 @@ func can_be_placed(to_coords):
 func emit_draging_over(polar_coords):
 	if !placed && polar_coords != Vector2i.ZERO:
 		emit_signal("on_dragging_over", polar_coords, self)
+
+func switch_variant():
+	variant = (variant + 1) % VARIANTS.size()
+	print("SWITCHING VARIANT TO " + str(variant))
+	var current_variant = VARIANTS[variant]
+	$Sprite.scale = current_variant.scale
+	current_output = current_variant.output
 
 func place(to_coords):
 	polar_pos = to_coords
@@ -61,10 +77,12 @@ func and_signals(signal1, signal2):
 	if signal1.direction - signal2.direction < 0:
 		direction = -1
 	
+	signal1.state = signal1.States.GONE
+	signal2.state = signal2.States.GONE
 	signal1.queue_free()
 	signal2.queue_free()
 	
-	create_signal(result, polar_pos.y, direction)
+	create_signal(result, polar_pos.y + current_output.y, current_output.x)
 
 	# $Sfx/Split.play()
 			

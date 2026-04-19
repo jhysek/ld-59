@@ -38,14 +38,13 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 			parent_object.placed = false
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MASK_RIGHT and event.pressed:
-		if parent_object.is_in_group("mover"):
+		if parent_object.has_method("switch_variant"):
 			parent_object.switch_variant()
 
 func dropped():
 	placed_at = Coords.world_to_polar(parent_object.position)
 		
 	if !can_be_placed(placed_at):
-		print("NONONONE")
 		explode()
 		parent_object.queue_free()
 

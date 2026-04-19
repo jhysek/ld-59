@@ -23,7 +23,6 @@ func _draw():
 		draw_arc(Vector2.ZERO, radius, start_angle, end_angle, 32, color, thickness, true)
 
 func highlight_segments(segments, color = null):
-	print("ACTIVE SEGS: " + str(segments))
 	set_active_segments(segments, color)
 
 func set_active_segments(indices: Array, color = null):

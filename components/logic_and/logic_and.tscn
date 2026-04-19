@@ -2,13 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_b54jn"]
 [ext_resource type="Script" uid="uid://b51llb37hpwv8" path="res://components/logic_and/logic_and.gd" id="1_r6hqt"]
-[ext_resource type="Texture2D" uid="uid://cjk821y381kg6" path="res://components/logic_and/placeholder.png" id="2_emq8p"]
+[ext_resource type="Texture2D" uid="uid://jug82dse7s1b" path="res://components/logic_and/box.png" id="2_y70lf"]
+[ext_resource type="Texture2D" uid="uid://brighdlp66ebc" path="res://components/logic_and/label.png" id="3_4o0ca"]
 
 [node name="LogicAnd" type="Node2D" unique_id=158245418 groups=["logic_and"]]
 script = ExtResource("1_r6hqt")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=356115170]
-position = Vector2(0, 2)
-texture = ExtResource("2_emq8p")
+position = Vector2(-127.999985, -14.999996)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_y70lf")
+offset = Vector2(163.74992, 76.24997)
+
+[node name="Label" type="Sprite2D" parent="." unique_id=1486754834]
+position = Vector2(-1, 42)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_4o0ca")
 
 [node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_b54jn")]
+position = Vector2(2, 44)
+scale = Vector2(1.5199997, 2.72)

@@ -12,6 +12,7 @@ var texture = load("res://components/goal_indicator/circle.png")
 var goal = []
 var cursor_idx = 0
 
+
 func init(_goal):
 	goal = _goal
 	reset()

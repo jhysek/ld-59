@@ -1,3 +1,4 @@
+Panel
 AudioStreamPlayer
 Node
 CPUParticles2D
@@ -7,7 +8,6 @@ AnimationPlayer
 PointLight2D
 TextureButton
 WorldEnvironment
-Panel
 TextureRect
 Control
 Label

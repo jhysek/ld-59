@@ -7,11 +7,18 @@ signal signal_in_center(config)
 
 signal on_component_placed(node)
 signal on_component_lifted(node)
+signal on_dragging_over(coords, object)
 
 var polar_pos = Vector2i(0,0)
 var placed = false
 var direction = -1
 
+const SHAPE = [ Vector2.ZERO ]
+
+func emit_draging_over(polar_coords):
+	if !placed && polar_coords != Vector2.ZERO:
+		emit_signal("on_dragging_over", polar_coords, self)
+		
 func place(to_coords):
 	polar_pos = to_coords
 	position = Coords.polar_to_world(polar_pos)

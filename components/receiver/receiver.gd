@@ -10,6 +10,7 @@ signal fire_signal(config)
 @export var color_code = "WHITE"
 
 var polar_pos = Vector2.ZERO 
+const SHAPE = [ Vector2.ZERO ]
 
 func place(polar_coords: Vector2i):
 	ring = polar_coords.y

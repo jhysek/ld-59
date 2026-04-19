@@ -22,6 +22,7 @@ var LogicOr = preload("res://components/logic_or/logic_or.tscn")
 @export var segments = 8
 @export var BPM = 60
 @export var GOAL = ["BLACK", "WHITE", "BLACK", "WHITE"]
+@export var ring_color = Color(0.303, 0.303, 0.303, 0.4)
 
 var time = 0
 var consumed = []
@@ -30,17 +31,21 @@ var beat_cooldown = beat_timeout
 
 var current_polar_coords = Vector2(0,0)
 var current_ring_center = Vector2(0,0)
+var dragging = false
 
 var ring_data = []
 
 enum States { 
 	PAUSED,
-	RUNNING
+	RUNNING,
+	DRAGGING
 }
 
 var state = States.PAUSED
 
 func _ready():
+	Transition.openScene()
+	
 	if Engine.is_editor_hint():
 		initialize_rings()
 		return
@@ -61,6 +66,34 @@ func _ready():
 	initialize_receivers()
 	initialize_center()
 	
+## Initialization ##############################################################
+func initialize_center():
+	Center.set_color(GOAL[0])
+	
+func initialize_rings():
+	for i in range(rings):
+		var ring = Ring.instantiate()
+		ring.radius = (i + 1) * ring_distance
+		ring.thickness = 4 + i
+		ring.segments = segments
+		
+		ring_data.append({
+			radius = ring.radius,
+			segments = ring.segments,
+			node = ring
+		})
+		Rings.add_child(ring)
+
+func initialize_receivers():
+	for receiver in $Components.get_children():
+		if receiver.is_in_group("receiver"):
+			receiver.place(Vector2i(receiver.segment, receiver.ring))
+	
+			# Connect new signal triggers
+			receiver.fire_signal.connect(spawn_signal)
+
+
+## Godot standard handlers #####################################################
 func _process(delta):
 	# $Lights.rotation -= delta * 0.1
 		
@@ -78,9 +111,50 @@ func _process(delta):
 	
 	highlight_active_segments()
 	
+func _input(event):
+	if event is InputEventMouseMotion:
+		var mouse_pos = get_global_mouse_position()
+		$Label.text = str(mouse_pos)
+		
+		current_polar_coords = Coords.world_to_polar(mouse_pos)
+		current_ring_center = Coords.polar_to_world(current_polar_coords)
+					
+		$Label.text = $Label.text + "\n RING: " + str(current_polar_coords.y) + "  SEG: " + str(current_polar_coords.x) + " DRAGGING: " + str(dragging) + " OCCUPIED: " + str(is_occupied(current_polar_coords))
+		if dragging:
+			if is_occupied(current_polar_coords):
+				highlight_segments([current_polar_coords], Global.COLOR_RED)
+			else:
+				highlight_segments([], Global.COLOR_RED)
+		
+		
+	if Input.is_action_just_pressed("ui_accept"):
+		if state == States.PAUSED:
+			state = States.RUNNING	
+		else:
+			state = States.PAUSED
+		refresh_ui()
+		
+	if Input.is_action_just_pressed("ui_restart"):
+		reset_simulation()
+		refresh_ui()
 
+## code spaghetti ingredients....
+
+# Does any component occupy given coordinate?
+func is_occupied(polar_pos: Vector2i):
+	for component in Components.get_children():
+		if component.placed:
+			for coord in component.SHAPE:
+				if polar_pos == Vector2i(component.polar_pos + Vector2i(coord)):
+					return true
+	return false
 	
-	
+func set_dragging(_dragging):
+	dragging = _dragging
+	if !dragging:
+		print("NO DRAGGING")
+		highlight_segments([], ring_color)
+
 func highlight_active_segments():
 	var positions = {}
 	for signal_node in Signals.get_children():
@@ -89,16 +163,17 @@ func highlight_active_segments():
 			positions[ring] = []
 		positions[ring].append(signal_node.polar_pos.x)
 	
-	if positions == {}:
-		return
+	#if positions == {}:
+	#	return
 	
 	var idx = 0
 	for ring in ring_data:
 		if positions.has(str(idx)):
-			ring.node.highlight_segments(positions[str(idx)])
+			ring.node.highlight_segments(positions[str(idx)], ring_color)
+		else:
+			ring.node.highlight_segments([], ring_color)
 		idx = idx + 1
 		
-	
 func tick():
 	time += 1
 	$Sfx/Tick.play()
@@ -145,31 +220,6 @@ func evaluate_source_signals(component):
 	if signals.size() > 0:
 		component.process_signals(signals)
 
-func initialize_center():
-	Center.set_color(GOAL[0])
-	
-func initialize_rings():
-	for i in range(rings):
-		var ring = Ring.instantiate()
-		ring.radius = (i + 1) * ring_distance
-		ring.thickness = 4 + i
-		ring.segments = segments
-		
-		ring_data.append({
-			radius = ring.radius,
-			segments = ring.segments,
-			node = ring
-		})
-		Rings.add_child(ring)
-
-func initialize_receivers():
-	for receiver in $Components.get_children():
-		if receiver.is_in_group("receiver"):
-			receiver.place(Vector2i(receiver.segment, receiver.ring))
-	
-			# Connect new signal triggers
-			receiver.fire_signal.connect(spawn_signal)
-
 
 func same_signal_in_segment(polar_pos, color_code):
 	for node in get_tree().get_nodes_in_group("signal"):
@@ -192,28 +242,6 @@ func consume_signal(config):
 	Center.set_color(GoalIndicator.next_expected())
 	consumed.append(config.color_code)
 
-func _input(event):
-	if event is InputEventMouseMotion:
-		var mouse_pos = get_global_mouse_position()
-		$Label.text = str(mouse_pos)
-		
-		current_polar_coords = Coords.world_to_polar(mouse_pos)
-		current_ring_center = Coords.polar_to_world(current_polar_coords)
-			
-		# highlight_active_segment(current_polar_coords.y, current_polar_coords.x)
-		
-		$Label.text = $Label.text + "\n RING: " + str(current_polar_coords.y) + "  SEG: " + str(current_polar_coords.x)
-
-	if Input.is_action_just_pressed("ui_accept"):
-		if state == States.PAUSED:
-			state = States.RUNNING	
-		else:
-			state = States.PAUSED
-		refresh_ui()
-		
-	if Input.is_action_just_pressed("ui_restart"):
-		reset_simulation()
-		refresh_ui()
 	
 func reset_simulation():
 	time = 0
@@ -252,6 +280,26 @@ func component_placed():
 func component_lifted():
 	$Sfx/Lifted.play()
 	refresh_component_metric()
+	
+func component_dragging(polar_pos, component_node):
+	pass
+
+func highlight_segments(segments, color):
+	var positions = {}
+	
+	for segment in segments:
+		var ring = str(int(segment.y - 1))
+		if !positions.has(ring):
+			positions[ring] = []
+		positions[ring].append(segment.x)
+	
+	var idx = 0
+	for ring in ring_data:
+		if positions.has(str(idx)):
+			ring.node.highlight_segments(positions[str(idx)], color)
+		else:
+			ring.node.highlight_segments([])
+		idx = idx + 1
 
 func refresh_component_metric():
 	var mergers = get_tree().get_node_count_in_group("merger")
@@ -270,6 +318,7 @@ func _on_splitter_gui_input(event: InputEvent) -> void:
 		
 			splitter.position = get_global_mouse_position()
 			splitter.start_dragging()
+			dragging = true
 			connect_splitter_signals(splitter)
 
 func _on_merger_gui_input(event: InputEvent) -> void:
@@ -280,6 +329,7 @@ func _on_merger_gui_input(event: InputEvent) -> void:
 		
 			merger.position = get_global_mouse_position()
 			merger.start_dragging()
+			dragging = true
 			connect_merger_signals(merger)
 
 func _on_mover_gui_input(event: InputEvent) -> void:
@@ -290,6 +340,7 @@ func _on_mover_gui_input(event: InputEvent) -> void:
 		
 			mover.position = get_global_mouse_position()
 			mover.start_dragging()
+			dragging = true
 			connect_mover_signals(mover)
 	
 func _on_logic_copy_gui_input(event: InputEvent) -> void:
@@ -300,6 +351,7 @@ func _on_logic_copy_gui_input(event: InputEvent) -> void:
 		
 			component.position = get_global_mouse_position()
 			component.start_dragging()
+			dragging = true
 			connect_coppier_signals(component)
 
 func _on_logic_not_gui_input(event: InputEvent) -> void:
@@ -310,6 +362,7 @@ func _on_logic_not_gui_input(event: InputEvent) -> void:
 		
 			component.position = get_global_mouse_position()
 			component.start_dragging()
+			dragging = true
 			connect_not_signals(component)
 
 func _on_logic_and_gui_input(event: InputEvent) -> void:
@@ -321,6 +374,7 @@ func _on_logic_and_gui_input(event: InputEvent) -> void:
 				
 			component.position = get_global_mouse_position()
 			component.start_dragging()
+			dragging = true
 			connect_and_signals(component)
 
 func _on_logic_or_gui_input(event: InputEvent) -> void:
@@ -331,6 +385,7 @@ func _on_logic_or_gui_input(event: InputEvent) -> void:
 		
 			component.position = get_global_mouse_position()
 			component.start_dragging()
+			dragging = true
 			connect_or_signals(component)
 		
 ## Component signals ###############################################
@@ -352,35 +407,35 @@ func connect_mover_signals(component):
 	if component.is_in_group("mover"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
-		component.on_component_placed.connect(component_placed)
-		component.on_component_lifted.connect(component_lifted)
+		connect_placement_signals(component)
 		
 func connect_coppier_signals(component):
 	if component.is_in_group("coppier"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
-		component.on_component_placed.connect(component_placed)
-		component.on_component_lifted.connect(component_lifted)
+		connect_placement_signals(component)
 
 func connect_not_signals(component):
 	if component.is_in_group("logic_not"):
 		component.fire_signal.connect(spawn_signal)
-		component.on_component_placed.connect(component_placed)
-		component.on_component_lifted.connect(component_lifted)
+		connect_placement_signals(component)
 
 func connect_and_signals(component):
 	if component.is_in_group("logic_and"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
-		component.on_component_placed.connect(component_placed)
-		component.on_component_lifted.connect(component_lifted)
+		connect_placement_signals(component)
 			
 func connect_or_signals(component):
 	if component.is_in_group("logic_or"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
-		component.on_component_placed.connect(component_placed)
-		component.on_component_lifted.connect(component_lifted)
+		connect_placement_signals(component)
+		
+func connect_placement_signals(component):
+	component.on_component_placed.connect(component_placed)
+	component.on_component_lifted.connect(component_lifted)
+	component.on_dragging_over.connect(component_dragging)
 		
 ## Goal indicator handlers #####################################################
 func _on_goal_indicator_on_goal_achieved() -> void:

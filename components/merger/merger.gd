@@ -9,6 +9,8 @@ signal on_component_lifted(node)
 var polar_pos = Vector2i(0,0)
 var placed = false
 
+const SHAPE = [ Vector2.ZERO, Vector2(0, -1) ]
+
 func place(to_coords):
 	polar_pos = to_coords
 	position = Coords.polar_to_world(polar_pos)

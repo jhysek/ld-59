@@ -11,6 +11,8 @@ signal fire_signal(config)
 @export var clock = false
 
 var polar_pos = Vector2.ZERO 
+const SHAPE = [ Vector2.ZERO ]
+var placed = true
 
 func place(polar_coords: Vector2i):
 	ring = polar_coords.y

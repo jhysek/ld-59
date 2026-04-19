@@ -7,6 +7,7 @@ signal signal_in_center(config)
 signal on_component_placed(node)
 signal on_component_lifted(node)
 
+const SHAPE = [ Vector2.ZERO ]
 
 var polar_pos = Vector2i(0,0)
 var placed = false

@@ -11,13 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="6_215e1"]
 [ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="6_iotsf"]
 [ext_resource type="Texture2D" uid="uid://djutndluqnpws" path="res://components/logic_not/placeholder.png" id="6_x5p1p"]
-[ext_resource type="PackedScene" uid="uid://duxpr4gb6baop" path="res://components/metrics/metrics.tscn" id="7_e8heu"]
 [ext_resource type="Texture2D" uid="uid://cjk821y381kg6" path="res://components/logic_and/placeholder.png" id="7_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="7_vef74"]
 [ext_resource type="Texture2D" uid="uid://bc4pyrfw4r5hu" path="res://components/logic_or/placeholder.png" id="8_f1jbl"]
 [ext_resource type="Script" uid="uid://mm1qjlxeapxp" path="res://outer.gd" id="8_lc2xo"]
 [ext_resource type="Texture2D" uid="uid://bodnfmktuun1l" path="res://assets/inner.png" id="8_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://dp7bi7emff4hw" path="res://components/goal_indicator/goal_indicator.tscn" id="9_hve3p"]
+[ext_resource type="Script" uid="uid://dnlbw4ifv6xhx" path="res://components/metrics/metrics.gd" id="11_hb5m1"]
 [ext_resource type="Texture2D" uid="uid://budjmyywgw3an" path="res://assets/light.png" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://v318s4fjehwt" path="res://components/logic_generator/logic_generator.tscn" id="14_rvswv"]
 [ext_resource type="AudioStream" uid="uid://benj5rvo7pwrm" path="res://assets/component_placed.wav" id="17_rvswv"]
@@ -124,20 +124,20 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
-offset_left = -112.0
-offset_top = 27.0
-offset_right = 118.0
-offset_bottom = 59.0
+offset_left = -186.0
+offset_top = 32.0
+offset_right = 190.0
+offset_bottom = 64.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1796083809]
 layout_mode = 0
-offset_left = 144.0
-offset_top = 27.0
-offset_right = 374.0
-offset_bottom = 59.0
+offset_left = 214.0
+offset_top = 32.0
+offset_right = 444.0
+offset_bottom = 64.0
 theme = ExtResource("6_80cx4")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Panel" unique_id=2113725402]
@@ -150,10 +150,34 @@ theme = ExtResource("6_80cx4")
 theme_override_font_sizes/font_size = 16
 text = "CTRL:"
 
-[node name="Metrics" parent="CanvasLayer/Control" unique_id=1107093088 instance=ExtResource("7_e8heu")]
-layout_mode = 1
-grow_horizontal = 2
-metadata/_edit_use_anchors_ = true
+[node name="Metrics" type="Panel" parent="CanvasLayer/Control" unique_id=2058442517]
+layout_mode = 0
+offset_left = -440.0
+offset_top = 32.0
+offset_right = -210.0
+offset_bottom = 64.0
+theme = ExtResource("6_80cx4")
+script = ExtResource("11_hb5m1")
+
+[node name="Time" type="Label" parent="CanvasLayer/Control/Metrics" unique_id=900009249]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 69.0
+offset_bottom = 29.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "TIME: 0"
+
+[node name="Size" type="Label" parent="CanvasLayer/Control/Metrics" unique_id=1499542166]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 6.0
+offset_right = 200.0
+offset_bottom = 29.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "SIZE: 0"
 
 [node name="Vignette" parent="CanvasLayer" unique_id=2053270938 instance=ExtResource("6_215e1")]
 
@@ -202,10 +226,10 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="." unique_id=1790227513]
-offset_left = 395.0
-offset_top = -255.0
-offset_right = 537.0
-offset_bottom = -232.0
+offset_left = -79.0
+offset_top = -268.0
+offset_right = 63.0
+offset_bottom = -245.0
 text = "ring: 0. segment: 0"
 
 [node name="Sfx" type="Node" parent="." unique_id=1735032796]

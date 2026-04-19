@@ -31,6 +31,7 @@ func initialize(_direction, _polar_position, _ring, _color_code, _bpm):
 	angle = position.angle()
 	$Sprite.modulate = Global.COLORS[color_code]
 	$Sprite/Trail.modulate = Global.COLORS[color_code]
+	$Explosion.color =  Global.COLORS[color_code]
 
 func change_color(new_color_code):
 	color_code = new_color_code
@@ -66,9 +67,8 @@ func get_segment_from_angle(angle: float) -> int:
 	
 func annihilate():
 	state = States.GONE
-	$Sfx/Annihilation.play()
 	$Sprite.hide()
-	$Particles.emitting = true
+	$Explosion.explode() 
 
 func _on_particles_finished() -> void:
 	if state == States.GONE:

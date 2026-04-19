@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://d7uap2c40kjb"]
+[gd_scene format=3 uid="uid://16ywe34vkp15"]
 
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://b1b4ykgm3k7jn" path="res://components/palette/palette.tscn" id="2_6q0d3"]
 [ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://bcq156orlxx1d" path="res://components/logic_branch/box.png" id="3_6wav4"]
 [ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
 [ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="6_80cx4"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="6_215e1"]
@@ -25,11 +26,11 @@ adjustment_contrast = 1.25
 
 [node name="Game" type="Node2D" unique_id=493524955]
 script = ExtResource("1_fc0e3")
-title = "#0011 Alternating router"
+title = "#0110 Filtering"
 rings = 3
 ring_distance = 80
-GOAL = ["WHITE", "BLACK", "WHITE", "BLACK"]
-ENABLED_TOOLS = ["Mover", "LogicNot", "Alternator"]
+GOAL = ["WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE"]
+ENABLED_TOOLS = ["LogicAnd", "LogicOr", "Mover", "LogicBranch"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249804444]
 
@@ -38,6 +39,9 @@ offset_left = 62.0
 offset_top = 149.0
 offset_right = 233.0
 offset_bottom = 684.0
+
+[node name="LogicBranch" parent="CanvasLayer/Palette" index="6" unique_id=1945037422]
+texture = ExtResource("3_6wav4")
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=564903987]
 layout_mode = 3
@@ -132,9 +136,9 @@ text = "SIZE: 0"
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer" unique_id=1874057529]
 offset_left = 62.0
-offset_top = 37.0
+offset_top = 35.0
 offset_right = 182.0
-offset_bottom = 62.0
+offset_bottom = 60.0
 theme = ExtResource("6_80cx4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "LEVEL 01"
@@ -227,7 +231,18 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
+delay_ticks = 8
 delay_offset = 1
+segment = 6
+ring = 3
+direction = -1
+clock = true
+
+[node name="LogicGenerator2" parent="Components" unique_id=982627352 instance=ExtResource("14_rvswv")]
+delay_ticks = 1
+delay_offset = 1
+segment = 3
+color_code = "BLACK"
 
 [node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
 metadata/_edit_lock_ = true
@@ -285,7 +300,6 @@ environment = SubResource("Environment_80cx4")
 wait_time = 3.0
 
 [node name="Tutorial" type="Panel" parent="." unique_id=1836625615]
-visible = false
 offset_left = 451.0
 offset_top = -343.0
 offset_right = 741.0
@@ -300,6 +314,9 @@ offset_right = 262.0
 offset_bottom = 355.0
 theme = ExtResource("6_80cx4")
 theme_override_font_sizes/font_size = 15
+text = "AND - returns 1 (cyan) only if 1 is on both inputs
+
+OR - returns 1 (cyan) if 1 is on any input"
 autowrap_mode = 2
 
 [node name="Title" type="Label" parent="Tutorial" unique_id=1984093114]
@@ -311,7 +328,7 @@ offset_bottom = 355.0
 theme = ExtResource("6_80cx4")
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_font_sizes/font_size = 15
-text = "Info"
+text = "Logic Gates"
 autowrap_mode = 2
 
 [connection signal="gui_input" from="CanvasLayer/Palette/Mover" to="." method="_on_mover_gui_input"]
@@ -320,6 +337,7 @@ autowrap_mode = 2
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicAnd" to="." method="_on_logic_and_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicOr" to="." method="_on_logic_or_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/Alternator" to="." method="_on_alternator_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/LogicBranch" to="." method="_on_logic_branch_gui_input"]
 [connection signal="on_goal_achieved" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_goal_achieved"]
 [connection signal="on_signal_consumed" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_consumed"]
 [connection signal="on_signal_rejected" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_rejected"]

@@ -9,6 +9,7 @@ signal fire_signal(config)
 @export var direction = 1
 @export var color_code = "WHITE"
 @export var clock = false
+@export var random = false
 
 @onready var anim = $AnimationPlayer
 
@@ -21,6 +22,8 @@ func _ready():
 	$Box/Dot.modulate = Global.COLORS[color_code]
 	if direction == 1:
 		$Box.rotation_degrees = 180
+	if random:
+		$Rand.show()
 	
 
 func place(polar_coords: Vector2i):
@@ -43,6 +46,14 @@ func tick(time):
 	anim.play("Pulse")
 
 func fire(signal_color = color_code):
+	if random:
+		if randi() % 2 == 0:
+			signal_color = Global.COLOR_BLACK
+		else:
+			signal_color = Global.COLOR_WHITE
+		$Box/Arrow.modulate = Global.COLORS[signal_color]
+		$Box/Dot.modulate = Global.COLORS[signal_color]
+		
 	anim.play("Fire")
 	if signal_color == Global.COLOR_BLACK:
 		$Sfx/Black.play()

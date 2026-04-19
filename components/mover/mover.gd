@@ -67,7 +67,9 @@ func process_signals(signals):
 		return
 		
 	if signals.size() > 0:
-		move_signal(signals[0])
+		move_signal(signals.pop_front())
+		for signal_node in signals:
+			signal_node.annihilate()
 
 func move_signal(signal_node):
 	$AnimationPlayer.play("Pulse")
@@ -104,6 +106,7 @@ func move_signal(signal_node):
 		"direction": result_direction,
 		"lifetime": signal_node.lifetime
 	})
+	$Sfx/Move.pitch_scale = 1 + (target_ring - 1) * 0.05
 	$Sfx/Move.play()
 	
 	signal_node.queue_free()

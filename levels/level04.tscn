@@ -25,7 +25,7 @@ adjustment_contrast = 1.25
 
 [node name="Game" type="Node2D" unique_id=493524955]
 script = ExtResource("1_fc0e3")
-title = "#0101 Inverted alternation"
+title = "#0100 Inverted alternation"
 rings = 3
 ring_distance = 80
 ENABLED_TOOLS = ["Mover", "LogicNot", "Alternator"]

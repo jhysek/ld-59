@@ -40,6 +40,8 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MASK_RIGHT and event.pressed:
 		if parent_object.has_method("switch_variant"):
 			parent_object.switch_variant()
+			map.set_dragging(true)
+			map.set_dragging(false)
 
 func dropped():
 	placed_at = Coords.world_to_polar(parent_object.position)

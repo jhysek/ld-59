@@ -43,6 +43,7 @@ logic_not=""
 logic_and=""
 logic_or=""
 alternator=""
+logic_branch=""
 
 [input]
 

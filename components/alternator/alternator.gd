@@ -51,6 +51,12 @@ func alternate():
 	current_output = current_variant.outputs[alternative]
 	
 	$Sfx/Alternate.play()
+	
+
+func reset_to_initial_position():
+	if alternative != 0:
+		alternate()
+		$Box/Arrow.rotation = 0
 		
 func place(to_coords):
 	polar_pos = to_coords

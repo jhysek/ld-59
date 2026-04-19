@@ -66,7 +66,12 @@ func process_signals(signals):
 		
 	print("PROCESING SIGNALS: " + str(signals))
 	if signals.size() > 1:
-		and_signals(signals[0], signals[1])
+		var s1 = signals.pop_front()
+		var s2 = signals.pop_front()
+		and_signals(s1, s2)
+	
+	for signal_node in signals:
+		signal_node.annihilate()
 
 func and_signals(signal1, signal2):
 	var result = Global.COLOR_BLACK
@@ -88,7 +93,6 @@ func and_signals(signal1, signal2):
 			
 
 func create_signal(color_code, ring_idx, direction):
-	print("CREATED " + color_code + " => " + str(Vector2(polar_pos.x, ring_idx)))
 	emit_signal("fire_signal", {
 		"color_code": color_code,
 		"ring_idx": ring_idx,

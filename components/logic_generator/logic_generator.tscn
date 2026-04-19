@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://djli2fk4r5ums" path="res://components/logic_generator/box.png" id="2_b5uri"]
 [ext_resource type="Texture2D" uid="uid://bi3jfbin8ybfg" path="res://components/logic_generator/arrow.png" id="3_jjfe2"]
 [ext_resource type="Texture2D" uid="uid://b2o5el5s75xy1" path="res://components/logic_generator/dot.png" id="4_kiscs"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="5_jjfe2"]
 
 [sub_resource type="Animation" id="Animation_kiscs"]
 resource_name = "Fire"
@@ -86,6 +87,20 @@ _data = {
 [node name="LogicGenerator" type="Node2D" unique_id=1155449095 groups=["receiver"]]
 script = ExtResource("1_65qug")
 ring = 2
+
+[node name="Rand" type="Label" parent="." unique_id=1600783134]
+visible = false
+offset_left = -28.0
+offset_top = -33.0
+offset_right = 20.0
+offset_bottom = -10.0
+theme = ExtResource("5_jjfe2")
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.70980394)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 16
+text = "RNG"
 
 [node name="Box" type="Sprite2D" parent="." unique_id=1452330385]
 scale = Vector2(0.5, 0.5)

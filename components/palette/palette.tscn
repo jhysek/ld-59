@@ -137,6 +137,25 @@ offset_bottom = 7.0
 theme_override_font_sizes/font_size = 10
 text = "alternating router"
 
+[node name="LogicBranch" type="TextureRect" parent="." unique_id=1945037422]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 388.0
+offset_right = 104.0
+offset_bottom = 420.0
+mouse_filter = 0
+texture = ExtResource("6_2fcey")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LogicBranch" unique_id=844506785]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -18.0
+offset_right = 79.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
+text = "conditional branching"
+
 [node name="Label" type="Label" parent="." unique_id=335494577]
 layout_mode = 0
 offset_left = 8.0

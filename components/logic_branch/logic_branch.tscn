@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dcypbvul813ew"]
+
+[ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_sptqw"]
+[ext_resource type="Script" uid="uid://d013j48owc1s0" path="res://components/logic_branch/logic_branch.gd" id="1_u71r0"]
+[ext_resource type="Texture2D" uid="uid://bcq156orlxx1d" path="res://components/logic_branch/box.png" id="2_4j3dp"]
+
+[node name="LogicBranch" type="Node2D" unique_id=182519455 groups=["logic_branch"]]
+script = ExtResource("1_u71r0")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=717082258]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_4j3dp")
+
+[node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_sptqw")]

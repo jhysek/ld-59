@@ -11,6 +11,7 @@ var LogicAnd = preload("res://components/logic_and/logic_and.tscn")
 var LogicOr = preload("res://components/logic_or/logic_or.tscn")
 var Explosion = preload("res://components/explosion/explosion.tscn")
 var Alternator = preload("res://components/alternator/alternator.tscn")
+var LogicBranch = preload("res://components/logic_branch/logic_branch.tscn")
 
 @onready var Rings = get_node("Rings")
 @onready var Components = get_node("Components")
@@ -50,6 +51,7 @@ enum States {
 var state = States.PAUSED
 
 func _ready():
+	randomize()
 	Transition.openScene()
 	
 	if Engine.is_editor_hint():
@@ -291,6 +293,10 @@ func reset_simulation():
 	$CanvasLayer/Control/GoalIndicator.reset()
 	for node in Signals.get_children():
 		node.annihilate()
+	
+	# reset alternator
+	for alternator in get_tree().get_nodes_in_group("alternator"):
+		alternator.reset_to_initial_position()
 		
 func refresh_ui():
 	$Ticks.text = "TICKS: " + str(time)
@@ -346,11 +352,12 @@ func highlight_segments(segments, color):
 		idx = idx + 1
 
 func refresh_component_metric():
-	var mergers = get_tree().get_node_count_in_group("merger")
-	var movers = get_tree().get_node_count_in_group("mover")
-	var splitters = get_tree().get_node_count_in_group("splitter")
+	var count = 0
+	for component in $Components.get_children():
+		if !component.is_in_group("receiver"):
+			count += 1
 	
-	Metrics.set_size_metric(mergers + movers + splitters)
+	Metrics.set_size_metric(count)
 	
 ## Component palette start dragging ############################################
 
@@ -443,6 +450,16 @@ func _on_alternator_gui_input(event: InputEvent) -> void:
 			dragging = true
 			connect_alternator_signals(component)
 		
+func _on_logic_branch_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var component = LogicBranch.instantiate()
+			$Components.add_child(component)
+		
+			component.position = get_global_mouse_position()
+			component.start_dragging()
+			dragging = true
+			connect_logic_branch_signals(component)
 	
 ## Component signals ###############################################
 func connect_splitter_signals(splitter):
@@ -490,6 +507,12 @@ func connect_or_signals(component):
 		
 func connect_alternator_signals(component):
 	if component.is_in_group("alternator"):
+		component.fire_signal.connect(spawn_signal)
+		component.signal_in_center.connect(consume_signal)
+		connect_placement_signals(component)
+		
+func connect_logic_branch_signals(component):
+	if component.is_in_group("logic_branch"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
 		connect_placement_signals(component)

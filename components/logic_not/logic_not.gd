@@ -40,19 +40,20 @@ func process_signals(signals):
 	if !placed:
 		return
 		
-	print("PRICESING SIGNALS: " + str(signals))
 	if signals.size() > 0:
-		negate_signal(signals[0])
+		negate_signal(signals.pop_front())
+		for signal_node in signals:
+			signal_node.annihilate()
 
 func source_rings():
 	return [polar_pos.y]
 	
 func negate_signal(signal_node):
-	print("COPYING SIGNAL...")
 	var color = Global.COLOR_BLACK
 	if signal_node.color_code == Global.COLOR_BLACK:
 		color = Global.COLOR_WHITE
 	
 	signal_node.change_color(color)	
-	# $Sfx/Split.play()
+	$Sfx/Invert.pitch_scale = 1 + (polar_pos.y - 1) * 0.05
+	$Sfx/Invert.play()
 			

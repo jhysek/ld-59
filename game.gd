@@ -9,6 +9,7 @@ var LogicCopy = preload("res://components/logic_splitter/logic_splitter.tscn")
 var LogicNot = preload("res://components/logic_not/logic_not.tscn")
 var LogicAnd = preload("res://components/logic_and/logic_and.tscn")
 var LogicOr = preload("res://components/logic_or/logic_or.tscn")
+var Explosion = preload("res://components/explosion/explosion.tscn")
 
 @onready var Rings = get_node("Rings")
 @onready var Components = get_node("Components")
@@ -230,9 +231,14 @@ func same_signal_in_segment(polar_pos, color_code):
 func spawn_signal(config):
 	if !config.has("force") and same_signal_in_segment(config.start_pos, config.color_code):
 		print("Already existing signal...")
+		explode(Coords.polar_to_world(config.start_pos))
+		
 		return
 		
 	var signal_node = SignalNode.instantiate()
+	if config.has("lifetime"):
+		signal_node.lifetime = config.lifetime + 1
+		
 	Signals.add_child(signal_node)
 	signal_node.initialize(config.direction, config.start_pos, ring_data[config.start_pos.y - 1].node, config.color_code, BPM)
 
@@ -445,3 +451,9 @@ func _on_goal_indicator_on_goal_achieved() -> void:
 func _on_goal_indicator_on_signal_rejected() -> void:
 	state = States.PAUSED
 	print("LOSE!!!")
+	
+func explode(pos):
+	var explosion = Explosion.instantiate()
+	add_child(explosion)
+	explosion.position = pos
+	explosion.explode()

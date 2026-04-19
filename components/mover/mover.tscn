@@ -2,8 +2,46 @@
 
 [ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_g1x4q"]
 [ext_resource type="Script" uid="uid://c8igpqcxn5yfv" path="res://components/mover/mover.gd" id="1_k48ye"]
-[ext_resource type="Texture2D" uid="uid://u0tq7qpbsbrd" path="res://components/mover/placeholder.png" id="3_5885g"]
+[ext_resource type="Texture2D" uid="uid://drfqrnl7ri3ts" path="res://components/mover/box.png" id="3_ecqor"]
 [ext_resource type="AudioStream" uid="uid://bc73pxrstg1wr" path="res://components/mover/move.wav" id="4_ecqor"]
+[ext_resource type="Texture2D" uid="uid://cl4r0c6hfvyr1" path="res://components/mover/arrow.png" id="5_m4qsf"]
+
+[sub_resource type="Animation" id="Animation_m4qsf"]
+resource_name = "Pulse"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Arrow:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.09969693, 0.4032604),
+"transitions": PackedFloat32Array(0.2679433, 3.0314348, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(50, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j6s3q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Arrow:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e56jo"]
+_data = {
+&"Pulse": SubResource("Animation_m4qsf"),
+&"RESET": SubResource("Animation_j6s3q")
+}
 
 [node name="Mover" type="Node2D" unique_id=553300533 groups=["mover"]]
 script = ExtResource("1_k48ye")
@@ -11,9 +49,18 @@ script = ExtResource("1_k48ye")
 [node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_g1x4q")]
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=684709920]
-texture = ExtResource("3_5885g")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_ecqor")
+offset = Vector2(-5, 0)
+
+[node name="Arrow" type="Sprite2D" parent="Sprite" unique_id=84554898]
+position = Vector2(27, -1)
+texture = ExtResource("5_m4qsf")
 
 [node name="Sfx" type="Node" parent="." unique_id=2103290975]
 
 [node name="Move" type="AudioStreamPlayer" parent="Sfx" unique_id=1032215771]
 stream = ExtResource("4_ecqor")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=705112230]
+libraries/ = SubResource("AnimationLibrary_e56jo")

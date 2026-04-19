@@ -13,8 +13,30 @@ var polar_pos = Vector2i(0,0)
 var placed = false
 var direction = -1
 
+var variant = 1
+var current_output = Vector2(0, -1)
+
+# output: Vector2(direction, ring_offset)
+const VARIANTS = [ 
+		{ "rotation": 0, "output": Vector2(1, 0) }, 
+		{ "rotation": PI / 2.0, "output": Vector2(0, -1) }, 
+		{ "rotation": PI, "output": Vector2(-1, 0)  }, 
+		{ "rotation": 3 * PI / 2.0, "output": Vector2(0, 1)  } ]
+
 const SHAPE = [ Vector2.ZERO ]
 
+func _ready():
+	var current_variant = VARIANTS[variant]
+	$Sprite.rotation = current_variant.rotation
+	current_output = current_variant.output
+	
+func switch_variant():
+	variant = (variant + 1) % VARIANTS.size()
+	print("SWITCHING VARIANT TO " + str(variant))
+	var current_variant = VARIANTS[variant]
+	$Sprite.rotation = current_variant.rotation
+	current_output = current_variant.output
+	
 func emit_draging_over(polar_coords):
 	if !placed && polar_coords != Vector2.ZERO:
 		emit_signal("on_dragging_over", polar_coords, self)
@@ -39,13 +61,6 @@ func start_dragging():
 	draggable.selected = true
 	placed = false
 	
-func switch_variant():
-	direction = direction * -1
-	if direction == -1:
-		$Sprite.rotation_degrees = 180
-	else: 
-		$Sprite.rotation_degrees = 0
-
 	
 func process_signals(signals):
 	if !placed:
@@ -55,13 +70,15 @@ func process_signals(signals):
 		move_signal(signals[0])
 
 func move_signal(signal_node):
-	var target_ring = polar_pos.y + direction
+	$AnimationPlayer.play("Pulse")
+	var target_ring = polar_pos.y + current_output.y
+	
 	if target_ring > Coords.current_level_config.rings:
-		emit_signal("annihilate_signal", { 
-			"color_code": signal_node.color_code,
-			"ring_idx": target_ring,
-			"segment": polar_pos.x
-		})
+		#emit_signal("annihilate_signal", { 
+		#	"color_code": signal_node.color_code,
+		#	"ring_idx": target_ring,
+		#	"segment": polar_pos.x
+		#})
 		signal_node.annihilate()
 		return 
 	
@@ -72,14 +89,22 @@ func move_signal(signal_node):
 		})
 		return
 	
+	var result_direction = current_output.x
+	if result_direction == 0:
+		result_direction = signal_node.direction
+		
+	signal_node.state = signal_node.States.GONE
+	print("FIRING TO ring: " + str(target_ring) + " direction: " + str(result_direction))
 	emit_signal("fire_signal", {
 		"color_code": signal_node.color_code,
 		"ring_idx": target_ring,
 		"segment": polar_pos.x,
 		"start_pos": Vector2(polar_pos.x, target_ring),
-		"direction": signal_node.direction
+		"direction": result_direction,
+		"lifetime": signal_node.lifetime
 	})
 	$Sfx/Move.play()
+	
 	signal_node.queue_free()
 	
 	

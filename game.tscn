@@ -20,9 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://dp7bi7emff4hw" path="res://components/goal_indicator/goal_indicator.tscn" id="9_hve3p"]
 [ext_resource type="Texture2D" uid="uid://budjmyywgw3an" path="res://assets/light.png" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://v318s4fjehwt" path="res://components/logic_generator/logic_generator.tscn" id="14_rvswv"]
-[ext_resource type="PackedScene" uid="uid://dk24n5bv16wo8" path="res://components/logic_not/logic_not.tscn" id="15_hb5m1"]
-[ext_resource type="PackedScene" uid="uid://7o03vuwl1xhk" path="res://components/logic_and/logic_and.tscn" id="16_x5p1p"]
-[ext_resource type="PackedScene" uid="uid://qoxaosc5kb0d" path="res://components/logic_or/logic_or.tscn" id="17_qhcbd"]
 [ext_resource type="AudioStream" uid="uid://benj5rvo7pwrm" path="res://assets/component_placed.wav" id="17_rvswv"]
 
 [sub_resource type="Environment" id="Environment_80cx4"]
@@ -77,37 +74,37 @@ texture = ExtResource("4_eow3j")
 
 [node name="LogicCopy" type="TextureRect" parent="CanvasLayer/Palette" unique_id=512293268]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 135.0
-offset_right = 106.0
-offset_bottom = 162.0
+offset_left = 53.0
+offset_top = 187.0
+offset_right = 109.0
+offset_bottom = 214.0
 mouse_filter = 0
 texture = ExtResource("5_boyg6")
 
 [node name="LogicNot" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1729214499]
 layout_mode = 0
-offset_left = 42.0
-offset_top = 242.0
-offset_right = 98.0
-offset_bottom = 269.0
+offset_left = 55.0
+offset_top = 233.0
+offset_right = 111.0
+offset_bottom = 260.0
 mouse_filter = 0
 texture = ExtResource("6_x5p1p")
 
 [node name="LogicAnd" type="TextureRect" parent="CanvasLayer/Palette" unique_id=390927940]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 319.0
-offset_right = 99.0
-offset_bottom = 346.0
+offset_left = 55.0
+offset_top = 280.0
+offset_right = 111.0
+offset_bottom = 307.0
 mouse_filter = 0
 texture = ExtResource("7_qhcbd")
 
 [node name="LogicOr" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1648289040]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 376.0
-offset_right = 106.0
-offset_bottom = 403.0
+offset_left = 55.0
+offset_top = 326.0
+offset_right = 111.0
+offset_bottom = 353.0
 mouse_filter = 0
 texture = ExtResource("8_f1jbl")
 
@@ -194,13 +191,6 @@ metadata/_edit_lock_ = true
 
 [node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
 ring = 3
-clock = true
-
-[node name="LogicNot" parent="Components" unique_id=1551525737 instance=ExtResource("15_hb5m1")]
-
-[node name="LogicAnd" parent="Components" unique_id=158245418 instance=ExtResource("16_x5p1p")]
-
-[node name="LogicOr" parent="Components" unique_id=1306487229 instance=ExtResource("17_qhcbd")]
 
 [node name="Rings" type="Node2D" parent="." unique_id=1700894208]
 metadata/_edit_lock_ = true

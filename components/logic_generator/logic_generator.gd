@@ -47,3 +47,6 @@ func process_signals(signals):
 		print("SIGNALS: " + str(signal_node.lifetime))
 		if signal_node.lifetime > 1:
 			signal_node.annihilate()
+			
+func blocking_rings():
+	return polar_pos.y

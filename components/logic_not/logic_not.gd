@@ -37,6 +37,9 @@ func process_signals(signals):
 	if signals.size() > 0:
 		negate_signal(signals[0])
 
+func source_rings():
+	return [polar_pos.y]
+	
 func negate_signal(signal_node):
 	print("COPYING SIGNAL...")
 	var color = Global.COLOR_BLACK

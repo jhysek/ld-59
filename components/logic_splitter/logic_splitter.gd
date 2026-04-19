@@ -29,6 +29,7 @@ func start_dragging():
 	draggable.selected = true
 	placed = false
 	
+	
 func process_signals(signals):
 	if !placed:
 		return
@@ -69,5 +70,10 @@ func create_signal(color_code, ring_idx, direction, signal_node = null):
 		"direction": direction
 	})
 	
+func source_rings():
+	return [polar_pos.y]	
+	
+func blocking_rings():
+	return [polar_pos.y - 1]
 	
 	

@@ -1,15 +1,4 @@
-res://game.gd
-res://game.tscn
+res://components/signal/signal.tscn
 res://assets/theme.tres
 res://Components/Vignette/vignette.gdshader
-res://components/logic_splitter/logic_splitter.tscn
-res://components/splitter/splitter.gd
-res://components/logic_splitter/logic_splitter.gd
-res://components/logic_not/logic_not.tscn
-res://components/logic_not/logic_not.gd
-res://components/logic_and/logic_and.tscn
-res://components/logic_and/logic_and.gd
-res://components/logic_or/logic_or.tscn
-res://components/logic_or/logic_or.gd
 res://components/signal/signal.gd
-res://components/signal/trail.gd

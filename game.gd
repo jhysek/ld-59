@@ -21,7 +21,7 @@ var LogicOr = preload("res://components/logic_or/logic_or.tscn")
 @export var ring_distance = 50
 @export var segments = 8
 @export var BPM = 60
-@export var GOAL = ["MAGENTA", "MAGENTA", "MAGENTA"]
+@export var GOAL = ["BLACK", "WHITE", "BLACK", "WHITE"]
 
 var time = 0
 var consumed = []
@@ -105,8 +105,6 @@ func tick():
 	
 	evaluate_components()
 	propagate_time(time)
-
-
 	refresh_ui()
 	
 func propagate_time(time):
@@ -115,12 +113,36 @@ func propagate_time(time):
 	
 func evaluate_components():
 	for component in Components.get_children():
-		var signals = []
+		annihilate_blocked_signals(component)
+		evaluate_source_signals(component)
+
+func annihilate_blocked_signals(component):
+	if !component.has_method("blocking_rings"):
+		return
+	
+	for ring_idx in component.blocking_rings():
+		var source_polar_pos = Vector2i(component.polar_pos.x, ring_idx)
 		for signal_node in Signals.get_children():
-			if Vector2i(signal_node.polar_pos) == Vector2i(component.polar_pos):
+			if Vector2i(signal_node.polar_pos) == source_polar_pos:
+				# Do not annihilate signals that were just created
+				if signal_node.lifetime > 1:
+					signal_node.annihilate()
+
+func evaluate_source_signals(component):
+	var signals = []
+	var source_rings = [component.polar_pos.y]
+	
+	if component.has_method("source_rings"):
+		source_rings = component.source_rings()
+	
+	for ring_idx in source_rings:
+		var source_polar_pos = Vector2i(component.polar_pos.x, ring_idx)
+		for signal_node in Signals.get_children():
+			if Vector2i(signal_node.polar_pos) == source_polar_pos:
 				signals.append(signal_node)
-		if signals.size() > 0:
-			component.process_signals(signals)
+				
+	if signals.size() > 0:
+		component.process_signals(signals)
 
 func initialize_center():
 	Center.set_color(GOAL[0])
@@ -294,7 +316,8 @@ func _on_logic_and_gui_input(event: InputEvent) -> void:
 		if event.pressed:
 			var component = LogicAnd.instantiate()
 			$Components.add_child(component)
-		
+			print("CLICKED ON AND 0 " + str(component))
+				
 			component.position = get_global_mouse_position()
 			component.start_dragging()
 			connect_and_signals(component)
@@ -339,20 +362,20 @@ func connect_coppier_signals(component):
 		component.on_component_lifted.connect(component_lifted)
 
 func connect_not_signals(component):
-	if component.is_in_group("mover"):
+	if component.is_in_group("logic_not"):
 		component.fire_signal.connect(spawn_signal)
 		component.on_component_placed.connect(component_placed)
 		component.on_component_lifted.connect(component_lifted)
 
 func connect_and_signals(component):
-	if component.is_in_group("mover"):
+	if component.is_in_group("logic_and"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
 		component.on_component_placed.connect(component_placed)
 		component.on_component_lifted.connect(component_lifted)
 			
 func connect_or_signals(component):
-	if component.is_in_group("mover"):
+	if component.is_in_group("logic_or"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
 		component.on_component_placed.connect(component_placed)

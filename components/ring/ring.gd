@@ -13,10 +13,10 @@ func _draw():
 		var start_angle = i * angle_per_segment
 		var end_angle = start_angle + angle_per_segment
 
-		var color = Color(0.835, 0.825, 0.81, 0.4)
+		var color = Color(0.0, 0.0, 0.0, 0.4)
 
 		if i in active_segments:
-			color = Color(1.0, 1.0, 1.0, 0.725)
+			color = Color(0.3, 0.3, 0.3, 0.776)
 
 		draw_arc(Vector2.ZERO, radius, start_angle, end_angle, 32, color, thickness, true)
 

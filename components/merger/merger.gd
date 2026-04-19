@@ -74,5 +74,7 @@ func create_signal(color_code, ring_idx, direction):
 		"direction": direction
 	})
 	
+func source_rings():
+	return [polar_pos.y, polar_pos.y - 1]	
 	
 	

@@ -12,7 +12,6 @@ var direction = -1
 func can_be_placed(to_coords):
 	if to_coords.y == 1 or to_coords.y > Coords.current_level_config.rings:
 		return false
-	
 	return true
 
 func place(to_coords):
@@ -61,8 +60,8 @@ func and_signals(signal1, signal2):
 	# $Sfx/Split.play()
 			
 
-func create_signal(color_code, ring_idx, direction, signal_node = null):
-	print("CREATED " + color_code + " => " + str(Vector2(polar_pos.x, ring_idx)))
+func create_signal(color_code, ring_idx, direction):
+	# print("CREATED " + color_code + " => " + str(Vector2(polar_pos.x, ring_idx)))
 	emit_signal("fire_signal", {
 		"color_code": color_code,
 		"ring_idx": ring_idx,

@@ -65,4 +65,11 @@ func get_segment_from_angle(angle: float) -> int:
 	
 	
 func annihilate():
-	queue_free()
+	state = States.GONE
+	$Sfx/Annihilation.play()
+	$Sprite.hide()
+	$Particles.emitting = true
+
+func _on_particles_finished() -> void:
+	if state == States.GONE:
+		queue_free()

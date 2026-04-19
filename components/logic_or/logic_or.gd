@@ -59,7 +59,7 @@ func or_signals(signal1, signal2):
 	signal1.queue_free()
 	signal2.queue_free()
 	# $Sfx/Split.play()
-			
+	
 
 func create_signal(color_code, ring_idx, direction, signal_node = null):
 	print("CREATED " + color_code + " => " + str(Vector2(polar_pos.x, ring_idx)))

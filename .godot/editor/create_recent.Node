@@ -1,7 +1,8 @@
-Sprite2D
-Node2D
 AudioStreamPlayer
 Node
+CPUParticles2D
+Sprite2D
+Node2D
 AnimationPlayer
 PointLight2D
 TextureButton
@@ -11,4 +12,3 @@ TextureRect
 Control
 Label
 Line2D
-AudioStreamPlayer2D

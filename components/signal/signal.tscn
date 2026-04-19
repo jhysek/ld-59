@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://kbscdnwiqnpa" path="res://components/signal/signal.gd" id="1_ik0xp"]
 [ext_resource type="Texture2D" uid="uid://by4o3ld7dtdu4" path="res://components/signal/sprite.png" id="2_ik0xp"]
 [ext_resource type="Script" uid="uid://d2dlh7dq2pi6" path="res://components/signal/trail.gd" id="3_g5i3x"]
+[ext_resource type="AudioStream" uid="uid://cvdf56cscxe4n" path="res://components/signal/annihilation.wav" id="4_xfg07"]
 
 [sub_resource type="Curve" id="Curve_g5i3x"]
 _data = [Vector2(0, 0.066328645), 0.0, 0.0, 0, 0, Vector2(1, 0.98626953), 0.0, 0.0, 0, 0]
@@ -10,6 +11,13 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_g5i3x"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.7019608)
+
+[sub_resource type="Curve" id="Curve_xfg07"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.97899157, 0.09818578), -4.1437206, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ql4pk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.21176471)
 
 [node name="Signal" type="Node2D" unique_id=2010018270 groups=["signal"]]
 script = ExtResource("1_ik0xp")
@@ -22,3 +30,26 @@ top_level = true
 width_curve = SubResource("Curve_g5i3x")
 gradient = SubResource("Gradient_g5i3x")
 script = ExtResource("3_g5i3x")
+
+[node name="Particles" type="CPUParticles2D" parent="." unique_id=1885869134]
+emitting = false
+amount = 10
+texture = ExtResource("2_ik0xp")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 358.57
+initial_velocity_max = 589.64
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_xfg07")
+color_ramp = SubResource("Gradient_ql4pk")
+
+[node name="Sfx" type="Node" parent="." unique_id=1016357593]
+
+[node name="Annihilation" type="AudioStreamPlayer" parent="Sfx" unique_id=11794205]
+stream = ExtResource("4_xfg07")
+
+[connection signal="finished" from="Particles" to="." method="_on_particles_finished"]

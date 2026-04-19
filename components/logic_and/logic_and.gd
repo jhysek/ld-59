@@ -48,26 +48,29 @@ func process_signals(signals):
 func and_signals(signal1, signal2):
 	var result = Global.COLOR_BLACK
 	if signal1.color_code == Global.COLOR_WHITE && signal2.color_code == Global.COLOR_WHITE:
-		result = true
+		result = Global.COLOR_WHITE
 	
 	var direction = 1
 	if signal1.direction - signal2.direction < 0:
 		direction = -1
 	
-	create_signal(result, polar_pos.y, direction)
 	signal1.queue_free()
 	signal2.queue_free()
+	
+	create_signal(result, polar_pos.y, direction)
+
 	# $Sfx/Split.play()
 			
 
 func create_signal(color_code, ring_idx, direction):
-	# print("CREATED " + color_code + " => " + str(Vector2(polar_pos.x, ring_idx)))
+	print("CREATED " + color_code + " => " + str(Vector2(polar_pos.x, ring_idx)))
 	emit_signal("fire_signal", {
 		"color_code": color_code,
 		"ring_idx": ring_idx,
 		"segment": polar_pos.x,
 		"start_pos": Vector2(polar_pos.x, ring_idx),
-		"direction": direction
+		"direction": direction,
+		"force": true
 	})
 	
 	

@@ -124,6 +124,7 @@ func annihilate_blocked_signals(component):
 		var source_polar_pos = Vector2i(component.polar_pos.x, ring_idx)
 		for signal_node in Signals.get_children():
 			if Vector2i(signal_node.polar_pos) == source_polar_pos:
+				print("ANNIHILATING: " + str(source_polar_pos))
 				# Do not annihilate signals that were just created
 				if signal_node.lifetime > 1:
 					signal_node.annihilate()
@@ -172,7 +173,7 @@ func initialize_receivers():
 
 func same_signal_in_segment(polar_pos, color_code):
 	for node in get_tree().get_nodes_in_group("signal"):
-		if Vector2i(node.polar_pos) == Vector2i(polar_pos) and  node.color_code == color_code:
+		if Vector2i(node.polar_pos) == Vector2i(polar_pos) and  node.color_code == color_code and node.state != node.States.GONE:
 			return true
 	return false
 
@@ -187,7 +188,7 @@ func spawn_signal(config):
 
 func consume_signal(config):
 	GoalIndicator.consume_signal(config.color_code)
-	config.signal_node.queue_free()
+	# config.signal_node.queue_free()
 	Center.set_color(GoalIndicator.next_expected())
 	consumed.append(config.color_code)
 

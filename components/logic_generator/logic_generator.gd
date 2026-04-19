@@ -49,4 +49,4 @@ func process_signals(signals):
 			signal_node.annihilate()
 			
 func blocking_rings():
-	return polar_pos.y
+	return [polar_pos.y]

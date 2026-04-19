@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c77i4o34yat12" path="res://components/logic_splitter/placeholder.png" id="5_boyg6"]
 [ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="6_80cx4"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="6_215e1"]
+[ext_resource type="Texture2D" uid="uid://b4ynqleg2cwb8" path="res://components/logic_not/sprite.png" id="6_hb5m1"]
 [ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="6_iotsf"]
-[ext_resource type="Texture2D" uid="uid://djutndluqnpws" path="res://components/logic_not/placeholder.png" id="6_x5p1p"]
 [ext_resource type="Texture2D" uid="uid://cjk821y381kg6" path="res://components/logic_and/placeholder.png" id="7_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="7_vef74"]
 [ext_resource type="Texture2D" uid="uid://bc4pyrfw4r5hu" path="res://components/logic_or/placeholder.png" id="8_f1jbl"]
@@ -83,12 +83,13 @@ texture = ExtResource("5_boyg6")
 
 [node name="LogicNot" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1729214499]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 233.0
-offset_right = 111.0
-offset_bottom = 260.0
+offset_left = 38.0
+offset_top = 216.0
+offset_right = 133.0
+offset_bottom = 271.0
 mouse_filter = 0
-texture = ExtResource("6_x5p1p")
+texture = ExtResource("6_hb5m1")
+expand_mode = 1
 
 [node name="LogicAnd" type="TextureRect" parent="CanvasLayer/Palette" unique_id=390927940]
 layout_mode = 0
@@ -210,17 +211,17 @@ visibility_layer = 2
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("8_mfdv2")
 
-[node name="Components" type="Node2D" parent="." unique_id=1389326713]
-metadata/_edit_lock_ = true
-
-[node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
-ring = 3
-
 [node name="Rings" type="Node2D" parent="." unique_id=1700894208]
 metadata/_edit_lock_ = true
 
 [node name="Signals" type="Node2D" parent="." unique_id=1692297398]
 metadata/_edit_lock_ = true
+
+[node name="Components" type="Node2D" parent="." unique_id=1389326713]
+metadata/_edit_lock_ = true
+
+[node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
+ring = 3
 
 [node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
 metadata/_edit_lock_ = true
@@ -259,6 +260,7 @@ offset_bottom = -273.0
 text = "TICKS: 0"
 
 [node name="Lights" type="Node2D" parent="." unique_id=39670324]
+visible = false
 rotation = -44.27279
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=72298969]

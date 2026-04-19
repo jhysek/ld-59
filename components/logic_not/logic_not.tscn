@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d1v5uamucrxff" path="res://components/logic_not/logic_not.gd" id="1_jtoqo"]
 [ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_xwc8b"]
-[ext_resource type="Texture2D" uid="uid://djutndluqnpws" path="res://components/logic_not/placeholder.png" id="2_d1765"]
+[ext_resource type="Texture2D" uid="uid://b4ynqleg2cwb8" path="res://components/logic_not/sprite.png" id="2_d1765"]
 
 [node name="LogicNot" type="Node2D" unique_id=1551525737 groups=["logic_and"]]
 script = ExtResource("1_jtoqo")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1679165925]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_d1765")
 
 [node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_xwc8b")]

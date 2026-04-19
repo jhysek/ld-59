@@ -10,9 +10,18 @@ signal fire_signal(config)
 @export var color_code = "WHITE"
 @export var clock = false
 
+@onready var anim = $AnimationPlayer
+
 var polar_pos = Vector2.ZERO 
 const SHAPE = [ Vector2.ZERO ]
 var placed = true
+
+func _ready():
+	$Box/Arrow.modulate = Global.COLORS[color_code]
+	$Box/Dot.modulate = Global.COLORS[color_code]
+	if direction == 1:
+		$Box.rotation_degrees = 180
+	
 
 func place(polar_coords: Vector2i):
 	ring = polar_coords.y
@@ -24,11 +33,17 @@ func place(polar_coords: Vector2i):
 func tick(time):
 	if (time - delay_offset) % delay_ticks == 0:
 		fire()
+		return
 	else:
 		if clock:
 			fire(Global.COLOR_BLACK)
+			return
+		
+	anim.stop()	
+	anim.play("Pulse")
 
 func fire(signal_color = color_code):
+	anim.play("Fire")
 	if signal_color == Global.COLOR_BLACK:
 		$Sfx/Black.play()
 	else:

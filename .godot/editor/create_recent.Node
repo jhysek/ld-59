@@ -1,10 +1,10 @@
+AnimationPlayer
+Sprite2D
 Panel
 AudioStreamPlayer
 Node
 CPUParticles2D
-Sprite2D
 Node2D
-AnimationPlayer
 PointLight2D
 TextureButton
 WorldEnvironment

@@ -22,3 +22,6 @@ res://components/ring/ring.gd
 res://components/explosion/explosion.gd
 res://components/explosion/explosion.tscn
 res://components/metrics/metrics.tscn
+res://components/logic_not/logic_not.tscn
+res://components/draggable/draggable.tscn
+res://components/logic_generator/logic_generator.tscn

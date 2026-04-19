@@ -20,7 +20,7 @@ const VARIANTS = [
 	{ "rotation": - PI , "outputs": [Vector2(-1, 0), Vector2(0, -1)] }, 
 	]
 		
-const SHAPE = [ Vector2.ZERO, Vector2(0, -1) ]
+const SHAPE = [ Vector2.ZERO ]
 
 func emit_draging_over(polar_coords):
 	if !placed && polar_coords != Vector2i.ZERO:

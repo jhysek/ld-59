@@ -5,6 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="1_ouk20"]
 [ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="4_4hy44"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytr4m"]
+bg_color = Color(0, 1, 0.90588236, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l48gv"]
+bg_color = Color(1, 0, 0.81960785, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy44"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="Menu" type="Node2D" unique_id=1199427413]
 script = ExtResource("1_mae5d")
 
@@ -18,6 +27,25 @@ texture = ExtResource("1_ouk20")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1241424091]
 
 [node name="Vignette" parent="CanvasLayer" unique_id=543236073 instance=ExtResource("1_lti8b")]
+
+[node name="Info" type="Label" parent="CanvasLayer/Vignette" unique_id=288773337]
+self_modulate = Color(1, 1, 1, 0.47058824)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -717.0
+offset_top = -39.0
+offset_right = 717.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_4hy44")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "made in 48h for Ludum Dare #59 compo by Jiri Hysek"
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1925562066]
 
@@ -51,12 +79,31 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
 text = "logic emittor"
 
+[node name="Button2" type="Button" parent="." unique_id=1625555469]
+offset_left = -180.0
+offset_top = -40.0
+offset_right = 165.0
+offset_bottom = 30.0
+theme = ExtResource("4_4hy44")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ytr4m")
+
+[node name="Button3" type="Button" parent="." unique_id=229284655]
+offset_left = -173.0
+offset_top = -33.0
+offset_right = 172.0
+offset_bottom = 37.0
+theme = ExtResource("4_4hy44")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l48gv")
+
 [node name="Button" type="Button" parent="." unique_id=821724128]
 offset_left = -177.0
 offset_top = -36.0
 offset_right = 168.0
 offset_bottom = 34.0
 theme = ExtResource("4_4hy44")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4hy44")
 text = "START GAME"
 
+[connection signal="pressed" from="Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

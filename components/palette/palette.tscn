@@ -26,6 +26,7 @@ offset_top = 458.0
 offset_right = 103.0
 offset_bottom = 498.0
 mouse_filter = 0
+mouse_default_cursor_shape = 6
 texture = ExtResource("1_lisst")
 expand_mode = 2
 

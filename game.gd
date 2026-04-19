@@ -45,7 +45,8 @@ enum States {
 	PAUSED,
 	RUNNING,
 	DRAGGING,
-	REJECTED
+	REJECTED,
+	FINISHED
 }
 
 var state = States.PAUSED
@@ -114,7 +115,7 @@ func initialize_receivers():
 ## Godot standard handlers #####################################################
 func _process(delta):
 	# $Lights.rotation -= delta * 0.1
-	if state == States.PAUSED or state == States.REJECTED:
+	if state == States.PAUSED or state == States.REJECTED or state == States.FINISHED:
 		return
 
 	Global.TIME = Global.TIME + delta
@@ -129,6 +130,9 @@ func _process(delta):
 	highlight_active_segments()
 	
 func _input(event):		
+	if state == States.FINISHED:
+		return
+		
 	if event is InputEventKey and state == States.REJECTED:
 		$CanvasLayer/InfoBox.hide()
 		state = States.PAUSED
@@ -283,6 +287,7 @@ func consume_signal(config):
 	GoalIndicator.consume_signal(config.color_code)
 	Center.set_color(GoalIndicator.next_expected())
 	consumed.append(config.color_code)
+	print(consumed)
 
 	
 func reset_simulation():
@@ -297,6 +302,7 @@ func reset_simulation():
 	# reset alternator
 	for alternator in get_tree().get_nodes_in_group("alternator"):
 		alternator.reset_to_initial_position()
+		
 		
 func refresh_ui():
 	$Ticks.text = "TICKS: " + str(time)
@@ -524,13 +530,12 @@ func connect_placement_signals(component):
 		
 ## Goal indicator handlers #####################################################
 func _on_goal_indicator_on_goal_achieved() -> void:
-	state = States.PAUSED
+	state = States.FINISHED
 	$CanvasLayer/InfoBox/Title.text = "Signal successfully transmitted!"
 	$CanvasLayer/InfoBox.show()
 	$Timer.start()
 
 func _on_goal_indicator_on_signal_rejected(color_code) -> void:
-	print("SIGNAL REJECTED: " + color_code)
 	reset_simulation()
 	state = States.REJECTED
 	$CanvasLayer/InfoBox/Title.text = "Incorrect signal transmitted!\n\npress any key..."
@@ -554,6 +559,9 @@ func _on_reset_pressed() -> void:
 	reset_simulation()
 
 func _on_button_pressed() -> void:
+	if state == States.FINISHED:
+		return
+		
 	if state == States.PAUSED:
 		state = States.RUNNING	
 		$CanvasLayer/Control/Panel/Button.text = "⏸"

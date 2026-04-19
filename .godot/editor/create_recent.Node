@@ -1,14 +1,14 @@
-Sprite2D
+Camera2D
+PointLight2D
 Node2D
+Sprite2D
 Label
 AudioStreamPlayer
 Node
 Panel
 Button
 Timer
-Camera2D
 CanvasLayer
 TextureRect
 AnimationPlayer
 CPUParticles2D
-PointLight2D

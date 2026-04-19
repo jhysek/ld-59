@@ -1,6 +1,7 @@
-res://components/logic_branch/
-res://components/palette/
 res://
+res://components/logic_branch/
+res://assets/
+res://components/palette/
 res://components/alternator/
 res://components/metrics/
 res://components/explosion/
@@ -10,7 +11,6 @@ res://components/logic_and/
 res://components/logic_not/
 res://components/logic_splitter/
 res://components/logic_generator/
-res://assets/
 res://components/goal_indicator/
 res://components/mover/
 res://components/merger/

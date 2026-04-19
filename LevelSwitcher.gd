@@ -10,14 +10,19 @@ var levels = [
 	"res://levels/level05.tscn",
 	"res://levels/level06.tscn",
 	"res://levels/level07.tscn",
+	"res://levels/level09.tscn",
 	"res://levels/finished.tscn"
 ]
 
 func _ready():
 	set_process_input(true)
 
+func _input(event):
 	if Input.is_key_pressed(KEY_N) and Input.is_key_pressed(KEY_SHIFT):
 		next_level()
+		
+	if Input.is_key_pressed(KEY_ESCAPE):
+		Transition.switchTo("res://menu.tscn")
 
 func get_current_level():
 	return levels[current_level]

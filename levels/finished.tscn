@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://bf0gf8mij1ieb"]
+
+[ext_resource type="Script" uid="uid://cbnwsbn3ifq5p" path="res://menu.gd" id="1_y5wvf"]
+[ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="2_pqf2d"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="3_on5r0"]
+[ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="4_xer2x"]
+[ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="5_51l3g"]
+[ext_resource type="Script" uid="uid://mm1qjlxeapxp" path="res://outer.gd" id="6_qrh37"]
+[ext_resource type="Texture2D" uid="uid://bodnfmktuun1l" path="res://assets/inner.png" id="7_ybc5y"]
+[ext_resource type="Texture2D" uid="uid://budjmyywgw3an" path="res://assets/light.png" id="8_qrh37"]
+
+[node name="Finished" type="Node2D" unique_id=1199427413]
+script = ExtResource("1_y5wvf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=945069610]
+modulate = Color(0.9471994, 0.9471994, 0.9471994, 1)
+offset_left = -1908.0
+offset_top = -914.0
+offset_right = 2145.0
+offset_bottom = 1105.0
+texture = ExtResource("2_pqf2d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1241424091]
+
+[node name="Vignette" parent="CanvasLayer" unique_id=543236073 instance=ExtResource("3_on5r0")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1925562066]
+
+[node name="Title" type="Label" parent="." unique_id=681052869]
+offset_left = -432.00003
+offset_top = -257.0
+offset_right = 1043.0
+offset_bottom = -137.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("4_xer2x")
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "mission accomplished"
+
+[node name="Title2" type="Label" parent="." unique_id=2023779398]
+offset_left = -429.00003
+offset_top = -253.0
+offset_right = 1046.0
+offset_bottom = -133.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("4_xer2x")
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "mission accomplished"
+
+[node name="Title3" type="Label" parent="." unique_id=1701402129]
+offset_left = -430.0
+offset_top = -255.0
+offset_right = 1045.0
+offset_bottom = -135.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("4_xer2x")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "mission accomplished"
+
+[node name="Title3" type="Label" parent="Title3" unique_id=1338178771]
+layout_mode = 0
+offset_left = 293.33334
+offset_top = 195.0
+offset_right = 1768.3334
+offset_bottom = 315.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("4_xer2x")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "congratulations"
+horizontal_alignment = 1
+
+[node name="Title3" type="Label" parent="Title3/Title3" unique_id=431407425]
+layout_mode = 0
+offset_left = 293.33334
+offset_top = 195.0
+offset_right = 1768.3334
+offset_bottom = 315.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("4_xer2x")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+
+[node name="Environment" type="Node2D" parent="." unique_id=1433410451]
+position = Vector2(4, 388)
+
+[node name="Outer" type="Sprite2D" parent="Environment" unique_id=401121467]
+modulate = Color(0.7437754, 0.7350739, 0.7339112, 1)
+clip_children = 2
+light_mask = 4
+visibility_layer = 7
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_51l3g")
+script = ExtResource("6_qrh37")
+metadata/_edit_lock_ = true
+
+[node name="Inner" type="Sprite2D" parent="Environment" unique_id=373299063]
+clip_children = 2
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_ybc5y")
+
+[node name="Back" type="Button" parent="Environment" unique_id=821724128]
+offset_left = -171.0
+offset_top = -160.0
+offset_right = 174.0
+offset_bottom = -90.0
+theme = ExtResource("4_xer2x")
+text = "BACK TO MENU"
+
+[node name="Lights" type="Node2D" parent="." unique_id=957571402]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=496850684]
+position = Vector2(-793, -580)
+color = Color(0, 1, 1, 0.75686276)
+energy = 0.7
+texture = ExtResource("8_qrh37")
+texture_scale = 2.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights" unique_id=644813812]
+position = Vector2(734, 427)
+color = Color(1, 0, 1, 1)
+energy = 0.7
+texture = ExtResource("8_qrh37")
+texture_scale = 2.0
+
+[connection signal="pressed" from="Environment/Back" to="." method="_on_back_pressed"]

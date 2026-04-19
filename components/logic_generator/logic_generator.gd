@@ -10,6 +10,8 @@ signal fire_signal(config)
 @export var color_code = "WHITE"
 @export var clock = false
 @export var random = false
+@export var multi = false
+@export var switch_after = 2
 
 @onready var anim = $AnimationPlayer
 
@@ -33,7 +35,20 @@ func place(polar_coords: Vector2i):
 	rotation = position.angle() + PI / 2
 	polar_pos = polar_coords
 
+func switch_color():
+	if color_code == Global.COLOR_BLACK:
+		color_code = Global.COLOR_WHITE
+	else:
+		color_code = Global.COLOR_BLACK
+
 func tick(time):
+	if multi:
+		if (time -1) % switch_after == 0:
+			switch_color()
+
+		fire(color_code)
+		return
+		
 	if (time - delay_offset) % delay_ticks == 0:
 		fire()
 		return

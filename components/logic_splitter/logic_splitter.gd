@@ -9,13 +9,35 @@ signal on_dragging_over(coords, object)
 var polar_pos = Vector2i(0,0)
 var placed = false
 var direction = -1
+var variant = 0
+var current_outputs = [Vector2(0, -1), Vector2(1, 0)]
 
+# output: Vector2(direction, ring_offset)
+const VARIANTS = [ 
+	{ "rotation": PI / 2.0, "outputs": [Vector2(0, 0), Vector2(0, -1)] },
+	{ "rotation": 0, "outputs": [Vector2(0, 0), Vector2(0, 1)] }, 	
+	{ "rotation": - PI / 2.0, "outputs": [Vector2(-1, 0), Vector2(0, 1)] }, 	
+	{ "rotation": - PI , "outputs": [Vector2(-1, 0), Vector2(0, -1)] }, 
+	]
+		
 const SHAPE = [ Vector2.ZERO, Vector2(0, -1) ]
 
 func emit_draging_over(polar_coords):
 	if !placed && polar_coords != Vector2i.ZERO:
 		emit_signal("on_dragging_over", polar_coords, self)
 		
+func _ready():
+	var current_variant = VARIANTS[variant]
+	$Sprite.rotation = current_variant.rotation
+	current_outputs = current_variant.outputs
+		
+func switch_variant():
+	variant = (variant + 1) % VARIANTS.size()
+	print("SWITCHING VARIANT TO " + str(variant))
+	var current_variant = VARIANTS[variant]
+	$Sprite.rotation = current_variant.rotation
+	current_outputs = current_variant.outputs
+	
 func place(to_coords):
 	polar_pos = to_coords
 	position = Coords.polar_to_world(polar_pos)
@@ -43,12 +65,26 @@ func process_signals(signals):
 		
 	print("PRICESING SIGNALS: " + str(signals))
 	if signals.size() > 0:
-		copy_signal(signals[0])
+		# Take the first signal
+		var first_signal = signals.pop_front()
+		copy_signal(first_signal)
+		
+		# Drop the rest
+		for signal_node in signals:
+			signal_node.annihilate()
+		
 
 func copy_signal(signal_node):
-	print("COPYING SIGNAL...")
-	create_signal(signal_node.color_code, polar_pos.y + direction, signal_node.direction)
-	# $Sfx/Split.play()
+	signal_node.state = signal_node.States.GONE
+	for output in current_outputs:
+		var result_direction = output.x
+		if result_direction == 0:
+			result_direction = signal_node.direction
+		
+		create_signal(signal_node.color_code, polar_pos.y + output.y, result_direction)
+		
+	signal_node.queue_free()
+	$Sfx/Split.play()
 			
 
 func create_signal(color_code, ring_idx, direction, signal_node = null):

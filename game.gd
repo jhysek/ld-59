@@ -10,6 +10,7 @@ var LogicNot = preload("res://components/logic_not/logic_not.tscn")
 var LogicAnd = preload("res://components/logic_and/logic_and.tscn")
 var LogicOr = preload("res://components/logic_or/logic_or.tscn")
 var Explosion = preload("res://components/explosion/explosion.tscn")
+var Alternator = preload("res://components/alternator/alternator.tscn")
 
 @onready var Rings = get_node("Rings")
 @onready var Components = get_node("Components")
@@ -227,9 +228,15 @@ func same_signal_in_segment(polar_pos, color_code):
 		if Vector2i(node.polar_pos) == Vector2i(polar_pos) and  node.color_code == color_code and node.state != node.States.GONE:
 			return true
 	return false
+	
+func annihilate_colliding_signals(polar_pos):
+	for node in get_tree().get_nodes_in_group("signal"):
+		if Vector2i(node.polar_pos) == Vector2i(polar_pos):
+			node.annihilate()
 
 func spawn_signal(config):
-	if !config.has("force") and same_signal_in_segment(config.start_pos, config.color_code):
+	annihilate_colliding_signals(config.start_pos)
+	if false and !config.has("force") and same_signal_in_segment(config.start_pos, config.color_code):
 		print("Already existing signal...")
 		explode(Coords.polar_to_world(config.start_pos))
 		
@@ -394,6 +401,18 @@ func _on_logic_or_gui_input(event: InputEvent) -> void:
 			dragging = true
 			connect_or_signals(component)
 		
+func _on_alternator_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var component = Alternator.instantiate()
+			$Components.add_child(component)
+		
+			component.position = get_global_mouse_position()
+			component.start_dragging()
+			dragging = true
+			connect_alternator_signals(component)
+		
+	
 ## Component signals ###############################################
 func connect_splitter_signals(splitter):
 	if splitter.is_in_group("splitter"):
@@ -434,6 +453,12 @@ func connect_and_signals(component):
 			
 func connect_or_signals(component):
 	if component.is_in_group("logic_or"):
+		component.fire_signal.connect(spawn_signal)
+		component.signal_in_center.connect(consume_signal)
+		connect_placement_signals(component)
+		
+func connect_alternator_signals(component):
+	if component.is_in_group("alternator"):
 		component.fire_signal.connect(spawn_signal)
 		component.signal_in_center.connect(consume_signal)
 		connect_placement_signals(component)

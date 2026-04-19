@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://c6b3m2043fsfq" path="res://components/center/center.tscn" id="2_e2o6t"]
-[ext_resource type="Texture2D" uid="uid://u0tq7qpbsbrd" path="res://components/mover/placeholder.png" id="4_eow3j"]
+[ext_resource type="Texture2D" uid="uid://b6s2nvc5thnaf" path="res://components/palette/mover.png" id="2_e36ub"]
+[ext_resource type="Texture2D" uid="uid://746mx7830ges" path="res://components/palette/copy.png" id="3_e36ub"]
 [ext_resource type="AudioStream" uid="uid://tk821eqittqn" path="res://assets/tick.wav" id="4_fc0e3"]
-[ext_resource type="Texture2D" uid="uid://c77i4o34yat12" path="res://components/logic_splitter/placeholder.png" id="5_boyg6"]
+[ext_resource type="Texture2D" uid="uid://bila2ad2rdi0p" path="res://components/palette/and.png" id="5_hb5m1"]
 [ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="6_80cx4"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="6_215e1"]
 [ext_resource type="Texture2D" uid="uid://b4ynqleg2cwb8" path="res://components/logic_not/sprite.png" id="6_hb5m1"]
 [ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="6_iotsf"]
-[ext_resource type="Texture2D" uid="uid://cjk821y381kg6" path="res://components/logic_and/placeholder.png" id="7_qhcbd"]
+[ext_resource type="Texture2D" uid="uid://617abveeo0ng" path="res://components/palette/or.png" id="6_x5p1p"]
+[ext_resource type="Texture2D" uid="uid://1w0f14bnip14" path="res://components/palette/alternator.png" id="7_qhcbd"]
 [ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="7_vef74"]
-[ext_resource type="Texture2D" uid="uid://bc4pyrfw4r5hu" path="res://components/logic_or/placeholder.png" id="8_f1jbl"]
 [ext_resource type="Script" uid="uid://mm1qjlxeapxp" path="res://outer.gd" id="8_lc2xo"]
 [ext_resource type="Texture2D" uid="uid://bodnfmktuun1l" path="res://assets/inner.png" id="8_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://dp7bi7emff4hw" path="res://components/goal_indicator/goal_indicator.tscn" id="9_hve3p"]
@@ -45,49 +46,63 @@ mouse_filter = 2
 
 [node name="Mover" type="TextureRect" parent="CanvasLayer/Palette" unique_id=2118907533]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 135.0
-offset_right = 106.0
-offset_bottom = 162.0
+offset_left = 62.0
+offset_top = 400.0
+offset_right = 102.0
+offset_bottom = 440.0
 mouse_filter = 0
-texture = ExtResource("4_eow3j")
+texture = ExtResource("2_e36ub")
+expand_mode = 2
 
 [node name="LogicCopy" type="TextureRect" parent="CanvasLayer/Palette" unique_id=512293268]
 layout_mode = 0
-offset_left = 53.0
-offset_top = 187.0
-offset_right = 109.0
-offset_bottom = 214.0
+offset_left = 54.0
+offset_top = 120.0
+offset_right = 94.0
+offset_bottom = 160.0
 mouse_filter = 0
-texture = ExtResource("5_boyg6")
+texture = ExtResource("3_e36ub")
+expand_mode = 2
 
 [node name="LogicNot" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1729214499]
 layout_mode = 0
 offset_left = 38.0
-offset_top = 216.0
+offset_top = 176.0
 offset_right = 133.0
-offset_bottom = 271.0
+offset_bottom = 231.0
 mouse_filter = 0
 texture = ExtResource("6_hb5m1")
 expand_mode = 1
 
 [node name="LogicAnd" type="TextureRect" parent="CanvasLayer/Palette" unique_id=390927940]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 280.0
-offset_right = 111.0
-offset_bottom = 307.0
+offset_left = 54.0
+offset_top = 240.0
+offset_right = 118.0
+offset_bottom = 272.0
 mouse_filter = 0
-texture = ExtResource("7_qhcbd")
+texture = ExtResource("5_hb5m1")
+expand_mode = 2
 
 [node name="LogicOr" type="TextureRect" parent="CanvasLayer/Palette" unique_id=1648289040]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 326.0
-offset_right = 111.0
-offset_bottom = 353.0
+offset_left = 54.0
+offset_top = 288.0
+offset_right = 117.0
+offset_bottom = 321.0
 mouse_filter = 0
-texture = ExtResource("8_f1jbl")
+texture = ExtResource("6_x5p1p")
+expand_mode = 1
+
+[node name="Alternator" type="TextureRect" parent="CanvasLayer/Palette" unique_id=2044272596]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 344.0
+offset_right = 102.0
+offset_bottom = 376.0
+mouse_filter = 0
+texture = ExtResource("7_qhcbd")
+expand_mode = 1
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=564903987]
 layout_mode = 3
@@ -165,10 +180,10 @@ text = "SIZE: 0"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=944193220]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=266532316]
-offset_left = -1155.0
-offset_top = -1102.0
-offset_right = 1338.0
-offset_bottom = 592.0
+offset_left = -1112.0
+offset_top = -1088.0
+offset_right = 1381.0
+offset_bottom = 606.0
 texture = ExtResource("6_iotsf")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1251804752]
@@ -269,5 +284,6 @@ environment = SubResource("Environment_80cx4")
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicNot" to="." method="_on_logic_not_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicAnd" to="." method="_on_logic_and_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/Palette/LogicOr" to="." method="_on_logic_or_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/Palette/Alternator" to="." method="_on_alternator_gui_input"]
 [connection signal="on_goal_achieved" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_goal_achieved"]
 [connection signal="on_signal_rejected" from="CanvasLayer/Control/GoalIndicator" to="." method="_on_goal_indicator_on_signal_rejected"]

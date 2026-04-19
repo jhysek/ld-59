@@ -41,6 +41,7 @@ coppier=""
 logic_not=""
 logic_and=""
 logic_or=""
+alternator=""
 
 [input]
 

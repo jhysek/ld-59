@@ -27,3 +27,6 @@ res://components/draggable/draggable.tscn
 res://components/logic_generator/logic_generator.tscn
 res://components/logic_and/logic_and.tscn
 res://components/mover/mover.tscn
+res://components/alternator/alternator.tscn
+res://components/alternator/alternator.gd
+res://components/logic_splitter/logic_splitter.tscn

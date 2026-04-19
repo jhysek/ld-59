@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cdcn6bghdbe37"]
+
+[ext_resource type="Script" uid="uid://bxlqy2el41nof" path="res://components/alternator/alternator.gd" id="1_2jii4"]
+[ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_ijcba"]
+[ext_resource type="Texture2D" uid="uid://cl4r0c6hfvyr1" path="res://components/mover/arrow.png" id="2_2jii4"]
+[ext_resource type="Texture2D" uid="uid://dwhatefx1yj2u" path="res://components/alternator/box.png" id="2_rhl64"]
+
+[sub_resource type="Animation" id="Animation_2jii4"]
+resource_name = "Pulse"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhl64"]
+_data = {
+&"Pulse": SubResource("Animation_2jii4")
+}
+
+[node name="Alternator" type="Node2D" unique_id=989595579 groups=["alternator"]]
+script = ExtResource("1_2jii4")
+
+[node name="Box" type="Sprite2D" parent="." unique_id=1867281914]
+position = Vector2(2, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rhl64")
+offset = Vector2(-6, 4)
+
+[node name="Arrow" type="Sprite2D" parent="Box" unique_id=1865350148]
+position = Vector2(-1, 0)
+texture = ExtResource("2_2jii4")
+offset = Vector2(32.949196, -2.4078362)
+
+[node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_ijcba")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=633961675]
+libraries/ = SubResource("AnimationLibrary_rhl64")
+
+[node name="Sfx" type="Node" parent="." unique_id=956470655]
+
+[node name="Move" type="AudioStreamPlayer" parent="Sfx" unique_id=1167120478]

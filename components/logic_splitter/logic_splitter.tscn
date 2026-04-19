@@ -2,12 +2,29 @@
 
 [ext_resource type="Script" uid="uid://p0o3uichqtjf" path="res://components/logic_splitter/logic_splitter.gd" id="1_3omna"]
 [ext_resource type="PackedScene" uid="uid://tcjux342gpil" path="res://components/draggable/draggable.tscn" id="1_efe41"]
-[ext_resource type="Texture2D" uid="uid://c77i4o34yat12" path="res://components/logic_splitter/placeholder.png" id="2_fmpn4"]
+[ext_resource type="Texture2D" uid="uid://bonpqyy4tvr5b" path="res://components/logic_splitter/box.png" id="3_crwyv"]
+[ext_resource type="Texture2D" uid="uid://byeplpe3fvxpq" path="res://components/logic_splitter/arrow.png" id="4_ulpoa"]
 
 [node name="LogicSplitter" type="Node2D" unique_id=1702744917 groups=["coppier"]]
 script = ExtResource("1_3omna")
 
 [node name="Draggable" parent="." unique_id=2650241 instance=ExtResource("1_efe41")]
+scale = Vector2(1, 1.6799996)
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1984002862]
-texture = ExtResource("2_fmpn4")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_crwyv")
+
+[node name="Arrow" type="Sprite2D" parent="Sprite" unique_id=42948538]
+position = Vector2(4, -32)
+texture = ExtResource("4_ulpoa")
+
+[node name="Arrow2" type="Sprite2D" parent="Sprite" unique_id=1594253232]
+position = Vector2(-4, -6)
+rotation = 1.5587869
+texture = ExtResource("4_ulpoa")
+offset = Vector2(0, -35)
+
+[node name="Sfx" type="Node" parent="." unique_id=1837800462]
+
+[node name="Split" type="AudioStreamPlayer" parent="Sfx" unique_id=505875319]

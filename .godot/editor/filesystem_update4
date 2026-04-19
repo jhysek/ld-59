@@ -37,3 +37,6 @@ res://levels/level01.tscn
 res://components/palette/palette.tscn
 res://components/goal_indicator/goal_indicator.tscn
 res://components/palette/palette.gd
+res://levels/level02.tscn
+res://levels/level03.tscn
+res://levels/level04.tscn

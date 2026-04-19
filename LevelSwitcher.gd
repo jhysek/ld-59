@@ -4,7 +4,9 @@ var current_level = 0
 
 var levels = [
 	"res://levels/level01.tscn",
-	"res://levels/level01.tscn",
+	"res://levels/level02.tscn",
+	"res://levels/level03.tscn",
+	"res://levels/level04.tscn",
 	"res://levels/finished.tscn"
 ]
 

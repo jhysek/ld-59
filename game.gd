@@ -151,6 +151,7 @@ func _input(event):
 		if state == States.PAUSED:
 			state = States.RUNNING	
 			$CanvasLayer/Control/Panel/Button.text = "⏸"
+			$CanvasLayer/InfoBox.hide()
 		else:
 			state = States.PAUSED
 			$CanvasLayer/Control/Panel/Button.text = "▶"
@@ -533,6 +534,7 @@ func _on_button_pressed() -> void:
 	if state == States.PAUSED:
 		state = States.RUNNING	
 		$CanvasLayer/Control/Panel/Button.text = "⏸"
+		$CanvasLayer/InfoBox.hide()
 	else:
 		state = States.PAUSED
 		$CanvasLayer/Control/Panel/Button.text = "▶"

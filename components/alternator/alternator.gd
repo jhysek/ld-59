@@ -9,6 +9,8 @@ signal on_component_placed(node)
 signal on_component_lifted(node)
 signal on_dragging_over(coords, object)
 
+var tween
+
 var polar_pos = Vector2i(0,0)
 var placed = false
 var direction = -1
@@ -48,10 +50,7 @@ func alternate():
 	var current_variant = VARIANTS[variant]
 	current_output = current_variant.outputs[alternative]
 	
-	if $Box/Arrow.rotation == 0:
-		$Box/Arrow.rotation = - PI / 2.0
-	else: 
-		$Box/Arrow.rotation = 0
+	$Sfx/Alternate.play()
 		
 func place(to_coords):
 	polar_pos = to_coords
@@ -81,9 +80,13 @@ func process_signals(signals):
 	if signals.size() > 0:
 		move_signal(signals[0])
 		alternate()
-
+		
 func move_signal(signal_node):
-	$AnimationPlayer.play("Pulse")
+	$AnimationPlayer.stop()
+	if alternative == 0:
+		$AnimationPlayer.play("Pulse0")
+	else:
+		$AnimationPlayer.play("Pulse1")
 	var target_ring = polar_pos.y + current_output.y
 	
 	if target_ring > Coords.current_level_config.rings:

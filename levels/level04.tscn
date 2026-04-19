@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cb8ifdjo14e73"]
+[gd_scene format=3 uid="uid://bd3koyybobyfa"]
 
 [ext_resource type="Script" uid="uid://rlq5kxrbaxo6" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://b1b4ykgm3k7jn" path="res://components/palette/palette.tscn" id="2_6q0d3"]
@@ -25,10 +25,10 @@ adjustment_contrast = 1.25
 
 [node name="Game" type="Node2D" unique_id=493524955]
 script = ExtResource("1_fc0e3")
-title = "#0001 Routing"
+title = "#0101 Inverted alternation"
 rings = 3
 ring_distance = 80
-GOAL = ["WHITE", "WHITE", "WHITE"]
+ENABLED_TOOLS = ["Mover", "LogicNot", "Alternator"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249804444]
 
@@ -131,9 +131,9 @@ text = "SIZE: 0"
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer" unique_id=1874057529]
 offset_left = 62.0
-offset_top = 37.0
+offset_top = 35.0
 offset_right = 182.0
-offset_bottom = 62.0
+offset_bottom = 60.0
 theme = ExtResource("6_80cx4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "LEVEL 01"
@@ -227,7 +227,6 @@ metadata/_edit_lock_ = true
 
 [node name="LogicGenerator" parent="Components" unique_id=1155449095 instance=ExtResource("14_rvswv")]
 delay_offset = 1
-segment = 3
 
 [node name="Center" parent="." unique_id=1098449740 instance=ExtResource("2_e2o6t")]
 metadata/_edit_lock_ = true
@@ -285,6 +284,7 @@ environment = SubResource("Environment_80cx4")
 wait_time = 3.0
 
 [node name="Tutorial" type="Panel" parent="." unique_id=1836625615]
+visible = false
 offset_left = 451.0
 offset_top = -343.0
 offset_right = 741.0
@@ -294,20 +294,17 @@ theme = ExtResource("6_80cx4")
 [node name="TutorialText" type="Label" parent="Tutorial" unique_id=1485507824]
 layout_mode = 0
 offset_left = 21.0
-offset_top = 18.0
+offset_top = 57.0
 offset_right = 262.0
 offset_bottom = 355.0
 theme = ExtResource("6_80cx4")
 theme_override_font_sizes/font_size = 15
-text = "
+text = "Signals can have one of 2 values:
 
-Route required signal sequence to the center.
+- 0 = magenta
+-  1  = cyan
 
-- drag & drop to place component
-
-- right click to rotate placed component
-
-- [space] to play / pause"
+"
 autowrap_mode = 2
 
 [node name="Title" type="Label" parent="Tutorial" unique_id=1984093114]
@@ -319,7 +316,7 @@ offset_bottom = 355.0
 theme = ExtResource("6_80cx4")
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_font_sizes/font_size = 15
-text = "Objective:"
+text = "Info"
 autowrap_mode = 2
 
 [connection signal="gui_input" from="CanvasLayer/Palette/Mover" to="." method="_on_mover_gui_input"]

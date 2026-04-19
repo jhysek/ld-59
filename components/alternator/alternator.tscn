@@ -6,11 +6,93 @@
 [ext_resource type="Texture2D" uid="uid://dwhatefx1yj2u" path="res://components/alternator/box.png" id="2_rhl64"]
 
 [sub_resource type="Animation" id="Animation_2jii4"]
-resource_name = "Pulse"
+resource_name = "Pulse0"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box/Arrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10096295, 0.4),
+"transitions": PackedFloat32Array(0.2679433, 2.4622881, 1.0717736),
+"update": 0,
+"values": [Vector2(-1, 0), Vector2(50, 0), Vector2(-1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Box/Arrow:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -1.5707964]
+}
+
+[sub_resource type="Animation" id="Animation_5e65q"]
+resource_name = "Pulse1"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box/Arrow:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7982172),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-1.5707964, -1.5707964, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Box/Arrow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.09825254, 0.4),
+"transitions": PackedFloat32Array(0.2030631, 1, 1),
+"update": 0,
+"values": [Vector2(-1, 0), Vector2(0, -44), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rhl64"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box/Arrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Box/Arrow:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rhl64"]
 _data = {
-&"Pulse": SubResource("Animation_2jii4")
+&"Pulse0": SubResource("Animation_2jii4"),
+&"Pulse1": SubResource("Animation_5e65q"),
+&"RESET": SubResource("Animation_rhl64")
 }
 
 [node name="Alternator" type="Node2D" unique_id=989595579 groups=["alternator"]]
@@ -35,3 +117,5 @@ libraries/ = SubResource("AnimationLibrary_rhl64")
 [node name="Sfx" type="Node" parent="." unique_id=956470655]
 
 [node name="Move" type="AudioStreamPlayer" parent="Sfx" unique_id=1167120478]
+
+[node name="Alternate" type="AudioStreamPlayer" parent="Sfx" unique_id=1005455654]

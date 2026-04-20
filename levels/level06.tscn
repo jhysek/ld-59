@@ -30,7 +30,7 @@ title = "#0110 Filtering"
 rings = 3
 ring_distance = 80
 GOAL = ["WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE"]
-ENABLED_TOOLS = ["LogicAnd", "LogicOr", "Mover", "LogicBranch"]
+ENABLED_TOOLS = ["Mover", "LogicBranch"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249804444]
 
@@ -78,30 +78,30 @@ theme = ExtResource("6_80cx4")
 [node name="Label" type="Label" parent="CanvasLayer/Control/Panel" unique_id=2113725402]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 4.0
-offset_right = 71.0
-offset_bottom = 27.0
+offset_top = 5.0
+offset_right = 82.0
+offset_bottom = 28.0
 theme = ExtResource("6_80cx4")
 theme_override_font_sizes/font_size = 16
-text = "Simulation"
+text = "Control"
 
 [node name="Button" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1947526452]
 layout_mode = 0
-offset_left = 144.0
+offset_left = 90.0
 offset_top = 4.0
-offset_right = 179.0
+offset_right = 154.0
 offset_bottom = 27.0
 theme_override_font_sizes/font_size = 12
-text = " ▶"
+text = "RUN"
 
 [node name="Reset" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1876512363]
 layout_mode = 0
-offset_left = 187.0
+offset_left = 161.0
 offset_top = 4.0
 offset_right = 221.0
 offset_bottom = 27.0
 theme_override_font_sizes/font_size = 12
-text = "↺"
+text = "RESET"
 
 [node name="Metrics" type="Panel" parent="CanvasLayer/Control" unique_id=2058442517]
 layout_mode = 0
@@ -195,9 +195,9 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=266532316]
-offset_left = -1112.0
+offset_left = -1099.0
 offset_top = -1088.0
-offset_right = 1381.0
+offset_right = 1394.0
 offset_bottom = 606.0
 texture = ExtResource("6_iotsf")
 
@@ -300,10 +300,10 @@ environment = SubResource("Environment_80cx4")
 wait_time = 3.0
 
 [node name="Tutorial" type="Panel" parent="." unique_id=1836625615]
-offset_left = 451.0
-offset_top = -343.0
-offset_right = 741.0
-offset_bottom = 55.0
+offset_left = 440.0
+offset_top = -181.0
+offset_right = 730.0
+offset_bottom = 217.0
 theme = ExtResource("6_80cx4")
 
 [node name="TutorialText" type="Label" parent="Tutorial" unique_id=1485507824]

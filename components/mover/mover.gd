@@ -107,7 +107,7 @@ func move_signal(signal_node):
 		"lifetime": signal_node.lifetime
 	})
 	$Sfx/Move.pitch_scale = 1 + (target_ring - 1) * 0.05
-	$Sfx/Move.play()
+	Sfx.play("Rrr", 1 + (target_ring - 1) * 0.05)
 	
 	signal_node.queue_free()
 	

@@ -298,10 +298,10 @@ environment = SubResource("Environment_80cx4")
 wait_time = 3.0
 
 [node name="Tutorial" type="Panel" parent="." unique_id=1836625615]
-offset_left = 451.0
-offset_top = -343.0
-offset_right = 741.0
-offset_bottom = 55.0
+offset_left = 447.0
+offset_top = -201.0
+offset_right = 737.0
+offset_bottom = 197.0
 theme = ExtResource("6_80cx4")
 
 [node name="TutorialText" type="Label" parent="Tutorial" unique_id=1485507824]

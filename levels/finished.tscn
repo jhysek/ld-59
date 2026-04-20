@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cbnwsbn3ifq5p" path="res://menu.gd" id="1_y5wvf"]
 [ext_resource type="Texture2D" uid="uid://bcrxd2xrrjltl" path="res://assets/white_square.png" id="2_pqf2d"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="3_on5r0"]
+[ext_resource type="Script" uid="uid://c8ow0momry6lx" path="res://levels/finished.gd" id="3_ybc5y"]
 [ext_resource type="Theme" uid="uid://bt0nuby2dsqi2" path="res://assets/theme.tres" id="4_xer2x"]
 [ext_resource type="Texture2D" uid="uid://de7wy2rsryfi7" path="res://assets/outer.png" id="5_51l3g"]
 [ext_resource type="Script" uid="uid://mm1qjlxeapxp" path="res://outer.gd" id="6_qrh37"]
@@ -19,6 +20,7 @@ offset_top = -914.0
 offset_right = 2145.0
 offset_bottom = 1105.0
 texture = ExtResource("2_pqf2d")
+script = ExtResource("3_ybc5y")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1241424091]
 

@@ -78,6 +78,11 @@ func and_signals(signal1, signal2):
 	if signal1.color_code == Global.COLOR_WHITE && signal2.color_code == Global.COLOR_WHITE:
 		result = Global.COLOR_WHITE
 	
+	if result == Global.COLOR_BLACK:
+		Sfx.play("Low")
+	else:
+		Sfx.play("Higher")
+		
 	var direction = 1
 	if signal1.direction - signal2.direction < 0:
 		direction = -1

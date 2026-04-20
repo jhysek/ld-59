@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Logic Emittor"
+config/name="Logic Emitter"
 run/main_scene="uid://d4emj7t3ygvcv"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.06675503, 0.06675499, 0.06675497, 1)

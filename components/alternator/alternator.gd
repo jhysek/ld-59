@@ -87,7 +87,12 @@ func process_signals(signals):
 		move_signal(signals[0])
 		alternate()
 		
+		
+func sfx():
+	Sfx.play("Slide")
+	
 func move_signal(signal_node):
+	Sfx.play("Kick")
 	$AnimationPlayer.stop()
 	if alternative == 0:
 		$AnimationPlayer.play("Pulse0")

@@ -1,5 +1,8 @@
 extends Panel
 
+func _ready():
+	reset()
+	
 func set_time_metric(time):
 	$Time.text = "Time: " + str(time)
 	

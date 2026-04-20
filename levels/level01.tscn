@@ -62,42 +62,6 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1796083809]
-layout_mode = 0
-offset_left = 214.0
-offset_top = 32.0
-offset_right = 444.0
-offset_bottom = 64.0
-theme = ExtResource("6_80cx4")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/Panel" unique_id=2113725402]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 71.0
-offset_bottom = 27.0
-theme = ExtResource("6_80cx4")
-theme_override_font_sizes/font_size = 16
-text = "Simulation"
-
-[node name="Button" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1947526452]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 4.0
-offset_right = 179.0
-offset_bottom = 27.0
-theme_override_font_sizes/font_size = 12
-text = " ▶"
-
-[node name="Reset" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1876512363]
-layout_mode = 0
-offset_left = 187.0
-offset_top = 4.0
-offset_right = 221.0
-offset_bottom = 27.0
-theme_override_font_sizes/font_size = 12
-text = "↺"
-
 [node name="Metrics" type="Panel" parent="CanvasLayer/Control" unique_id=2058442517]
 layout_mode = 0
 offset_left = -440.0
@@ -126,6 +90,44 @@ offset_bottom = 29.0
 theme = ExtResource("6_80cx4")
 theme_override_font_sizes/font_size = 16
 text = "SIZE: 0"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=276806941]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 32.0
+offset_right = 444.0
+offset_bottom = 64.0
+theme = ExtResource("6_80cx4")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel" unique_id=1598936866]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 225.0
+offset_bottom = 28.0
+theme = ExtResource("6_80cx4")
+theme_override_font_sizes/font_size = 16
+text = "Controls: [SPACE]  [R]"
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/Panel" unique_id=912350558]
+visible = false
+layout_mode = 0
+offset_left = 90.0
+offset_top = 4.0
+offset_right = 154.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 12
+text = "RUN"
+
+[node name="Reset" type="Button" parent="CanvasLayer/Control/Panel" unique_id=1805192723]
+visible = false
+layout_mode = 0
+offset_left = 161.0
+offset_top = 4.0
+offset_right = 221.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 12
+text = "RESET"
 
 [node name="Vignette" parent="CanvasLayer" unique_id=2053270938 instance=ExtResource("6_215e1")]
 
@@ -285,10 +287,10 @@ environment = SubResource("Environment_80cx4")
 wait_time = 3.0
 
 [node name="Tutorial" type="Panel" parent="." unique_id=1836625615]
-offset_left = 451.0
-offset_top = -343.0
-offset_right = 741.0
-offset_bottom = 55.0
+offset_left = 435.0
+offset_top = -205.0
+offset_right = 725.0
+offset_bottom = 193.0
 theme = ExtResource("6_80cx4")
 
 [node name="TutorialText" type="Label" parent="Tutorial" unique_id=1485507824]

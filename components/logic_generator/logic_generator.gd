@@ -70,6 +70,7 @@ func fire(signal_color = color_code):
 		$Box/Dot.modulate = Global.COLORS[signal_color]
 		
 	anim.play("Fire")
+	Sfx.play("Kick3")
 	if signal_color == Global.COLOR_BLACK:
 		$Sfx/Black.play()
 	else:

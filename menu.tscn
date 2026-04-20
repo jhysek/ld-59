@@ -57,7 +57,7 @@ offset_bottom = -262.0
 theme = ExtResource("4_4hy44")
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_font_sizes/font_size = 100
-text = "logic emittor"
+text = "logic emitter"
 
 [node name="Title2" type="Label" parent="." unique_id=2023779398]
 offset_left = -391.0
@@ -67,7 +67,7 @@ offset_bottom = -255.0
 theme = ExtResource("4_4hy44")
 theme_override_colors/font_color = Color(1, 0, 1, 1)
 theme_override_font_sizes/font_size = 100
-text = "logic emittor"
+text = "logic emitter"
 
 [node name="Title3" type="Label" parent="." unique_id=1701402129]
 offset_left = -394.0
@@ -77,7 +77,7 @@ offset_bottom = -258.0
 theme = ExtResource("4_4hy44")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "logic emittor"
+text = "logic emitter"
 
 [node name="Button2" type="Button" parent="." unique_id=1625555469]
 offset_left = -180.0

@@ -52,11 +52,11 @@ func consume_signal(color_code):
 	if goal[cursor_idx] != color_code:
 		print("SIGNAL REJECT~ED, emitting signall....")
 		emit_signal("on_signal_rejected", color_code)
-		$Sfx/Rejected.play()
+		Sfx.play("Nope")
 		return
 		
 	emit_signal("on_signal_consumed", color_code)
-	$Sfx/Consumed.play()
+	Sfx.play("Guitar")
 	
 	cursor_idx += 1
 	if cursor_idx >= goal.size():

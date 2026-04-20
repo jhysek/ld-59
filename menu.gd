@@ -9,6 +9,7 @@ func _ready():
 			btn.text = "Continue game"
 
 func _on_button_pressed() -> void:
+	Sfx.play("Click")
 	LevelSwitcher.start_level()	
 
 func _on_back_pressed() -> void:

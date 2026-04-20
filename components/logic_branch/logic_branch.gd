@@ -77,6 +77,9 @@ func route_signal(signal_node):
 	var output = current_outputs[0]
 	if signal_node.color_code == Global.COLOR_BLACK:
 		output = current_outputs[1]
+		Sfx.play("Kick2")
+	else:
+		Sfx.play("Rrr")
 		
 	var result_direction = output.x
 	if result_direction == 0:

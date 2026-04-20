@@ -32,5 +32,6 @@ script = ExtResource("2_m4nro")
 
 [node name="Explode" type="AudioStreamPlayer" parent="Sfx" unique_id=692328757]
 stream = ExtResource("3_h41j5")
+volume_db = 9.93
 
 [connection signal="finished" from="." to="." method="_on_finished"]

@@ -73,6 +73,7 @@ func _ready():
 	refresh_ui()
 	initialize_title()
 	initialize_tools()
+	initialize_ctrls()
 	$CanvasLayer/Control/GoalIndicator.init(GOAL)
 	initialize_rings()
 	initialize_receivers()
@@ -83,6 +84,11 @@ func initialize_title():
 	$CanvasLayer/LevelTitle.text = title
 	$CanvasLayer/LevelTitle/LevelTitleCyan.text = title
 	$CanvasLayer/LevelTitle/LevelTitleMagenta.text = title
+	
+func initialize_ctrls():
+	$CanvasLayer/Control/Panel/Label.text = "Controls: [SPACE]  [R]"
+	$CanvasLayer/Control/Panel/Button.queue_free()
+	$CanvasLayer/Control/Panel/Reset.queue_free()
 	
 func initialize_tools():
 	$CanvasLayer/Palette.initialize(ENABLED_TOOLS)
@@ -157,11 +163,9 @@ func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		if state == States.PAUSED:
 			state = States.RUNNING	
-			$CanvasLayer/Control/Panel/Button.text = "⏸"
 			$CanvasLayer/InfoBox.hide()
 		else:
 			state = States.PAUSED
-			$CanvasLayer/Control/Panel/Button.text = "▶"
 		refresh_ui()
 		
 	if Input.is_action_just_pressed("ui_restart"):
@@ -214,7 +218,7 @@ func highlight_active_segments():
 		
 func tick():
 	time += 1
-	$Sfx/Tick.play()
+	Sfx.play("Tap")
 	
 	if time == 8:
 
@@ -293,8 +297,6 @@ func consume_signal(config):
 	GoalIndicator.consume_signal(config.color_code)
 	Center.set_color(GoalIndicator.next_expected())
 	consumed.append(config.color_code)
-	print(consumed)
-
 	
 func reset_simulation():
 	time = 0
@@ -581,9 +583,8 @@ func _on_button_pressed() -> void:
 		
 	if state == States.PAUSED:
 		state = States.RUNNING	
-		$CanvasLayer/Control/Panel/Button.text = "⏸"
+
 		$CanvasLayer/InfoBox.hide()
 	else:
 		state = States.PAUSED
 		Loops.fade_out()
-		$CanvasLayer/Control/Panel/Button.text = "▶"

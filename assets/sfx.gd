@@ -1,5 +1,10 @@
 extends Node
 
-func play(name):
+func play(name, pitch = null):
 	if has_node(name):
-		get_node(name).play()
+		var player = get_node(name)
+		if pitch:
+			player.pitch_scale = pitch
+		player.play()
+		
+		

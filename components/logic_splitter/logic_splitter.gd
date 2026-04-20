@@ -68,6 +68,7 @@ func process_signals(signals):
 		# Take the first signal
 		var first_signal = signals.pop_front()
 		copy_signal(first_signal)
+		Sfx.play("Kick")
 		
 		# Drop the rest
 		for signal_node in signals:
